@@ -8,7 +8,7 @@ const CMS_SCRIPT = "https://unpkg.com/decap-cms@3.8.3/dist/decap-cms.js";
  * Parol — statik saytda bu panelni tasodifiy kirib qolganlardan yopadi.
  * Saqlash faqat GitHub hisobi orqali amalga oshadi.
  */
-const PASSWORD = "Rokate2026";
+const DEFAULT_PASSWORD = "RokateAdmin2026!";
 const SESSION_KEY = "rokate-cms-auth";
 
 /* ------------------------------------------------------------------ UI text */
@@ -275,7 +275,8 @@ export default function CmsLoader() {
 
   function submit(e: FormEvent) {
     e.preventDefault();
-    if (value === PASSWORD) {
+    const correctPassword = process.env.NEXT_PUBLIC_ADMIN_PASSWORD || DEFAULT_PASSWORD;
+    if (value === correctPassword) {
       sessionStorage.setItem(SESSION_KEY, "1");
       setAuthed(true);
       setError(false);
