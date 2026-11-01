@@ -92,13 +92,40 @@ const ADMIN_CSS = `
     transition: all 0.2s ease !important;
   }
 
-  /* Header (yuqori panel) dizayni */
+  /* Decap CMS ichki konteyneri, editor va toolbar stillari */
   #nc-root header {
     background: #ffffff !important;
     border-bottom: 1px solid #e5ded0 !important;
     box-shadow: 0 2px 12px rgba(28, 35, 64, 0.04) !important;
-    min-height: 64px !important;
+    min-height: 60px !important;
     padding: 0 16px !important;
+    position: relative !important;
+    z-index: 10 !important;
+  }
+
+  /* Tahrirlash sahifasida (Editor) tepasi qisilib/bosilib qolmasligi uchun */
+  #nc-root [class*="EditorContainer"],
+  #nc-root [class*="EditorToolbar"],
+  #nc-root [class*="AppMainContainer"] {
+    position: relative !important;
+    top: 0 !important;
+  }
+
+  #nc-root [class*="EditorContainer"] {
+    padding-top: 16px !important;
+  }
+
+  #nc-root [class*="EditorToolbar"] {
+    position: sticky !important;
+    top: 52px !important; /* Global qora header (52px) tagidan joylashadi */
+    z-index: 50 !important;
+    background: #ffffff !important;
+    border-bottom: 1px solid #e5ded0 !important;
+    box-shadow: 0 4px 12px rgba(28, 35, 64, 0.04) !important;
+  }
+
+  #nc-root [class*="EditorContent"] {
+    padding-top: 24px !important;
   }
 
   /* Yon panel (Sidebar / Kolleksiyalar) */
