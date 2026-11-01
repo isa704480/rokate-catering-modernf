@@ -49,27 +49,32 @@ export default function RequestForm({
     setState("sending");
     setMessage("");
     try {
-      // 1. Firebase Firestore'ga zudlik bilan saqlash (Admin panelga ovozli xabar kelishi uchun)
       const attr = attribution();
-      await saveLeadToFirestore({
-        kind: "inquiry",
-        name: v("name"),
-        phone: v("phone"),
-        date: v("date"),
-        guests: v("guests"),
-        eventType: v("eventType"),
-        place: v("place"),
-        comment: v("comment"),
-        package: pkg || "",
-        language: locale,
-        page: typeof window !== "undefined" ? window.location.pathname : "",
-        source: attr.utm_source,
-        campaign: attr.utm_campaign,
-      });
 
-      // 2. Cloudflare API orqali jo'natish (agar mavjud bo'lsa)
+      // 1. Firebase Firestore'ga saqlash (timeout bilan)
       try {
-        const cfRes = await fetch("/api/lead", {
+        await saveLeadToFirestore({
+          kind: "inquiry",
+          name: v("name"),
+          phone: v("phone"),
+          date: v("date"),
+          guests: v("guests"),
+          eventType: v("eventType"),
+          place: v("place"),
+          comment: v("comment"),
+          package: pkg || "",
+          language: locale,
+          page: typeof window !== "undefined" ? window.location.pathname : "",
+          source: attr.utm_source,
+          campaign: attr.utm_campaign,
+        });
+      } catch (fbErr) {
+        console.warn("Firebase save warning (offline/rules):", fbErr);
+      }
+
+      // 2. Cloudflare API (mavjud bo'lsa)
+      try {
+        await fetch("/api/lead", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -89,12 +94,8 @@ export default function RequestForm({
             ...attr,
           }),
         });
-        if (cfRes.status === 429) {
-          console.warn("Rate limited on CF");
-        }
       } catch (cfErr) {
-        // Vercel yoki statik hostingda Cloudflare function yo'qligi sababli 404 berishi mumkin
-        // Lekin Firebase'ga yozilgani uchun forma to'liq muvaffaqiyatli hisoblanadi
+        // CF endpointi bo'lmasa xato ko'rsatmaymiz
       }
 
       track("form_submit", { page: window.location.pathname, package: pkg });

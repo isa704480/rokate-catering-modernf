@@ -157,15 +157,71 @@ const ADMIN_CSS = `
     fill: #ffffff !important;
   }
 
-  /* Asosiy kontent kartalari */
+  /* Asosiy kontent kartalari va sarlavhalar */
   #nc-root [class*="Card"],
   #nc-root [class*="CollectionTop"],
   #nc-root [class*="ListCard"] {
-    border-radius: 14px !important;
+    border-radius: 16px !important;
     border: 1px solid #e7e0d3 !important;
     box-shadow: 0 4px 20px rgba(28, 35, 64, 0.04) !important;
     background: #ffffff !important;
+    padding: 20px 24px !important;
+    overflow: visible !important;
     transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+  }
+
+  /* Decap CMS sarlavha va tugma qatorini to'g'rilash (bir-biriga kirib ketmasligi uchun) */
+  #nc-root [class*="CollectionTop"] {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 16px !important;
+    min-height: 80px !important;
+  }
+
+  #nc-root [class*="CollectionTop"] h1,
+  #nc-root [class*="CollectionTopHeading"] {
+    font-size: 22px !important;
+    font-weight: 800 !important;
+    color: #1c2340 !important;
+    margin: 0 !important;
+    line-height: 1.3 !important;
+    flex: 1 1 auto !important;
+    min-width: 200px !important;
+  }
+
+  #nc-root [class*="CollectionTopDescription"] {
+    width: 100% !important;
+    font-size: 14px !important;
+    color: #60667e !important;
+    margin-top: 6px !important;
+    line-height: 1.5 !important;
+  }
+
+  /* Yangi yaratish tugmasi ("Создать...") */
+  #nc-root [class*="CollectionTop"] a,
+  #nc-root [class*="CollectionTop"] button,
+  #nc-root a[class*="NewButton"] {
+    background: #2f5e46 !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    font-size: 14px !important;
+    border-radius: 999px !important;
+    padding: 10px 24px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    white-space: nowrap !important;
+    box-shadow: 0 4px 14px rgba(47, 94, 70, 0.25) !important;
+    text-decoration: none !important;
+    margin: 0 !important;
+  }
+
+  #nc-root [class*="CollectionTop"] a:hover,
+  #nc-root a[class*="NewButton"]:hover {
+    background: #20412f !important;
+    transform: translateY(-1px) !important;
   }
 
   #nc-root [class*="Card"]:hover {

@@ -36,19 +36,23 @@ export default function PartnerForm({ locale, siteKey, whatsapp }: { locale: Loc
     setMessage("");
     try {
       const attr = attribution();
-      await saveLeadToFirestore({
-        kind: "partner",
-        name: v("name"),
-        company: v("company"),
-        field: v("field"),
-        phone: v("phone"),
-        email: v("email"),
-        comment: v("message"),
-        language: locale,
-        page: typeof window !== "undefined" ? window.location.pathname : "",
-        source: attr.utm_source,
-        campaign: attr.utm_campaign,
-      });
+      try {
+        await saveLeadToFirestore({
+          kind: "partner",
+          name: v("name"),
+          company: v("company"),
+          field: v("field"),
+          phone: v("phone"),
+          email: v("email"),
+          comment: v("message"),
+          language: locale,
+          page: typeof window !== "undefined" ? window.location.pathname : "",
+          source: attr.utm_source,
+          campaign: attr.utm_campaign,
+        });
+      } catch (fbErr) {
+        console.warn("Firebase save warning:", fbErr);
+      }
 
       try {
         await fetch("/api/lead", {
