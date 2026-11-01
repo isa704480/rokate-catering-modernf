@@ -34,21 +34,90 @@ export interface LeadItem {
   createdClientTime?: string;
 }
 
-export default function AdminLeadsPanel() {
+const TEXT = {
+  ru: {
+    title: "Входящие заявки",
+    all: "Все",
+    newOnly: "Новые",
+    contactedOnly: "Обработаны",
+    allReviewed: "Все заявки просмотрены",
+    newBadge: "новые",
+    soundOn: "Звук: Включён (Тиринь)",
+    soundOff: "Звук: Выключен",
+    loading: "Загрузка заявок...",
+    emptyTitle: "Пока нет заявок",
+    emptyDesc: "Когда клиент отправит форму на сайте, здесь моментально появится заявка со звуком «Тиринь».",
+    newLabel: "Новая заявка",
+    contactedLabel: "Связались",
+    completedLabel: "Завершено",
+    partnerBadge: "Партнёрство",
+    unknownClient: "Клиент",
+    justNow: "Только что",
+    phone: "Телефон",
+    eventDate: "Дата мероприятия",
+    guestsCount: "Количество гостей",
+    guestsUnit: "чел.",
+    eventType: "Тип события",
+    location: "Площадка/Локация",
+    company: "Компания",
+    commentLabel: "Комментарий клиента",
+    whatsappBtn: "Написать в WhatsApp",
+    callBtn: "Позвонить",
+    markContacted: "✓ Отметить как обработанную",
+    markNew: "Вернуть в новые",
+    deleteConfirm: "Вы действительно хотите удалить эту заявку?",
+  },
+  en: {
+    title: "Incoming Inquiries",
+    all: "All",
+    newOnly: "New",
+    contactedOnly: "Contacted",
+    allReviewed: "All inquiries reviewed",
+    newBadge: "new",
+    soundOn: "Sound: Enabled (Chime)",
+    soundOff: "Sound: Muted",
+    loading: "Loading inquiries...",
+    emptyTitle: "No inquiries yet",
+    emptyDesc: "When a customer submits a form, it will appear here in real-time with a 'Chime' alert.",
+    newLabel: "New Inquiry",
+    contactedLabel: "Contacted",
+    completedLabel: "Completed",
+    partnerBadge: "Partnership",
+    unknownClient: "Client",
+    justNow: "Just now",
+    phone: "Phone",
+    eventDate: "Event date",
+    guestsCount: "Number of guests",
+    guestsUnit: "guests",
+    eventType: "Event type",
+    location: "Venue/Location",
+    company: "Company",
+    commentLabel: "Client note",
+    whatsappBtn: "Chat on WhatsApp",
+    callBtn: "Call",
+    markContacted: "✓ Mark as contacted",
+    markNew: "Mark as new",
+    deleteConfirm: "Are you sure you want to delete this inquiry?",
+  },
+};
+
+export default function AdminLeadsPanel({ lang = "ru" }: { lang?: "ru" | "en" }) {
   const [leads, setLeads] = useState<LeadItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [filter, setFilter] = useState<"all" | "new" | "contacted">("all");
-  const [selectedLead, setSelectedLead] = useState<LeadItem | null>(null);
 
   const initialLoadRef = useRef(true);
   const audioCtxRef = useRef<AudioContext | null>(null);
 
-  // Haqiqiy yoqimli "TIRING" (Chime / Bell) ovozini Web Audio API orqali generatsiya qilish
-  // Tashqi audio fayl yuklanishini kutmasdan har doim 100% kafolatli yangraydi
+  const t = TEXT[lang] || TEXT.ru;
+
+  // Real Web Audio API Chime / Bell sound
   const playChimeSound = () => {
     try {
-      const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+      const AudioCtx =
+        window.AudioContext ||
+        (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
       if (!AudioCtx) return;
       const ctx = audioCtxRef.current || new AudioCtx();
       audioCtxRef.current = ctx;
@@ -58,7 +127,7 @@ export default function AdminLeadsPanel() {
       }
 
       const now = ctx.currentTime;
-      // 1-ohang (880Hz - A5)
+      // Tone 1 (880Hz - A5)
       const osc1 = ctx.createOscillator();
       const gain1 = ctx.createGain();
       osc1.type = "sine";
@@ -71,7 +140,7 @@ export default function AdminLeadsPanel() {
       osc1.start(now);
       osc1.stop(now + 0.5);
 
-      // 2-ohang (1318.5Hz - E6 "TIRING" jarangi)
+      // Tone 2 (1318.5Hz - E6 "TIRING" chime)
       const osc2 = ctx.createOscillator();
       const gain2 = ctx.createGain();
       osc2.type = "sine";
@@ -89,7 +158,6 @@ export default function AdminLeadsPanel() {
   };
 
   useEffect(() => {
-    // Firestore real-time listener (Yangi ariza tushishi bilan bir zumda eshitadi)
     const q = query(collection(db, "leads"), orderBy("createdAt", "desc"));
     const unsub = onSnapshot(
       q,
@@ -136,10 +204,9 @@ export default function AdminLeadsPanel() {
   };
 
   const deleteLead = async (id: string) => {
-    if (!window.confirm("Bu arizani o'chirmoqchimisiz?")) return;
+    if (!window.confirm(t.deleteConfirm)) return;
     try {
       await deleteDoc(doc(db, "leads", id));
-      if (selectedLead?.id === id) setSelectedLead(null);
     } catch (err) {
       console.error(err);
     }
@@ -153,7 +220,7 @@ export default function AdminLeadsPanel() {
 
   return (
     <div style={{ maxWidth: 1200, margin: "0 auto", padding: "16px 20px" }}>
-      {/* Yuqori boshqaruv paneli */}
+      {/* Top action bar */}
       <div
         style={{
           display: "flex",
@@ -171,7 +238,7 @@ export default function AdminLeadsPanel() {
       >
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <h2 style={{ margin: 0, fontSize: 20, fontWeight: 800, color: "#1c2340" }}>
-            📥 Kelib tushgan arizalar
+            📥 {t.title}
           </h2>
           {newCount > 0 ? (
             <span
@@ -197,21 +264,21 @@ export default function AdminLeadsPanel() {
                   animation: "rk-pulse 1.5s infinite",
                 }}
               />
-              {newCount} yangi
+              {newCount} {t.newBadge}
             </span>
           ) : (
-            <span style={{ fontSize: 13, color: "#6b7280" }}>Barcha arizalar ko'rib chiqilgan</span>
+            <span style={{ fontSize: 13, color: "#6b7280" }}>{t.allReviewed}</span>
           )}
         </div>
 
-        {/* Filtrlar va Ovoz tugmasi */}
+        {/* Filters and Sound button */}
         <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
           <div style={{ display: "inline-flex", background: "#f5f2ea", padding: 3, borderRadius: 12 }}>
             {(
               [
-                { id: "all", label: "Hammasi" },
-                { id: "new", label: `Yangi (${newCount})` },
-                { id: "contacted", label: "Bog'lanilgan" },
+                { id: "all", label: t.all },
+                { id: "new", label: `${t.newOnly} (${newCount})` },
+                { id: "contacted", label: t.contactedOnly },
               ] as const
             ).map((btn) => (
               <button
@@ -236,14 +303,13 @@ export default function AdminLeadsPanel() {
             ))}
           </div>
 
-          {/* Ovozni yoqish / sinab ko'rish */}
           <button
             type="button"
             onClick={() => {
               playChimeSound();
               setSoundEnabled(!soundEnabled);
             }}
-            title="Ovozli bildirishnoma (Tiring)"
+            title={soundEnabled ? t.soundOn : t.soundOff}
             style={{
               display: "inline-flex",
               alignItems: "center",
@@ -258,15 +324,15 @@ export default function AdminLeadsPanel() {
               cursor: "pointer",
             }}
           >
-            <span>{soundEnabled ? "🔔 Tiring ovozi: Yoqilgan" : "🔕 Ovoz: O'chiq"}</span>
+            <span>{soundEnabled ? `🔔 ${t.soundOn}` : `🔕 ${t.soundOff}`}</span>
           </button>
         </div>
       </div>
 
-      {/* Arizalar ro'yxati */}
+      {/* Leads list */}
       {loading ? (
         <div style={{ textAlign: "center", padding: "60px 0", color: "#6b7280" }}>
-          Arizalar yuklanmoqda...
+          {t.loading}
         </div>
       ) : filtered.length === 0 ? (
         <div
@@ -280,10 +346,8 @@ export default function AdminLeadsPanel() {
           }}
         >
           <div style={{ fontSize: 36, marginBottom: 10 }}>📭</div>
-          <h3 style={{ margin: 0, fontSize: 17, color: "#1c2340" }}>Hozircha arizalar yo'q</h3>
-          <p style={{ margin: "6px 0 0", fontSize: 14 }}>
-            Saytdan yangi buyurtma yuborilganda, bu yerda darhol paydo bo'ladi va «Tiring» ovozi yangraydi.
-          </p>
+          <h3 style={{ margin: 0, fontSize: 17, color: "#1c2340" }}>{t.emptyTitle}</h3>
+          <p style={{ margin: "6px 0 0", fontSize: 14 }}>{t.emptyDesc}</p>
         </div>
       ) : (
         <div style={{ display: "grid", gap: 14 }}>
@@ -330,7 +394,7 @@ export default function AdminLeadsPanel() {
                         color: isNew ? "#ffffff" : "#4b5563",
                       }}
                     >
-                      {isNew ? "✨ Yangi ariza" : lead.status === "contacted" ? "Bog'lanilgan" : "Bajarildi"}
+                      {isNew ? `✨ ${t.newLabel}` : lead.status === "contacted" ? t.contactedLabel : t.completedLabel}
                     </span>
 
                     {lead.kind === "partner" && (
@@ -344,23 +408,23 @@ export default function AdminLeadsPanel() {
                           color: "#0369a1",
                         }}
                       >
-                        Hamkorlik
+                        {t.partnerBadge}
                       </span>
                     )}
 
                     <h3 style={{ margin: 0, fontSize: 18, fontWeight: 700, color: "#1c2340" }}>
-                      {lead.name || "Noma'lum mijoz"}
+                      {lead.name || t.unknownClient}
                     </h3>
                   </div>
 
                   <div style={{ fontSize: 13, color: "#8a90a2" }}>
                     {lead.createdClientTime
-                      ? new Date(lead.createdClientTime).toLocaleString()
-                      : "Hozirgina"}
+                      ? new Date(lead.createdClientTime).toLocaleString(lang === "ru" ? "ru-RU" : "en-US")
+                      : t.justNow}
                   </div>
                 </div>
 
-                {/* Tafsilotlar paneli */}
+                {/* Details */}
                 <div
                   style={{
                     display: "grid",
@@ -373,41 +437,41 @@ export default function AdminLeadsPanel() {
                   }}
                 >
                   <div>
-                    <span style={{ color: "#71778e", fontSize: 12, display: "block" }}>Telefon:</span>
+                    <span style={{ color: "#71778e", fontSize: 12, display: "block" }}>{t.phone}:</span>
                     <strong style={{ color: "#1c2340" }}>{lead.phone || "—"}</strong>
                   </div>
 
                   {lead.date && (
                     <div>
-                      <span style={{ color: "#71778e", fontSize: 12, display: "block" }}>Tadbir sanasi:</span>
+                      <span style={{ color: "#71778e", fontSize: 12, display: "block" }}>{t.eventDate}:</span>
                       <strong style={{ color: "#1c2340" }}>{lead.date}</strong>
                     </div>
                   )}
 
                   {lead.guests && (
                     <div>
-                      <span style={{ color: "#71778e", fontSize: 12, display: "block" }}>Mehmonlar soni:</span>
-                      <strong style={{ color: "#1c2340" }}>{lead.guests} kishi</strong>
+                      <span style={{ color: "#71778e", fontSize: 12, display: "block" }}>{t.guestsCount}:</span>
+                      <strong style={{ color: "#1c2340" }}>{lead.guests} {t.guestsUnit}</strong>
                     </div>
                   )}
 
                   {lead.eventType && (
                     <div>
-                      <span style={{ color: "#71778e", fontSize: 12, display: "block" }}>Tadbir turi:</span>
+                      <span style={{ color: "#71778e", fontSize: 12, display: "block" }}>{t.eventType}:</span>
                       <strong style={{ color: "#1c2340" }}>{lead.eventType}</strong>
                     </div>
                   )}
 
                   {lead.place && (
                     <div>
-                      <span style={{ color: "#71778e", fontSize: 12, display: "block" }}>Joylashuv/Maydon:</span>
+                      <span style={{ color: "#71778e", fontSize: 12, display: "block" }}>{t.location}:</span>
                       <strong style={{ color: "#1c2340" }}>{lead.place}</strong>
                     </div>
                   )}
 
                   {lead.company && (
                     <div>
-                      <span style={{ color: "#71778e", fontSize: 12, display: "block" }}>Kompaniya:</span>
+                      <span style={{ color: "#71778e", fontSize: 12, display: "block" }}>{t.company}:</span>
                       <strong style={{ color: "#1c2340" }}>{lead.company}</strong>
                     </div>
                   )}
@@ -423,11 +487,11 @@ export default function AdminLeadsPanel() {
                       color: "#374151",
                     }}
                   >
-                    <strong>Mijoz izohi:</strong> {lead.comment}
+                    <strong>{t.commentLabel}:</strong> {lead.comment}
                   </div>
                 )}
 
-                {/* Tugmalar qatori */}
+                {/* Action buttons */}
                 <div
                   style={{
                     display: "flex",
@@ -458,7 +522,7 @@ export default function AdminLeadsPanel() {
                           borderRadius: 10,
                         }}
                       >
-                        <span>WhatsApp'da yozish</span>
+                        <span>{t.whatsappBtn}</span>
                       </a>
                     )}
 
@@ -478,7 +542,7 @@ export default function AdminLeadsPanel() {
                           borderRadius: 10,
                         }}
                       >
-                        Qo'ng'iroq qilish
+                        {t.callBtn}
                       </a>
                     )}
                   </div>
@@ -499,7 +563,7 @@ export default function AdminLeadsPanel() {
                           cursor: "pointer",
                         }}
                       >
-                        ✓ Bog'lanildi deb belgilash
+                        {t.markContacted}
                       </button>
                     ) : (
                       <button
@@ -515,7 +579,7 @@ export default function AdminLeadsPanel() {
                           cursor: "pointer",
                         }}
                       >
-                        Qayta yangi qilish
+                        {t.markNew}
                       </button>
                     )}
 
@@ -530,7 +594,7 @@ export default function AdminLeadsPanel() {
                         padding: "6px 8px",
                         fontSize: 13,
                       }}
-                      title="O'chirish"
+                      title="Delete"
                     >
                       🗑
                     </button>

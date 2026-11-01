@@ -23,13 +23,22 @@ export type LeadPayload = {
 export async function saveLeadToFirestore(lead: LeadPayload) {
   try {
     const colRef = collection(db, "leads");
+    // Firebase undefined qabul qilmaydi, shuning uchun barcha bo'sh maydonlarni tozalaymiz
+    const cleanData: Record<string, string | null> = {};
+    for (const [k, v] of Object.entries(lead)) {
+      if (v !== undefined) {
+        cleanData[k] = v;
+      }
+    }
+
     await addDoc(colRef, {
-      ...lead,
-      status: "new", // "new" | "contacted" | "completed"
+      ...cleanData,
+      status: "new",
       createdAt: serverTimestamp(),
       createdClientTime: new Date().toISOString(),
     });
   } catch (err) {
     console.error("Firestore saveLead error:", err);
+    throw err;
   }
 }

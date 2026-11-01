@@ -24,6 +24,10 @@ const UI = {
     loadingTitle: "Загрузка панели управления",
     loadingDesc: "Подключаем редактор Decap CMS…",
     note: "Сохранение контента синхронизируется через GitHub-аккаунт владельца.",
+    tabLeads: "📥 Заявки клиентов (со звуком)",
+    tabCms: "✏️ Контент сайта (CMS)",
+    viewSite: "На сайт ↗",
+    logout: "Выйти",
   },
   en: {
     subtitle: "Rokate Catering — site content management",
@@ -34,6 +38,10 @@ const UI = {
     loadingTitle: "Loading Control Panel",
     loadingDesc: "Connecting Decap CMS editor…",
     note: "Content changes are synced via the site owner's GitHub account.",
+    tabLeads: "📥 Client Inquiries (with alert)",
+    tabCms: "✏️ Site Content (CMS)",
+    viewSite: "View site ↗",
+    logout: "Log out",
   },
 } as const;
 
@@ -623,7 +631,7 @@ export default function CmsLoader() {
                 transition: "all 0.15s ease",
               }}
             >
-              📥 Arizalar (Tiring ovozli)
+              {s.tabLeads}
             </button>
 
             <button
@@ -641,12 +649,36 @@ export default function CmsLoader() {
                 transition: "all 0.15s ease",
               }}
             >
-              ✏️ Sayt Kontenti (Decap CMS)
+              {s.tabCms}
             </button>
           </nav>
         </div>
 
-        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          {/* Lang Switcher in Header */}
+          <div style={{ display: "flex", gap: 4, background: "rgba(255,255,255,0.08)", padding: 3, borderRadius: 999 }}>
+            {(["ru", "en"] as Lang[]).map((l) => (
+              <button
+                key={l}
+                type="button"
+                onClick={() => setLang(l)}
+                style={{
+                  border: 0,
+                  background: lang === l ? "#2f5e46" : "transparent",
+                  color: "#ffffff",
+                  fontSize: 11.5,
+                  fontWeight: 700,
+                  padding: "4px 10px",
+                  borderRadius: 999,
+                  cursor: "pointer",
+                  textTransform: "uppercase",
+                }}
+              >
+                {l}
+              </button>
+            ))}
+          </div>
+
           <a
             href="/"
             target="_blank"
@@ -658,7 +690,7 @@ export default function CmsLoader() {
               fontWeight: 600,
             }}
           >
-            Saytga o'tish ↗
+            {s.viewSite}
           </a>
           <button
             type="button"
@@ -676,7 +708,7 @@ export default function CmsLoader() {
               cursor: "pointer",
             }}
           >
-            Chiqish
+            {s.logout}
           </button>
         </div>
       </header>
@@ -684,7 +716,7 @@ export default function CmsLoader() {
       {/* Tab: Leads */}
       {activeTab === "leads" && (
         <main style={{ padding: "16px 0 40px" }}>
-          <AdminLeadsPanel />
+          <AdminLeadsPanel lang={lang} />
         </main>
       )}
 

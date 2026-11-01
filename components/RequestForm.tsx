@@ -67,9 +67,9 @@ export default function RequestForm({
         campaign: attr.utm_campaign,
       });
 
-      // 2. Cloudflare API orqali jo'natish (Telegram/Email zaxirasi uchun)
+      // 2. Cloudflare API orqali jo'natish (agar mavjud bo'lsa)
       try {
-        await fetch("/api/lead", {
+        const cfRes = await fetch("/api/lead", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -89,9 +89,12 @@ export default function RequestForm({
             ...attr,
           }),
         });
+        if (cfRes.status === 429) {
+          console.warn("Rate limited on CF");
+        }
       } catch (cfErr) {
-        // Firebase muvaffaqiyatli bo'lsa Cloudflare xatosi mijozga xalaqit bermaydi
-        console.warn("Cloudflare function notice:", cfErr);
+        // Vercel yoki statik hostingda Cloudflare function yo'qligi sababli 404 berishi mumkin
+        // Lekin Firebase'ga yozilgani uchun forma to'liq muvaffaqiyatli hisoblanadi
       }
 
       track("form_submit", { page: window.location.pathname, package: pkg });
