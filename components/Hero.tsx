@@ -22,10 +22,31 @@ export default function Hero({
   const s = t(locale);
   const [p1, p2, p3, p4] = home.hero.photos;
 
+  const chips = [
+    { label: "Yachts", href: "#directions" },
+    { label: "Corporate", href: "#directions" },
+    { label: "Private Dinners", href: "#directions" },
+    { label: "Weddings", href: "#directions" },
+  ];
+
   return (
-    <section className="container-x pt-10 pb-14 md:pt-16 md:pb-20">
-      <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-16">
+    <section className="container-x pt-8 pb-14 md:pt-14 md:pb-20">
+      <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1.1fr)] lg:gap-14">
         <div>
+          {/* Senior level modern badge tags */}
+          <div className="mb-5 flex flex-wrap gap-2">
+            {chips.map((chip) => (
+              <a
+                key={chip.label}
+                href={chip.href}
+                className="inline-flex items-center gap-1.5 rounded-full border border-line bg-surface/80 px-3.5 py-1.5 text-[12px] font-bold text-ink-soft transition-colors hover:border-green hover:bg-green hover:text-white"
+              >
+                <span className="h-1.5 w-1.5 rounded-full bg-gold" />
+                {chip.label}
+              </a>
+            ))}
+          </div>
+
           <h1 className="display">{home.hero.title}</h1>
           <p className="lede mt-5">{home.hero.text}</p>
 

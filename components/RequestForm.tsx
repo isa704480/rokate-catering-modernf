@@ -7,6 +7,7 @@ import { t, href } from "@/lib/i18n";
 import type { Locale } from "@/lib/content";
 import { track, attribution } from "@/lib/track";
 import Turnstile, { turnstileToken } from "./Turnstile";
+import { saveLeadToFirestore } from "@/lib/leads";
 
 /** Asosiy ariza formasi. Yuborilgandan keyin "rahmat" sahifasiga o'tadi. */
 export default function RequestForm({
@@ -48,28 +49,51 @@ export default function RequestForm({
     setState("sending");
     setMessage("");
     try {
-      const res = await fetch("/api/lead", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          kind: "inquiry",
-          name: v("name"),
-          phone: v("phone"),
-          date: v("date"),
-          guests: v("guests"),
-          eventType: v("eventType"),
-          place: v("place"),
-          comment: v("comment"),
-          package: pkg || "",
-          website: v("website"),
-          language: locale,
-          page: window.location.pathname,
-          turnstile: turnstileToken(form),
-          ...attribution(),
-        }),
+      // 1. Firebase Firestore'ga zudlik bilan saqlash (Admin panelga ovozli xabar kelishi uchun)
+      const attr = attribution();
+      await saveLeadToFirestore({
+        kind: "inquiry",
+        name: v("name"),
+        phone: v("phone"),
+        date: v("date"),
+        guests: v("guests"),
+        eventType: v("eventType"),
+        place: v("place"),
+        comment: v("comment"),
+        package: pkg || "",
+        language: locale,
+        page: typeof window !== "undefined" ? window.location.pathname : "",
+        source: attr.utm_source,
+        campaign: attr.utm_campaign,
       });
-      if (res.status === 429) throw new Error(s.form.rate);
-      if (!res.ok) throw new Error(s.form.error);
+
+      // 2. Cloudflare API orqali jo'natish (Telegram/Email zaxirasi uchun)
+      try {
+        await fetch("/api/lead", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            kind: "inquiry",
+            name: v("name"),
+            phone: v("phone"),
+            date: v("date"),
+            guests: v("guests"),
+            eventType: v("eventType"),
+            place: v("place"),
+            comment: v("comment"),
+            package: pkg || "",
+            website: v("website"),
+            language: locale,
+            page: window.location.pathname,
+            turnstile: turnstileToken(form),
+            ...attr,
+          }),
+        });
+      } catch (cfErr) {
+        // Firebase muvaffaqiyatli bo'lsa Cloudflare xatosi mijozga xalaqit bermaydi
+        console.warn("Cloudflare function notice:", cfErr);
+      }
+
       track("form_submit", { page: window.location.pathname, package: pkg });
       router.push(href(locale, "/thank-you"));
     } catch (err) {

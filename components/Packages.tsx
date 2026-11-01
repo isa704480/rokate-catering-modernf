@@ -45,26 +45,34 @@ export default function Packages({
             {items.map((p) => (
               <article
                 key={p.slug}
-                className="flex w-[260px] flex-col overflow-hidden rounded-card border border-line bg-surface md:w-[300px]"
+                className="group flex w-[270px] shrink-0 flex-col overflow-hidden rounded-[20px] border border-line bg-surface shadow-[0_4px_20px_rgba(28,35,64,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(28,35,64,0.08)] md:w-[320px]"
               >
-                <div className="aspect-[4/3] overflow-hidden bg-sand">
-                  <Img src={p.photo} alt={p.title} sizes="300px" className="h-full w-full object-cover" />
+                <div className="relative aspect-[4/3] overflow-hidden bg-sand">
+                  <Img src={p.photo} alt={p.title} sizes="320px" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                  <span className="absolute bottom-3 left-3 rounded-full bg-surface/90 px-3 py-1 text-[13px] font-extrabold text-ink shadow-sm backdrop-blur">
+                    {p.price}
+                  </span>
                 </div>
-                <div className="flex flex-1 flex-col p-5">
-                  <h3 className="text-[18px] font-bold">{p.title}</h3>
-                  <p className="mt-1 text-[13px] text-ink-soft">{p.guests}</p>
-                  <ul className="mt-4 flex-1 space-y-2">
+                <div className="flex flex-1 flex-col p-6">
+                  <div className="flex items-start justify-between gap-2">
+                    <h3 className="text-[19px] font-bold text-ink">{p.title}</h3>
+                  </div>
+                  <p className="mt-1 flex items-center gap-1.5 text-[13px] font-semibold text-ink-soft">
+                    <span>👥</span> {p.guests}
+                  </p>
+                  <ul className="mt-4 flex-1 space-y-2 border-t border-line/60 pt-4">
                     {p.includes.map((it) => (
                       <li key={it} className="flex gap-2.5 text-[14px] leading-snug text-ink-soft">
-                        <span className="mt-[7px] h-[5px] w-[5px] shrink-0 rounded-full bg-gold" aria-hidden="true" />
+                        <span className="mt-[6px] h-[6px] w-[6px] shrink-0 rounded-full bg-gold" aria-hidden="true" />
                         {it}
                       </li>
                     ))}
                   </ul>
-                  <p className="mt-5 text-[17px] font-bold">{p.price}</p>
-                  <Link href="#contact" className="btn btn-ghost mt-3 !py-2.5 !text-[14px]">
-                    {s.request}
-                  </Link>
+                  <div className="mt-6 pt-2">
+                    <Link href="#contact" className="btn btn-primary w-full !py-3 !text-[14px]">
+                      {s.request}
+                    </Link>
+                  </div>
                 </div>
               </article>
             ))}

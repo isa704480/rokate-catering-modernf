@@ -1,0 +1,546 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { db } from "@/lib/firebase";
+import {
+  collection,
+  query,
+  orderBy,
+  onSnapshot,
+  doc,
+  updateDoc,
+  deleteDoc,
+  Timestamp,
+} from "firebase/firestore";
+
+export interface LeadItem {
+  id: string;
+  kind?: "inquiry" | "partner";
+  name?: string;
+  phone?: string;
+  date?: string;
+  guests?: string;
+  eventType?: string;
+  place?: string;
+  comment?: string;
+  package?: string;
+  company?: string;
+  field?: string;
+  email?: string;
+  language?: string;
+  page?: string;
+  status?: "new" | "contacted" | "completed";
+  createdAt?: Timestamp | { seconds: number; nanoseconds: number };
+  createdClientTime?: string;
+}
+
+export default function AdminLeadsPanel() {
+  const [leads, setLeads] = useState<LeadItem[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [soundEnabled, setSoundEnabled] = useState(true);
+  const [filter, setFilter] = useState<"all" | "new" | "contacted">("all");
+  const [selectedLead, setSelectedLead] = useState<LeadItem | null>(null);
+
+  const initialLoadRef = useRef(true);
+  const audioCtxRef = useRef<AudioContext | null>(null);
+
+  // Haqiqiy yoqimli "TIRING" (Chime / Bell) ovozini Web Audio API orqali generatsiya qilish
+  // Tashqi audio fayl yuklanishini kutmasdan har doim 100% kafolatli yangraydi
+  const playChimeSound = () => {
+    try {
+      const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+      if (!AudioCtx) return;
+      const ctx = audioCtxRef.current || new AudioCtx();
+      audioCtxRef.current = ctx;
+
+      if (ctx.state === "suspended") {
+        ctx.resume();
+      }
+
+      const now = ctx.currentTime;
+      // 1-ohang (880Hz - A5)
+      const osc1 = ctx.createOscillator();
+      const gain1 = ctx.createGain();
+      osc1.type = "sine";
+      osc1.frequency.setValueAtTime(880, now);
+      gain1.gain.setValueAtTime(0, now);
+      gain1.gain.linearRampToValueAtTime(0.3, now + 0.03);
+      gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.45);
+      osc1.connect(gain1);
+      gain1.connect(ctx.destination);
+      osc1.start(now);
+      osc1.stop(now + 0.5);
+
+      // 2-ohang (1318.5Hz - E6 "TIRING" jarangi)
+      const osc2 = ctx.createOscillator();
+      const gain2 = ctx.createGain();
+      osc2.type = "sine";
+      osc2.frequency.setValueAtTime(1318.5, now + 0.1);
+      gain2.gain.setValueAtTime(0, now + 0.1);
+      gain2.gain.linearRampToValueAtTime(0.45, now + 0.13);
+      gain2.gain.exponentialRampToValueAtTime(0.0001, now + 0.9);
+      osc2.connect(gain2);
+      gain2.connect(ctx.destination);
+      osc2.start(now + 0.1);
+      osc2.stop(now + 0.95);
+    } catch (e) {
+      console.warn("Audio play error:", e);
+    }
+  };
+
+  useEffect(() => {
+    // Firestore real-time listener (Yangi ariza tushishi bilan bir zumda eshitadi)
+    const q = query(collection(db, "leads"), orderBy("createdAt", "desc"));
+    const unsub = onSnapshot(
+      q,
+      (snapshot) => {
+        const items: LeadItem[] = [];
+        let hasNewIncoming = false;
+
+        snapshot.docChanges().forEach((change) => {
+          if (change.type === "added" && !initialLoadRef.current) {
+            hasNewIncoming = true;
+          }
+        });
+
+        snapshot.forEach((d) => {
+          items.push({ id: d.id, ...d.data() } as LeadItem);
+        });
+
+        setLeads(items);
+        setLoading(false);
+
+        if (hasNewIncoming && soundEnabled) {
+          playChimeSound();
+        }
+
+        if (initialLoadRef.current) {
+          initialLoadRef.current = false;
+        }
+      },
+      (err) => {
+        console.error("Leads onSnapshot error:", err);
+        setLoading(false);
+      }
+    );
+
+    return () => unsub();
+  }, [soundEnabled]);
+
+  const updateStatus = async (id: string, st: "new" | "contacted" | "completed") => {
+    try {
+      await updateDoc(doc(db, "leads", id), { status: st });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const deleteLead = async (id: string) => {
+    if (!window.confirm("Bu arizani o'chirmoqchimisiz?")) return;
+    try {
+      await deleteDoc(doc(db, "leads", id));
+      if (selectedLead?.id === id) setSelectedLead(null);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const newCount = leads.filter((l) => (l.status || "new") === "new").length;
+  const filtered = leads.filter((l) => {
+    if (filter === "all") return true;
+    return (l.status || "new") === filter;
+  });
+
+  return (
+    <div style={{ maxWidth: 1200, margin: "0 auto", padding: "16px 20px" }}>
+      {/* Yuqori boshqaruv paneli */}
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "space-between",
+          alignItems: "center",
+          gap: 12,
+          padding: "16px 22px",
+          background: "#ffffff",
+          borderRadius: 18,
+          border: "1px solid #e5ded0",
+          boxShadow: "0 4px 20px rgba(28,35,64,.04)",
+          marginBottom: 20,
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          <h2 style={{ margin: 0, fontSize: 20, fontWeight: 800, color: "#1c2340" }}>
+            📥 Kelib tushgan arizalar
+          </h2>
+          {newCount > 0 ? (
+            <span
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 6,
+                padding: "3px 12px",
+                background: "#fef2f2",
+                color: "#dc2626",
+                border: "1px solid #fecaca",
+                borderRadius: 999,
+                fontSize: 13,
+                fontWeight: 700,
+              }}
+            >
+              <span
+                style={{
+                  width: 8,
+                  height: 8,
+                  borderRadius: "50%",
+                  background: "#dc2626",
+                  animation: "rk-pulse 1.5s infinite",
+                }}
+              />
+              {newCount} yangi
+            </span>
+          ) : (
+            <span style={{ fontSize: 13, color: "#6b7280" }}>Barcha arizalar ko'rib chiqilgan</span>
+          )}
+        </div>
+
+        {/* Filtrlar va Ovoz tugmasi */}
+        <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
+          <div style={{ display: "inline-flex", background: "#f5f2ea", padding: 3, borderRadius: 12 }}>
+            {(
+              [
+                { id: "all", label: "Hammasi" },
+                { id: "new", label: `Yangi (${newCount})` },
+                { id: "contacted", label: "Bog'lanilgan" },
+              ] as const
+            ).map((btn) => (
+              <button
+                key={btn.id}
+                type="button"
+                onClick={() => setFilter(btn.id)}
+                style={{
+                  border: 0,
+                  background: filter === btn.id ? "#ffffff" : "transparent",
+                  color: filter === btn.id ? "#1c2340" : "#60667e",
+                  fontWeight: filter === btn.id ? 700 : 500,
+                  fontSize: 13,
+                  padding: "6px 14px",
+                  borderRadius: 9,
+                  cursor: "pointer",
+                  boxShadow: filter === btn.id ? "0 2px 8px rgba(0,0,0,0.06)" : "none",
+                  transition: "all 0.15s ease",
+                }}
+              >
+                {btn.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Ovozni yoqish / sinab ko'rish */}
+          <button
+            type="button"
+            onClick={() => {
+              playChimeSound();
+              setSoundEnabled(!soundEnabled);
+            }}
+            title="Ovozli bildirishnoma (Tiring)"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 7,
+              border: "1px solid #ded6c8",
+              background: soundEnabled ? "#f0f7f3" : "#fdfbf7",
+              color: soundEnabled ? "#2f5e46" : "#8a8f9f",
+              padding: "7px 14px",
+              borderRadius: 12,
+              fontSize: 13,
+              fontWeight: 600,
+              cursor: "pointer",
+            }}
+          >
+            <span>{soundEnabled ? "🔔 Tiring ovozi: Yoqilgan" : "🔕 Ovoz: O'chiq"}</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Arizalar ro'yxati */}
+      {loading ? (
+        <div style={{ textAlign: "center", padding: "60px 0", color: "#6b7280" }}>
+          Arizalar yuklanmoqda...
+        </div>
+      ) : filtered.length === 0 ? (
+        <div
+          style={{
+            background: "#ffffff",
+            borderRadius: 18,
+            padding: "50px 20px",
+            textAlign: "center",
+            border: "1px solid #e7dfd1",
+            color: "#6b7280",
+          }}
+        >
+          <div style={{ fontSize: 36, marginBottom: 10 }}>📭</div>
+          <h3 style={{ margin: 0, fontSize: 17, color: "#1c2340" }}>Hozircha arizalar yo'q</h3>
+          <p style={{ margin: "6px 0 0", fontSize: 14 }}>
+            Saytdan yangi buyurtma yuborilganda, bu yerda darhol paydo bo'ladi va «Tiring» ovozi yangraydi.
+          </p>
+        </div>
+      ) : (
+        <div style={{ display: "grid", gap: 14 }}>
+          {filtered.map((lead) => {
+            const isNew = (lead.status || "new") === "new";
+            const cleanPhone = (lead.phone || "").replace(/\D/g, "");
+            const waUrl = cleanPhone ? `https://wa.me/${cleanPhone}` : null;
+
+            return (
+              <div
+                key={lead.id}
+                style={{
+                  background: "#ffffff",
+                  borderRadius: 16,
+                  border: isNew ? "1.5px solid #2f5e46" : "1px solid #e7e0d3",
+                  padding: "18px 22px",
+                  boxShadow: isNew
+                    ? "0 6px 20px rgba(47, 94, 70, 0.08)"
+                    : "0 2px 10px rgba(28, 35, 64, 0.03)",
+                  transition: "all 0.2s ease",
+                  display: "grid",
+                  gap: 12,
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    justifyContent: "space-between",
+                    alignItems: "flex-start",
+                    gap: 10,
+                  }}
+                >
+                  <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                    <span
+                      style={{
+                        padding: "4px 10px",
+                        borderRadius: 8,
+                        fontSize: 12,
+                        fontWeight: 700,
+                        textTransform: "uppercase",
+                        letterSpacing: ".04em",
+                        background: isNew ? "#2f5e46" : "#f1ede3",
+                        color: isNew ? "#ffffff" : "#4b5563",
+                      }}
+                    >
+                      {isNew ? "✨ Yangi ariza" : lead.status === "contacted" ? "Bog'lanilgan" : "Bajarildi"}
+                    </span>
+
+                    {lead.kind === "partner" && (
+                      <span
+                        style={{
+                          padding: "4px 8px",
+                          borderRadius: 6,
+                          fontSize: 11,
+                          fontWeight: 700,
+                          background: "#e0f2fe",
+                          color: "#0369a1",
+                        }}
+                      >
+                        Hamkorlik
+                      </span>
+                    )}
+
+                    <h3 style={{ margin: 0, fontSize: 18, fontWeight: 700, color: "#1c2340" }}>
+                      {lead.name || "Noma'lum mijoz"}
+                    </h3>
+                  </div>
+
+                  <div style={{ fontSize: 13, color: "#8a90a2" }}>
+                    {lead.createdClientTime
+                      ? new Date(lead.createdClientTime).toLocaleString()
+                      : "Hozirgina"}
+                  </div>
+                </div>
+
+                {/* Tafsilotlar paneli */}
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+                    gap: 10,
+                    background: "#fcfbf8",
+                    padding: "12px 16px",
+                    borderRadius: 12,
+                    fontSize: 14,
+                  }}
+                >
+                  <div>
+                    <span style={{ color: "#71778e", fontSize: 12, display: "block" }}>Telefon:</span>
+                    <strong style={{ color: "#1c2340" }}>{lead.phone || "—"}</strong>
+                  </div>
+
+                  {lead.date && (
+                    <div>
+                      <span style={{ color: "#71778e", fontSize: 12, display: "block" }}>Tadbir sanasi:</span>
+                      <strong style={{ color: "#1c2340" }}>{lead.date}</strong>
+                    </div>
+                  )}
+
+                  {lead.guests && (
+                    <div>
+                      <span style={{ color: "#71778e", fontSize: 12, display: "block" }}>Mehmonlar soni:</span>
+                      <strong style={{ color: "#1c2340" }}>{lead.guests} kishi</strong>
+                    </div>
+                  )}
+
+                  {lead.eventType && (
+                    <div>
+                      <span style={{ color: "#71778e", fontSize: 12, display: "block" }}>Tadbir turi:</span>
+                      <strong style={{ color: "#1c2340" }}>{lead.eventType}</strong>
+                    </div>
+                  )}
+
+                  {lead.place && (
+                    <div>
+                      <span style={{ color: "#71778e", fontSize: 12, display: "block" }}>Joylashuv/Maydon:</span>
+                      <strong style={{ color: "#1c2340" }}>{lead.place}</strong>
+                    </div>
+                  )}
+
+                  {lead.company && (
+                    <div>
+                      <span style={{ color: "#71778e", fontSize: 12, display: "block" }}>Kompaniya:</span>
+                      <strong style={{ color: "#1c2340" }}>{lead.company}</strong>
+                    </div>
+                  )}
+                </div>
+
+                {lead.comment && (
+                  <div
+                    style={{
+                      background: "#f7f5ee",
+                      padding: "10px 14px",
+                      borderRadius: 10,
+                      fontSize: 13.5,
+                      color: "#374151",
+                    }}
+                  >
+                    <strong>Mijoz izohi:</strong> {lead.comment}
+                  </div>
+                )}
+
+                {/* Tugmalar qatori */}
+                <div
+                  style={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    gap: 10,
+                    paddingTop: 8,
+                    borderTop: "1px solid #f0e9dc",
+                  }}
+                >
+                  <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                    {waUrl && (
+                      <a
+                        href={waUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        style={{
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: 6,
+                          background: "#25d366",
+                          color: "#ffffff",
+                          textDecoration: "none",
+                          fontSize: 13,
+                          fontWeight: 700,
+                          padding: "7px 14px",
+                          borderRadius: 10,
+                        }}
+                      >
+                        <span>WhatsApp'da yozish</span>
+                      </a>
+                    )}
+
+                    {lead.phone && (
+                      <a
+                        href={`tel:${lead.phone}`}
+                        style={{
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: 6,
+                          background: "#f1ede3",
+                          color: "#1c2340",
+                          textDecoration: "none",
+                          fontSize: 13,
+                          fontWeight: 600,
+                          padding: "7px 14px",
+                          borderRadius: 10,
+                        }}
+                      >
+                        Qo'ng'iroq qilish
+                      </a>
+                    )}
+                  </div>
+
+                  <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+                    {isNew ? (
+                      <button
+                        type="button"
+                        onClick={() => updateStatus(lead.id, "contacted")}
+                        style={{
+                          border: "1px solid #2f5e46",
+                          background: "transparent",
+                          color: "#2f5e46",
+                          padding: "6px 12px",
+                          borderRadius: 8,
+                          fontSize: 12.5,
+                          fontWeight: 600,
+                          cursor: "pointer",
+                        }}
+                      >
+                        ✓ Bog'lanildi deb belgilash
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => updateStatus(lead.id, "new")}
+                        style={{
+                          border: "1px solid #cbd5e1",
+                          background: "transparent",
+                          color: "#64748b",
+                          padding: "6px 12px",
+                          borderRadius: 8,
+                          fontSize: 12.5,
+                          cursor: "pointer",
+                        }}
+                      >
+                        Qayta yangi qilish
+                      </button>
+                    )}
+
+                    <button
+                      type="button"
+                      onClick={() => deleteLead(lead.id)}
+                      style={{
+                        border: 0,
+                        background: "transparent",
+                        color: "#9ca3af",
+                        cursor: "pointer",
+                        padding: "6px 8px",
+                        fontSize: 13,
+                      }}
+                      title="O'chirish"
+                    >
+                      🗑
+                    </button>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}

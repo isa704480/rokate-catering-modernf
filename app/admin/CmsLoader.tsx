@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, type FormEvent } from "react";
+import AdminLeadsPanel from "@/components/admin/AdminLeadsPanel";
 
 const CMS_SCRIPT = "https://unpkg.com/decap-cms@3.8.3/dist/decap-cms.js";
 
@@ -237,6 +238,7 @@ export default function CmsLoader() {
   const [value, setValue] = useState("");
   const [error, setError] = useState(false);
   const [ready, setReady] = useState(false);
+  const [activeTab, setActiveTab] = useState<"leads" | "cms">("leads");
 
   const s = UI[lang];
 
@@ -581,52 +583,147 @@ export default function CmsLoader() {
     );
   }
 
-  /* ------------------------------------------------------------------- CMS */
+  /* ------------------------------------------------------------------- CMS & LEADS */
 
   return (
-    <>
-      <div id="nc-root" style={ready ? undefined : { position: "fixed", inset: 0 }} />
-      {!ready && (
-        <div
-          style={{
-            position: "fixed",
-            inset: 0,
-            zIndex: 9999,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            background: "#f7f4ee",
-            color: "#1c2340",
-            fontFamily: "system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif",
-            padding: 24,
-            boxSizing: "border-box",
-          }}
-        >
+    <div style={{ minHeight: "100vh", background: "#f7f4ee" }}>
+      {/* Global Admin Header - Tabbing between Leads (Arizalar) and CMS */}
+      <header
+        style={{
+          position: "sticky",
+          top: 0,
+          zIndex: 9000,
+          background: "#1c2340",
+          color: "#ffffff",
+          padding: "10px 20px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          boxShadow: "0 4px 18px rgba(0,0,0,0.12)",
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+          <div style={{ fontSize: 18, fontWeight: 800, letterSpacing: "-.02em" }}>
+            Rokate <span style={{ color: "#c9a96a", fontSize: 11, letterSpacing: ".2em" }}>CATERING</span>
+          </div>
+
+          <nav style={{ display: "flex", gap: 6 }}>
+            <button
+              type="button"
+              onClick={() => setActiveTab("leads")}
+              style={{
+                border: 0,
+                background: activeTab === "leads" ? "#2f5e46" : "rgba(255,255,255,0.08)",
+                color: "#ffffff",
+                padding: "7px 16px",
+                borderRadius: 999,
+                fontSize: 13.5,
+                fontWeight: 700,
+                cursor: "pointer",
+                transition: "all 0.15s ease",
+              }}
+            >
+              📥 Arizalar (Tiring ovozli)
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setActiveTab("cms")}
+              style={{
+                border: 0,
+                background: activeTab === "cms" ? "#2f5e46" : "rgba(255,255,255,0.08)",
+                color: "#ffffff",
+                padding: "7px 16px",
+                borderRadius: 999,
+                fontSize: 13.5,
+                fontWeight: 700,
+                cursor: "pointer",
+                transition: "all 0.15s ease",
+              }}
+            >
+              ✏️ Sayt Kontenti (Decap CMS)
+            </button>
+          </nav>
+        </div>
+
+        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          <a
+            href="/"
+            target="_blank"
+            rel="noreferrer"
+            style={{
+              color: "#c9a96a",
+              textDecoration: "none",
+              fontSize: 13,
+              fontWeight: 600,
+            }}
+          >
+            Saytga o'tish ↗
+          </a>
+          <button
+            type="button"
+            onClick={() => {
+              sessionStorage.removeItem(SESSION_KEY);
+              setAuthed(false);
+            }}
+            style={{
+              border: "1px solid rgba(255,255,255,0.2)",
+              background: "transparent",
+              color: "#ffffff",
+              padding: "4px 12px",
+              borderRadius: 8,
+              fontSize: 12,
+              cursor: "pointer",
+            }}
+          >
+            Chiqish
+          </button>
+        </div>
+      </header>
+
+      {/* Tab: Leads */}
+      {activeTab === "leads" && (
+        <main style={{ padding: "16px 0 40px" }}>
+          <AdminLeadsPanel />
+        </main>
+      )}
+
+      {/* Tab: CMS */}
+      <div style={{ display: activeTab === "cms" ? "block" : "none" }}>
+        <div id="nc-root" style={ready ? undefined : { minHeight: "80vh" }} />
+        {!ready && (
           <div
             style={{
-              width: 44,
-              height: 44,
-              border: "3.5px solid #ded5c3",
-              borderTopColor: "#2f5e46",
-              borderRadius: "50%",
-              animation: "rk-spin 0.8s linear infinite",
-              marginBottom: 20,
+              padding: "80px 20px",
+              textAlign: "center",
+              color: "#1c2340",
             }}
-          />
-          <style>{`
-            @keyframes rk-spin {
-              to { transform: rotate(360deg); }
-            }
-          `}</style>
-          <h2 style={{ margin: "0 0 6px", fontSize: 19, fontWeight: 700 }}>
-            {s.loadingTitle}
-          </h2>
-          <p style={{ margin: 0, fontSize: 14, color: "#656b82" }}>
-            {s.loadingDesc}
-          </p>
-        </div>
-      )}
-    </>
+          >
+            <div
+              style={{
+                width: 40,
+                height: 40,
+                border: "3.5px solid #ded5c3",
+                borderTopColor: "#2f5e46",
+                borderRadius: "50%",
+                animation: "rk-spin 0.8s linear infinite",
+                margin: "0 auto 16px",
+              }}
+            />
+            <style>{`
+              @keyframes rk-spin {
+                to { transform: rotate(360deg); }
+              }
+            `}</style>
+            <h2 style={{ margin: "0 0 6px", fontSize: 18, fontWeight: 700 }}>
+              {s.loadingTitle}
+            </h2>
+            <p style={{ margin: 0, fontSize: 14, color: "#656b82" }}>
+              {s.loadingDesc}
+            </p>
+          </div>
+        )}
+      </div>
+    </div>
   );
 }

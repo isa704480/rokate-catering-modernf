@@ -6,6 +6,7 @@ import { t, href } from "@/lib/i18n";
 import type { Locale } from "@/lib/content";
 import { track, attribution } from "@/lib/track";
 import Turnstile, { turnstileToken } from "./Turnstile";
+import { saveLeadToFirestore } from "@/lib/leads";
 
 /** Hamkorlar uchun forma. Komissiya va foizlar ko'rsatilmaydi. */
 export default function PartnerForm({ locale, siteKey, whatsapp }: { locale: Locale; siteKey: string; whatsapp: string }) {
@@ -34,26 +35,44 @@ export default function PartnerForm({ locale, siteKey, whatsapp }: { locale: Loc
     setState("sending");
     setMessage("");
     try {
-      const res = await fetch("/api/lead", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          kind: "partner",
-          name: v("name"),
-          company: v("company"),
-          field: v("field"),
-          phone: v("phone"),
-          email: v("email"),
-          comment: v("message"),
-          website: v("website"),
-          language: locale,
-          page: window.location.pathname,
-          turnstile: turnstileToken(form),
-          ...attribution(),
-        }),
+      const attr = attribution();
+      await saveLeadToFirestore({
+        kind: "partner",
+        name: v("name"),
+        company: v("company"),
+        field: v("field"),
+        phone: v("phone"),
+        email: v("email"),
+        comment: v("message"),
+        language: locale,
+        page: typeof window !== "undefined" ? window.location.pathname : "",
+        source: attr.utm_source,
+        campaign: attr.utm_campaign,
       });
-      if (res.status === 429) throw new Error(s.form.rate);
-      if (!res.ok) throw new Error(s.form.error);
+
+      try {
+        await fetch("/api/lead", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            kind: "partner",
+            name: v("name"),
+            company: v("company"),
+            field: v("field"),
+            phone: v("phone"),
+            email: v("email"),
+            comment: v("message"),
+            website: v("website"),
+            language: locale,
+            page: window.location.pathname,
+            turnstile: turnstileToken(form),
+            ...attr,
+          }),
+        });
+      } catch (cfErr) {
+        console.warn("Cloudflare function notice:", cfErr);
+      }
+
       track("partner_form_submit", { page: "/partners" });
       router.push(href(locale, "/thank-you"));
     } catch (err) {
