@@ -1,0 +1,34 @@
+{
+  "title_ru": "Политика конфиденциальности",
+  "title_en": "Privacy policy",
+  "lede_ru": "Как мы обращаемся с данными, которые вы оставляете на сайте.",
+  "lede_en": "How we handle the data you leave on this site.",
+  "photo": "",
+  "blocks": [
+    {
+      "title_ru": "Какие данные мы собираем",
+      "title_en": "What we collect",
+      "text_ru": "Через форму заявки: имя, телефон или WhatsApp, email, дату и формат мероприятия, количество гостей и ваш комментарий. Через форму для партнёров: имя, компанию, сферу деятельности и контакты.",
+      "text_en": "Through the request form: your name, phone or WhatsApp, email, the date and format of the event, the number of guests and your comment. Through the partner form: your name, company, field of work and contact details."
+    },
+    {
+      "title_ru": "Зачем они нужны",
+      "title_en": "Why we need it",
+      "text_ru": "Только для того, чтобы ответить на заявку, согласовать меню и провести мероприятие. Мы не продаём и не передаём эти данные третьим лицам для рекламы.",
+      "text_en": "Only to answer your request, agree the menu and run the event. We do not sell or pass this data to third parties for advertising."
+    },
+    {
+      "title_ru": "Аналитика",
+      "title_en": "Analytics",
+      "text_ru": "Сайт использует Google Analytics, чтобы понимать, какими страницами пользуются. Эти данные обезличены и не содержат ваших контактов.",
+      "text_en": "This site uses Google Analytics to understand which pages people use. That data is anonymised and contains no contact details."
+    },
+    {
+      "title_ru": "Как удалить данные",
+      "title_en": "Removing your data",
+      "text_ru": "Напишите нам в WhatsApp или на email — удалим вашу заявку и контакты из переписки.",
+      "text_en": "Message us on WhatsApp or by email and we will delete your request and your contact details from our correspondence."
+    }
+  ],
+  "gallery": []
+}

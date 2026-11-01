@@ -1,0 +1,45 @@
+{
+  "title_ru": "Пакеты и меню",
+  "title_en": "Packages and menu",
+  "lede_ru": "Цены указаны как отправная точка. Итоговую стоимость считаем под количество гостей, формат и площадку.",
+  "lede_en": "Prices are a starting point. We calculate the final quote from your guest count, format and venue.",
+  "menuTitle_ru": "Что бывает в меню",
+  "menuTitle_en": "What the menu can include",
+  "menuNote_ru": "Это не фиксированная карта: меню собираем под ваше мероприятие, учитываем аллергии и религиозные требования.",
+  "menuNote_en": "This is not a fixed card: we build the menu around your event and take allergies and religious requirements into account.",
+  "pdf": "",
+  "pdfLabel_ru": "Скачать меню в PDF",
+  "pdfLabel_en": "Download the menu as PDF",
+  "sections": [
+    {
+      "title_ru": "Канапе и закуски",
+      "title_en": "Canapés and starters",
+      "text_ru": "Тарталетки с лососем и креветкой, брускетты, ролл-канапе с ростбифом, сырные шарики, мини-салаты в стакане, овощные палочки с соусами.",
+      "text_en": "Salmon and prawn tartlets, bruschetta, roast beef canapé rolls, cheese bites, mini salads in a glass, vegetable sticks with dips."
+    },
+    {
+      "title_ru": "Горячее и гриль",
+      "title_en": "Hot dishes and grill",
+      "text_ru": "Шашлык из курицы и говядины, люля-кебаб, рыба на гриле, овощи гриль, запечённый картофель, плов по запросу.",
+      "text_en": "Chicken and beef skewers, lule kebab, grilled fish, grilled vegetables, roast potatoes, plov on request."
+    },
+    {
+      "title_ru": "Морепродукты",
+      "title_en": "Seafood",
+      "text_ru": "Устрицы, тигровые креветки, слабосолёный лосось, морской коктейль, икра — по сезону и наличию.",
+      "text_en": "Oysters, tiger prawns, lightly salted salmon, seafood cocktail, caviar — subject to season and availability."
+    },
+    {
+      "title_ru": "Фрукты, сыры и десерты",
+      "title_en": "Fruit, cheese and desserts",
+      "text_ru": "Сезонные фрукты и ягоды, сырная тарелка с орехами и мёдом, мини-десерты, макаруны, торт на заказ.",
+      "text_en": "Seasonal fruit and berries, a cheese board with nuts and honey, mini desserts, macarons, a cake to order."
+    },
+    {
+      "title_ru": "Напитки",
+      "title_en": "Drinks",
+      "text_ru": "Лимонады и детокс-вода, кофе и чай, свежевыжатые соки. Алкоголь не поставляем — подаём ваш.",
+      "text_en": "Lemonades and infused water, coffee and tea, fresh juices. We do not supply alcohol — we serve yours."
+    }
+  ]
+}

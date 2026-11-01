@@ -1,0 +1,18 @@
+{
+  "order": 1,
+  "title_ru": "Яхт-кейтеринг",
+  "title_en": "Yacht catering",
+  "short_ru": "Завтраки, канапе, фуршеты и ужины на борту. Сервировка под размер яхты, посуду и мебель привозим сами.",
+  "short_en": "Breakfasts, canapés, buffets and dinners on board. Setup sized to your yacht; we bring the tableware ourselves.",
+  "page": "/yacht-catering",
+  "photos": [
+    "/media/yacht-deck-table__w960.webp",
+    "/media/yacht-canape-buffet__w960.webp",
+    "/media/yacht-salon-buffet__w960.webp",
+    "/media/yacht-oysters-fruit__w960.webp",
+    "/media/yacht-lounge-snacks__w960.webp",
+    "/media/chef-on-yacht__w960.webp",
+    "/media/family-on-yacht__w960.webp",
+    "/media/chef-bbq-yacht__w960.webp"
+  ]
+}

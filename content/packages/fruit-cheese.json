@@ -1,0 +1,22 @@
+{
+  "order": 2,
+  "title_ru": "Фруктово-сырная станция",
+  "title_en": "Fruit and cheese station",
+  "guests_ru": "от 10 гостей",
+  "guests_en": "from 10 guests",
+  "price_ru": "от AED 70 / гость",
+  "price_en": "from AED 70 / guest",
+  "includes_ru": [
+    "Сезонные фрукты и ягоды",
+    "Сыры, орехи, мёд и джемы",
+    "Оформление стола",
+    "Посуда и сервировка"
+  ],
+  "includes_en": [
+    "Seasonal fruit and berries",
+    "Cheeses, nuts, honey and jams",
+    "Table styling",
+    "Tableware and setup"
+  ],
+  "photo": "/media/yacht-oysters-fruit__w960.webp"
+}

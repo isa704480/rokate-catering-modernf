@@ -1,0 +1,383 @@
+# Decap CMS — панель редактирования Rokate Catering.
+# Контент хранится в этом же репозитории, в папке content/.
+# После сохранения Cloudflare Pages пересобирает сайт за 1–2 минуты.
+#
+# ВАЖНО: перед запуском заменить `repo` на реальный репозиторий
+# и `base_url` на адрес OAuth-воркера (см. cms-oauth-worker/README.md).
+
+backend:
+  name: test-repo
+
+# Production (GitHub) ga ulash uchun:
+# backend:
+#   name: github
+#   repo: OWNER/REPO
+#   branch: main
+#   base_url: https://rokate-cms-auth.workers.dev
+#   auth_endpoint: auth
+  commit_messages:
+    create: 'Добавлено: {{collection}} "{{slug}}"'
+    update: 'Изменено: {{collection}} "{{slug}}"'
+    delete: 'Удалено: {{collection}} "{{slug}}"'
+    uploadMedia: "Загружен файл {{path}}"
+    deleteMedia: "Удалён файл {{path}}"
+
+locale: ru
+media_folder: public/media/uploads
+public_folder: /media/uploads
+publish_mode: simple
+slug:
+  encoding: ascii
+  clean_accents: true
+
+collections:
+  # ---------------------------------------------------------------- Настройки
+  - name: settings
+    label: "Настройки · Settings"
+    files:
+      - name: contacts
+        label: "Контакты · Contacts & connections"
+        file: content/settings.json
+        description: Телефон, мессенджеры, адрес сайта и ключи аналитики.
+        fields:
+          - { name: phone, label: Телефон, widget: string }
+          - { name: whatsapp, label: WhatsApp (только цифры, с кодом страны), widget: string }
+          - { name: telegram, label: Telegram (имя без @), widget: string }
+          - { name: instagram, label: Instagram (имя без @), widget: string }
+          - { name: email, label: Email, widget: string }
+          - { name: siteUrl, label: Адрес сайта, widget: string, hint: "Например https://rokatecatering.com" }
+          - { name: gaId, label: Google Analytics ID, widget: string, required: false, hint: "G-XXXXXXX. Пусто — аналитика выключена." }
+          - { name: turnstileSiteKey, label: Turnstile site key, widget: string, required: false, hint: "Защита форм от спама. Пусто — выключена." }
+          - { name: city_ru, label: Город (RU), widget: string }
+          - { name: city_en, label: Город (EN), widget: string }
+          - { name: hours_ru, label: Часы работы (RU), widget: string }
+          - { name: hours_en, label: Часы работы (EN), widget: string }
+          - { name: venues_ru, label: Где работали (RU), widget: text }
+          - { name: venues_en, label: Где работали (EN), widget: text }
+
+  # ------------------------------------------------------------ Главная страница
+  - name: home
+    label: "Главная · Home"
+    files:
+      - name: home
+        label: "Блоки главной · Home blocks"
+        file: content/home.json
+        fields:
+          - name: hero
+            label: Первый экран
+            widget: object
+            fields:
+              - { name: title_ru, label: Заголовок (RU), widget: string }
+              - { name: title_en, label: Заголовок (EN), widget: string }
+              - { name: text_ru, label: Подзаголовок (RU), widget: text }
+              - { name: text_en, label: Подзаголовок (EN), widget: text }
+              - name: photos
+                label: Четыре фото разных мероприятий
+                widget: list
+                field: { name: photo, label: Фото, widget: image }
+              - { name: video, label: Видео для первого экрана, widget: file, required: false, hint: "Без звука, зацикленное, MP4. Пусто — будет фото." }
+          - name: about
+            label: О Rokate
+            widget: object
+            fields:
+              - { name: title_ru, label: Заголовок (RU), widget: string }
+              - { name: title_en, label: Заголовок (EN), widget: string }
+              - { name: text_ru, label: Текст (RU), widget: text }
+              - { name: text_en, label: Текст (EN), widget: text }
+              - name: advantages
+                label: Преимущества
+                widget: list
+                fields:
+                  - { name: title_ru, label: Название (RU), widget: string }
+                  - { name: title_en, label: Название (EN), widget: string }
+                  - { name: text_ru, label: Описание (RU), widget: text }
+                  - { name: text_en, label: Описание (EN), widget: text }
+          - { name: directionsTitle_ru, label: "Направления: заголовок (RU)", widget: string }
+          - { name: directionsTitle_en, label: "Направления: заголовок (EN)", widget: string }
+          - { name: directionsText_ru, label: "Направления: подпись (RU)", widget: text }
+          - { name: directionsText_en, label: "Направления: подпись (EN)", widget: text }
+          - { name: packagesTitle_ru, label: "Пакеты: заголовок (RU)", widget: string }
+          - { name: packagesTitle_en, label: "Пакеты: заголовок (EN)", widget: string }
+          - { name: packagesText_ru, label: "Пакеты: подпись (RU)", widget: text }
+          - { name: packagesText_en, label: "Пакеты: подпись (EN)", widget: text }
+          - name: relax
+            label: "Мы работаем — вы отдыхаете"
+            widget: object
+            fields:
+              - { name: title_ru, label: Заголовок (RU), widget: string }
+              - { name: title_en, label: Заголовок (EN), widget: string }
+              - { name: text_ru, label: Подпись (RU), widget: text }
+              - { name: text_en, label: Подпись (EN), widget: text }
+              - name: steps
+                label: Шаги
+                widget: list
+                fields:
+                  - { name: title_ru, label: Шаг (RU), widget: string }
+                  - { name: title_en, label: Шаг (EN), widget: string }
+                  - { name: text_ru, label: Описание (RU), widget: text }
+                  - { name: text_en, label: Описание (EN), widget: text }
+          - name: services
+            label: Дополнительные услуги
+            widget: object
+            fields:
+              - { name: title_ru, label: Заголовок (RU), widget: string }
+              - { name: title_en, label: Заголовок (EN), widget: string }
+              - { name: note_ru, label: Примечание (RU), widget: string }
+              - { name: note_en, label: Примечание (EN), widget: string }
+              - name: items
+                label: Услуги
+                widget: list
+                fields:
+                  - { name: title_ru, label: Название (RU), widget: string }
+                  - { name: title_en, label: Название (EN), widget: string }
+                  - { name: text_ru, label: Описание (RU), widget: text }
+                  - { name: text_en, label: Описание (EN), widget: text }
+          - name: portfolio
+            label: "Портфолио: заголовок блока"
+            widget: object
+            fields:
+              - { name: title_ru, label: Заголовок (RU), widget: string }
+              - { name: title_en, label: Заголовок (EN), widget: string }
+              - { name: text_ru, label: Подпись (RU), widget: text }
+              - { name: text_en, label: Подпись (EN), widget: text }
+          - { name: faqTitle_ru, label: "Вопросы: заголовок (RU)", widget: string }
+          - { name: faqTitle_en, label: "Вопросы: заголовок (EN)", widget: string }
+          - name: cta
+            label: Блок заявки
+            widget: object
+            fields:
+              - { name: title_ru, label: Заголовок (RU), widget: string }
+              - { name: title_en, label: Заголовок (EN), widget: string }
+              - { name: text_ru, label: Подпись (RU), widget: text }
+              - { name: text_en, label: Подпись (EN), widget: text }
+
+  # -------------------------------------------------------------- Направления
+  - name: directions
+    label: "Направления · Catering types"
+    label_singular: "Направление · Type"
+    folder: content/directions
+    extension: json
+    format: json
+    create: true
+    slug: "{{slug}}"
+    summary: "{{title_ru}}"
+    sortable_fields: [order]
+    description: Пять блоков на главной. Порядок задаётся полем «Порядок».
+    fields:
+      - { name: order, label: Порядок, widget: number, value_type: int, default: 9 }
+      - { name: title_ru, label: Название (RU), widget: string }
+      - { name: title_en, label: Название (EN), widget: string }
+      - { name: short_ru, label: Короткое описание (RU), widget: text }
+      - { name: short_en, label: Короткое описание (EN), widget: text }
+      - name: page
+        label: Отдельная страница
+        widget: string
+        required: false
+        hint: "Пусто — откроется галерея. Или /yacht-catering, /corporate-catering."
+      - name: photos
+        label: Фотографии (лента)
+        widget: list
+        field: { name: photo, label: Фото, widget: image }
+      - { name: hidden, label: Скрыть на сайте, widget: boolean, required: false, default: false }
+
+  # ------------------------------------------------------------------ Пакеты
+  - name: packages
+    label: "Пакеты · Catering packages"
+    label_singular: "Пакет · Package"
+    folder: content/packages
+    extension: json
+    format: json
+    create: true
+    summary: "{{title_ru}} — {{price_ru}}"
+    sortable_fields: [order]
+    fields:
+      - { name: order, label: Порядок, widget: number, value_type: int, default: 9 }
+      - { name: title_ru, label: Название (RU), widget: string }
+      - { name: title_en, label: Название (EN), widget: string }
+      - { name: guests_ru, label: Количество гостей (RU), widget: string, hint: "Например: от 10 гостей" }
+      - { name: guests_en, label: Количество гостей (EN), widget: string }
+      - { name: price_ru, label: Цена (RU), widget: string, hint: "Например: от AED 85 / гость" }
+      - { name: price_en, label: Цена (EN), widget: string }
+      - name: includes_ru
+        label: Что входит (RU)
+        widget: list
+        field: { name: item, label: Пункт, widget: string }
+      - name: includes_en
+        label: Что входит (EN)
+        widget: list
+        field: { name: item, label: Пункт, widget: string }
+      - { name: photo, label: Фото, widget: image }
+      - { name: hidden, label: Скрыть на сайте, widget: boolean, required: false, default: false }
+
+  # --------------------------------------------------------------- Портфолио
+  - name: portfolio
+    label: "Портфолио · Portfolio"
+    label_singular: "Работа · Case"
+    folder: content/portfolio
+    extension: json
+    format: json
+    create: true
+    summary: "{{title_ru}}"
+    sortable_fields: [order]
+    fields:
+      - { name: order, label: Порядок, widget: number, value_type: int, default: 9 }
+      - { name: title_ru, label: Название (RU), widget: string }
+      - { name: title_en, label: Название (EN), widget: string }
+      - { name: kind_ru, label: Тип мероприятия (RU), widget: string }
+      - { name: kind_en, label: Тип мероприятия (EN), widget: string }
+      - { name: place_ru, label: Место (RU), widget: string }
+      - { name: place_en, label: Место (EN), widget: string }
+      - { name: photo, label: Фото, widget: image }
+      - { name: hidden, label: Скрыть на сайте, widget: boolean, required: false, default: false }
+
+  # ----------------------------------------------------------------- Отзывы
+  - name: reviews
+    label: "Отзывы · Reviews"
+    label_singular: "Отзыв · Review"
+    folder: content/reviews
+    extension: json
+    format: json
+    create: true
+    summary: "{{author}}"
+    description: Пока пусто. Добавляйте только настоящие отзывы клиентов — блок появится на сайте сам.
+    fields:
+      - { name: order, label: Порядок, widget: number, value_type: int, default: 9 }
+      - { name: author, label: Кто оставил, widget: string }
+      - { name: kind_ru, label: Мероприятие (RU), widget: string, required: false }
+      - { name: kind_en, label: Мероприятие (EN), widget: string, required: false }
+      - { name: text_ru, label: Текст отзыва (RU), widget: text }
+      - { name: text_en, label: Текст отзыва (EN), widget: text }
+      - { name: hidden, label: Скрыть на сайте, widget: boolean, required: false, default: false }
+
+  # ----------------------------------------------------------------- Страницы
+  - name: pages
+    label: "Страницы · Pages"
+    files:
+      - name: menu
+        label: "Пакеты и меню · Menu"
+        file: content/menu.json
+        fields:
+          - { name: title_ru, label: Заголовок (RU), widget: string }
+          - { name: title_en, label: Заголовок (EN), widget: string }
+          - { name: lede_ru, label: Вступление (RU), widget: text }
+          - { name: lede_en, label: Вступление (EN), widget: text }
+          - { name: menuTitle_ru, label: "Меню: заголовок (RU)", widget: string }
+          - { name: menuTitle_en, label: "Меню: заголовок (EN)", widget: string }
+          - { name: menuNote_ru, label: "Меню: примечание (RU)", widget: text }
+          - { name: menuNote_en, label: "Меню: примечание (EN)", widget: text }
+          - { name: pdf, label: Меню в PDF, widget: file, required: false }
+          - { name: pdfLabel_ru, label: Подпись кнопки PDF (RU), widget: string }
+          - { name: pdfLabel_en, label: Подпись кнопки PDF (EN), widget: string }
+          - name: sections
+            label: Разделы меню
+            widget: list
+            fields:
+              - { name: title_ru, label: Раздел (RU), widget: string }
+              - { name: title_en, label: Раздел (EN), widget: string }
+              - { name: text_ru, label: Блюда через запятую (RU), widget: text }
+              - { name: text_en, label: Блюда через запятую (EN), widget: text }
+
+      - name: yacht
+        label: "Яхт-кейтеринг · Yacht catering"
+        file: content/pages/yacht-catering.json
+        fields: &page_fields
+          - { name: title_ru, label: Заголовок (RU), widget: string }
+          - { name: title_en, label: Заголовок (EN), widget: string }
+          - { name: lede_ru, label: Вступление (RU), widget: text }
+          - { name: lede_en, label: Вступление (EN), widget: text }
+          - { name: photo, label: Главное фото, widget: image, required: false }
+          - name: blocks
+            label: Текстовые блоки
+            widget: list
+            fields:
+              - { name: title_ru, label: Заголовок (RU), widget: string }
+              - { name: title_en, label: Заголовок (EN), widget: string }
+              - { name: text_ru, label: Текст (RU), widget: text }
+              - { name: text_en, label: Текст (EN), widget: text }
+          - { name: listTitle_ru, label: "Список: заголовок (RU)", widget: string, required: false }
+          - { name: listTitle_en, label: "Список: заголовок (EN)", widget: string, required: false }
+          - name: list_ru
+            label: Список (RU)
+            widget: list
+            required: false
+            field: { name: item, label: Пункт, widget: string }
+          - name: list_en
+            label: Список (EN)
+            widget: list
+            required: false
+            field: { name: item, label: Пункт, widget: string }
+          - name: gallery
+            label: Галерея
+            widget: list
+            required: false
+            field: { name: photo, label: Фото, widget: image }
+
+      - name: corporate
+        label: "Корпоративный · Corporate catering"
+        file: content/pages/corporate-catering.json
+        fields: *page_fields
+
+      - name: partners
+        label: "Партнёрам · Partners"
+        file: content/pages/partners.json
+        fields: *page_fields
+
+      - name: privacy
+        label: "Конфиденциальность · Privacy"
+        file: content/pages/privacy.json
+        fields:
+          - { name: title_ru, label: Заголовок (RU), widget: string }
+          - { name: title_en, label: Заголовок (EN), widget: string }
+          - { name: lede_ru, label: Вступление (RU), widget: text }
+          - { name: lede_en, label: Вступление (EN), widget: text }
+          - { name: photo, label: Фото, widget: image, required: false }
+          - name: blocks
+            label: Разделы
+            widget: list
+            fields:
+              - { name: title_ru, label: Заголовок (RU), widget: string }
+              - { name: title_en, label: Заголовок (EN), widget: string }
+              - { name: text_ru, label: Текст (RU), widget: text }
+              - { name: text_en, label: Текст (EN), widget: text }
+          - name: gallery
+            label: Галерея
+            widget: list
+            required: false
+            field: { name: photo, label: Фото, widget: image }
+
+      - name: faq
+        label: "Вопросы · FAQ"
+        file: content/faq.json
+        fields:
+          - name: items
+            label: Вопросы
+            widget: list
+            fields:
+              - { name: q_ru, label: Вопрос (RU), widget: string }
+              - { name: q_en, label: Вопрос (EN), widget: string }
+              - { name: a_ru, label: Ответ (RU), widget: text }
+              - { name: a_en, label: Ответ (EN), widget: text }
+
+  # --------------------------------------------------------------------- SEO
+  - name: seo
+    label: "SEO"
+    files:
+      - name: seo
+        label: "Заголовки страниц · Page titles & descriptions"
+        file: content/seo.json
+        description: Title и Description для поиска. Title — до 60 знаков, Description — до 160.
+        fields:
+          - name: home
+            label: Главная
+            widget: object
+            fields: &seo_fields
+              - { name: title_ru, label: Title (RU), widget: string }
+              - { name: title_en, label: Title (EN), widget: string }
+              - { name: description_ru, label: Description (RU), widget: text }
+              - { name: description_en, label: Description (EN), widget: text }
+          - { name: yacht, label: Яхт-кейтеринг, widget: object, fields: *seo_fields }
+          - { name: corporate, label: Корпоративный кейтеринг, widget: object, fields: *seo_fields }
+          - { name: menu, label: Пакеты и меню, widget: object, fields: *seo_fields }
+          - { name: partners, label: Партнёрам, widget: object, fields: *seo_fields }
+          - { name: privacy, label: Политика конфиденциальности, widget: object, fields: *seo_fields }
+          - { name: thanks, label: Страница «спасибо», widget: object, fields: *seo_fields }

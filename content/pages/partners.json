@@ -1,0 +1,46 @@
+{
+  "title_ru": "Партнёрам",
+  "title_en": "For partners",
+  "lede_ru": "Работаем с компаниями по аренде яхт и вилл, event-агентствами, консьерж-службами и агентами по недвижимости в Дубае и Абу-Даби.",
+  "lede_en": "We work with yacht and villa charter companies, event agencies, concierge services and real estate agents in Dubai and Abu Dhabi.",
+  "photo": "/media/yacht-salon-buffet__w960.webp",
+  "blocks": [
+    {
+      "title_ru": "Ваш гость — наш стол",
+      "title_en": "Your guest, our table",
+      "text_ru": "Вы предлагаете кейтеринг как часть своей услуги, мы берём на себя меню, сервировку, обслуживание и уборку.",
+      "text_en": "You offer catering as part of your service; we take on the menu, setup, service and cleanup."
+    },
+    {
+      "title_ru": "Быстрый ответ",
+      "title_en": "A fast answer",
+      "text_ru": "Отвечаем на запрос в тот же день и держим связь по WhatsApp. Срочные заказы принимаем за сутки.",
+      "text_en": "We answer a request the same day and stay in touch on WhatsApp. Urgent orders are accepted one day ahead."
+    },
+    {
+      "title_ru": "Условия",
+      "title_en": "Terms",
+      "text_ru": "Условия сотрудничества обсуждаем индивидуально — зависят от формата, объёма и регулярности заказов.",
+      "text_en": "We agree terms individually — they depend on the format, the volume and how regular the orders are."
+    }
+  ],
+  "listTitle_ru": "С кем работаем",
+  "listTitle_en": "Who we work with",
+  "list_ru": [
+    "Аренда яхт и катеров",
+    "Аренда вилл и апартаментов",
+    "Event-агентства",
+    "Консьерж-службы",
+    "Агенты по недвижимости",
+    "Организаторы свадеб"
+  ],
+  "list_en": [
+    "Yacht and boat charter",
+    "Villa and apartment rental",
+    "Event agencies",
+    "Concierge services",
+    "Real estate agents",
+    "Wedding planners"
+  ],
+  "gallery": []
+}

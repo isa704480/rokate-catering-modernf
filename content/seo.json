@@ -1,0 +1,44 @@
+{
+  "home": {
+    "title_ru": "Rokate Catering — выездной кейтеринг в Дубае и Абу-Даби",
+    "title_en": "Rokate Catering — off-site catering in Dubai and Abu Dhabi",
+    "description_ru": "Кейтеринг на яхте, вилле, в офисе и дома. Канапе, фуршеты, гриль и морепродукты. Приезжаем за 40–60 минут, накрываем и убираем. Дубай и Абу-Даби.",
+    "description_en": "Catering on a yacht, at a villa, in the office or at home. Canapés, buffets, grill and seafood. We arrive 40–60 minutes early, set up and clear away. Dubai and Abu Dhabi."
+  },
+  "yacht": {
+    "title_ru": "Яхт-кейтеринг в Дубае — Rokate Catering",
+    "title_en": "Yacht catering in Dubai — Rokate Catering",
+    "description_ru": "Кейтеринг на яхте в Дубае и Абу-Даби: завтраки, канапе, фуршеты, морепродукты и гриль. Посуда, сервировка и уборка включены.",
+    "description_en": "Yacht catering in Dubai and Abu Dhabi: breakfasts, canapés, buffets, seafood and grill. Tableware, setup and cleanup included."
+  },
+  "corporate": {
+    "title_ru": "Корпоративный кейтеринг в Дубае — Rokate Catering",
+    "title_en": "Corporate catering in Dubai — Rokate Catering",
+    "description_ru": "Кофе-брейки, бизнес-ланчи и фуршеты в офисе и на конференциях в Дубае. Счёт и документы для компании.",
+    "description_en": "Coffee breaks, business lunches and buffets at offices and conferences in Dubai. Invoice and paperwork for your company."
+  },
+  "menu": {
+    "title_ru": "Пакеты и меню — Rokate Catering",
+    "title_en": "Packages and menu — Rokate Catering",
+    "description_ru": "Готовые кейтеринг-пакеты и состав меню: канапе, гриль, морепродукты, фрукты и десерты. Цены от AED.",
+    "description_en": "Ready-made catering packages and what the menu includes: canapés, grill, seafood, fruit and desserts. Prices from AED."
+  },
+  "partners": {
+    "title_ru": "Партнёрам — Rokate Catering",
+    "title_en": "For partners — Rokate Catering",
+    "description_ru": "Кейтеринг для компаний по аренде яхт и вилл, event-агентств и консьерж-служб в Дубае и Абу-Даби.",
+    "description_en": "Catering for yacht and villa charter companies, event agencies and concierge services in Dubai and Abu Dhabi."
+  },
+  "privacy": {
+    "title_ru": "Политика конфиденциальности — Rokate Catering",
+    "title_en": "Privacy policy — Rokate Catering",
+    "description_ru": "Как Rokate Catering обращается с данными, оставленными через формы на сайте.",
+    "description_en": "How Rokate Catering handles data left through the forms on this site."
+  },
+  "thanks": {
+    "title_ru": "Заявка отправлена — Rokate Catering",
+    "title_en": "Request sent — Rokate Catering",
+    "description_ru": "Спасибо за заявку. Мы ответим в WhatsApp в ближайшее время.",
+    "description_en": "Thank you for your request. We will reply on WhatsApp shortly."
+  }
+}

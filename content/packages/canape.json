@@ -1,0 +1,22 @@
+{
+  "order": 1,
+  "title_ru": "Канапе-фуршет",
+  "title_en": "Canapé buffet",
+  "guests_ru": "от 10 гостей",
+  "guests_en": "from 10 guests",
+  "price_ru": "от AED 85 / гость",
+  "price_en": "from AED 85 / guest",
+  "includes_ru": [
+    "12 видов канапе и тарталеток",
+    "Сырная и фруктовая подача",
+    "Посуда, текстиль и сервировка",
+    "Уборка после мероприятия"
+  ],
+  "includes_en": [
+    "12 kinds of canapés and tartlets",
+    "Cheese and fruit display",
+    "Tableware, linen and setup",
+    "Cleanup after the event"
+  ],
+  "photo": "/media/platters-closeup__w960.webp"
+}

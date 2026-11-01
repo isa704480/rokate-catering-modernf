@@ -1,0 +1,9 @@
+# Ildiz manzil: default til — English (/index.html bo'lsa, shu qoida fallback bo'ladi)
+/                    /en                      301
+
+# Eski manzillar va qulaylik uchun qisqa havolalar
+/yacht-catering      /en/yacht-catering      301
+/corporate-catering  /en/corporate-catering  301
+/menu                /en/menu                301
+/partners            /en/partners            301
+/privacy             /en/privacy             301

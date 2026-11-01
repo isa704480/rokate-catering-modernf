@@ -1,0 +1,53 @@
+{
+  "title_ru": "Корпоративный кейтеринг",
+  "title_en": "Corporate catering",
+  "lede_ru": "Кофе-брейки, бизнес-ланчи и фуршеты в офисе, на конференциях и выездных встречах в Дубае и Абу-Даби.",
+  "lede_en": "Coffee breaks, business lunches and buffets at the office, at conferences and off-site meetings in Dubai and Abu Dhabi.",
+  "photo": "/media/office-reception__w960.webp",
+  "blocks": [
+    {
+      "title_ru": "Не мешаем работе",
+      "title_en": "We stay out of the way",
+      "text_ru": "Приезжаем заранее, накрываем тихо и быстро, убираем сразу после. Переговорная или кофе-зона освобождается в тот же час.",
+      "text_en": "We arrive early, set up quietly and quickly, and clear away immediately afterwards. The meeting room or coffee area is free again within the hour."
+    },
+    {
+      "title_ru": "Документы для компании",
+      "title_en": "Paperwork for the company",
+      "text_ru": "Выставляем счёт и готовим закрывающие документы. Для регулярных мероприятий согласуем постоянное меню и условия.",
+      "text_en": "We issue an invoice and prepare the closing documents. For recurring events we agree a standing menu and terms."
+    },
+    {
+      "title_ru": "Повторяющиеся форматы",
+      "title_en": "Recurring formats",
+      "text_ru": "Еженедельные ланчи, встречи с клиентами, обучение, открытие офиса или презентация — собираем меню под повод и бюджет.",
+      "text_en": "Weekly lunches, client meetings, training days, an office opening or a product launch — we build the menu around the occasion and the budget."
+    }
+  ],
+  "listTitle_ru": "Поводы",
+  "listTitle_en": "Occasions",
+  "list_ru": [
+    "Кофе-брейк на конференции",
+    "Бизнес-ланч в офисе",
+    "Встреча с клиентами",
+    "Презентация и запуск",
+    "Открытие офиса или шоурума",
+    "Корпоративный праздник"
+  ],
+  "list_en": [
+    "Conference coffee break",
+    "Business lunch at the office",
+    "Client meeting",
+    "Presentation and launch",
+    "Office or showroom opening",
+    "Company celebration"
+  ],
+  "gallery": [
+    "/media/office-reception__w960.webp",
+    "/media/canape-marble-table__w960.webp",
+    "/media/platters-closeup__w960.webp",
+    "/media/seafood-fruit-table__w960.webp",
+    "/media/waitress-fruit-platter__w960.webp",
+    "/media/white-table-setting__w960.webp"
+  ]
+}

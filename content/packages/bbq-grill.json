@@ -1,0 +1,22 @@
+{
+  "order": 4,
+  "title_ru": "Гриль и BBQ с шефом",
+  "title_en": "Grill and BBQ with a chef",
+  "guests_ru": "от 10 гостей",
+  "guests_en": "from 10 guests",
+  "price_ru": "от AED 150 / гость",
+  "price_en": "from AED 150 / guest",
+  "includes_ru": [
+    "Шеф готовит на месте",
+    "Мясо, птица, овощи на гриле",
+    "Гарниры, соусы и салаты",
+    "Оборудование и уборка"
+  ],
+  "includes_en": [
+    "The chef cooks on site",
+    "Grilled meat, poultry and vegetables",
+    "Sides, sauces and salads",
+    "Equipment and cleanup"
+  ],
+  "photo": "/media/chef-grill-skewers__w960.webp"
+}

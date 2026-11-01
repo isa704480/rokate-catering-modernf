@@ -1,0 +1,40 @@
+{
+  "items": [
+    {
+      "q_ru": "За сколько нужно заказывать?",
+      "q_en": "How far in advance should I book?",
+      "a_ru": "Обычно за 3–5 дней. Срочные заказы принимаем за сутки до мероприятия.",
+      "a_en": "Usually 3–5 days. We accept urgent orders one day before the event."
+    },
+    {
+      "q_ru": "Где вы работаете?",
+      "q_en": "Where do you work?",
+      "a_ru": "Дубай и Абу-Даби: яхты, виллы, офисы, дома, пляжи и площадки.",
+      "a_en": "Dubai and Abu Dhabi: yachts, villas, offices, homes, beaches and venues."
+    },
+    {
+      "q_ru": "Вы привозите посуду и мебель?",
+      "q_en": "Do you bring tableware and furniture?",
+      "a_ru": "Посуду, текстиль и сервировку привозим сами. Мебель и декор организуем через проверенных партнёров.",
+      "a_en": "We bring tableware, linen and setup ourselves. Furniture and decor are arranged through trusted partners."
+    },
+    {
+      "q_ru": "Можно меню под аллергии или религиозные требования?",
+      "q_en": "Can the menu suit allergies or religious requirements?",
+      "a_ru": "Да. Сообщите заранее — подберём меню и заменим блюда.",
+      "a_en": "Yes. Tell us in advance and we will adjust the menu and swap dishes."
+    },
+    {
+      "q_ru": "Вы остаётесь на мероприятии?",
+      "q_en": "Do you stay during the event?",
+      "a_ru": "Да, если нужно обслуживание. Официанты следят за столом и убирают после.",
+      "a_en": "Yes, if you need service. Our waiters look after the table and clear up afterwards."
+    },
+    {
+      "q_ru": "На каком языке вы общаетесь?",
+      "q_en": "What language do you work in?",
+      "a_ru": "На русском и английском.",
+      "a_en": "Russian and English."
+    }
+  ]
+}
