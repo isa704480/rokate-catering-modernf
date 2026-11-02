@@ -47,18 +47,18 @@ export function DynHero({ hero, chips, wa, waLabel, cta }: {
         <div className="relative w-full px-5 pb-[calc(96px+env(safe-area-inset-bottom))] text-white sm:px-8 lg:px-14 lg:pb-14">
           {hero.eyebrow && (
             <p className="glass inline-flex items-center gap-2 rounded-full px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.14em]">
-              <span className="h-2 w-2 rounded-full bg-lime" />{hero.eyebrow}
+              <span className="h-2 w-2 rounded-full bg-gold" />{hero.eyebrow}
             </p>
           )}
-          <h1 className="dyn-title mt-6 max-w-[15ch] text-[clamp(1.85rem,7.2vw,7.4rem)] text-white">{hero.title}</h1>
+          <h1 className="dyn-title mt-6 max-w-[17ch] text-[clamp(1.75rem,5.2vw,4.8rem)] font-semibold text-white">{hero.title}</h1>
           <div className="mt-8 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-            {hero.subtitle && <p className="max-w-lg text-[17px] leading-relaxed text-white/80">{hero.subtitle}</p>}
+            {hero.subtitle && <p className="max-w-lg text-[16px] leading-relaxed text-white/85">{hero.subtitle}</p>}
             <div className="flex flex-wrap gap-3">
-              <a href="#request" className="btn btn-primary !min-h-[56px] !px-7 text-[15px]" data-event="cta_click" data-location="hero">
+              <a href="#request" className="btn btn-primary !min-h-[54px] !px-7 text-[15px]" data-event="cta_click" data-location="hero">
                 {cta}<Icon name="arrow" size={18} />
               </a>
               {wa && (
-                <a href={wa} target="_blank" rel="noopener" className="btn glass !min-h-[56px] !px-6 text-white hover:bg-white/25" data-location="hero">
+                <a href={wa} target="_blank" rel="noopener" className="btn glass !min-h-[54px] !px-6 text-white hover:bg-white/25" data-location="hero">
                   <WhatsAppIcon size={18} />{waLabel}
                 </a>
               )}
