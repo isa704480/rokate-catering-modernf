@@ -1,36 +1,24 @@
 import type { MetadataRoute } from "next";
-import { doc, LOCALES } from "@/lib/content";
-import type { Settings } from "@/lib/types";
+import { href, SITE_URL } from "@/lib/site";
+import { DEMO } from "@/lib/demo";
+import demoData from "@/lib/demo-data.json";
 
 export const dynamic = "force-static";
 
-/** Ikkala til uchun umumiy sitemap, hreflang havolalari bilan. */
-export default function sitemap(): MetadataRoute.Sitemap {
-  const settings = doc<Settings>("settings", "en");
-  const base = settings.siteUrl.replace(/\/$/, "");
+const API = (process.env.API_INTERNAL_URL || "http://localhost:8002").replace(/\/$/, "");
 
-  const paths = [
-    { path: "", priority: 1 },
-    { path: "/yacht-catering", priority: 0.9 },
-    { path: "/corporate-catering", priority: 0.9 },
-    { path: "/menu", priority: 0.8 },
-    { path: "/partners", priority: 0.5 },
-  ];
-
-  const now = new Date();
-
-  return paths.flatMap(({ path, priority }) =>
-    LOCALES.map((locale) => ({
-      url: `${base}/${locale}${path}`,
-      lastModified: now,
-      changeFrequency: "monthly" as const,
-      priority,
-      alternates: {
-        languages: Object.fromEntries([
-          ...LOCALES.map((l) => [l, `${base}/${l}${path}`]),
-          ["x-default", `${base}/en${path}`],
-        ]),
-      },
-    }))
-  );
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  let items: { path: string; updated: string }[] = [{ path: "/", updated: new Date().toISOString() }];
+  if (DEMO) items = demoData.sitemap;
+  else try {
+    const res = await fetch(`${API}/api/v1/sitemap`, { next: { revalidate: 3600, tags: ["cms"] } });
+    if (res.ok) items = await res.json();
+  } catch {
+    /* build paytida backend ishlamasligi mumkin */
+  }
+  return items.map((i) => ({
+    url: `${SITE_URL}${href("en", i.path)}`,
+    lastModified: i.updated,
+    alternates: { languages: { en: `${SITE_URL}${href("en", i.path)}`, ru: `${SITE_URL}${href("ru", i.path)}` } },
+  }));
 }

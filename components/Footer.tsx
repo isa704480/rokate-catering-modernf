@@ -1,76 +1,60 @@
 import Link from "next/link";
-import Logo from "./Logo";
-import { t, href } from "@/lib/i18n";
-import type { Locale } from "@/lib/content";
-import type { Settings } from "@/lib/types";
-import { Contact } from "./Contacts";
+import { t } from "@/lib/i18n";
+import { href, telLink, waLink } from "@/lib/site";
+import type { Locale, SiteData } from "@/lib/types";
+import { Icon, WhatsAppIcon } from "./Icon";
+import { Logo } from "./Logo";
 
-export default function Footer({ locale, settings }: { locale: Locale; settings: Settings }) {
-  const s = t(locale);
-  const year = new Date().getFullYear();
-
+export function Footer({ locale, site }: { locale: Locale; site: SiteData }) {
+  const d = t(locale);
+  const home = href(locale, "/");
+  
+  const wa = waLink(site.whatsapp_number, site.whatsapp_text);
   return (
-    <footer className="bg-green-deep text-bg">
-      <div className="container-x py-14 md:py-16">
-        <div className="grid gap-10 md:grid-cols-[1.1fr_1fr_1fr]">
-          <div>
-            <Logo light className="h-14 w-auto" />
-            <p className="slogan mt-4 text-gold">Taste | Style | Quality</p>
-            <p className="mt-4 max-w-[34ch] text-[15px] leading-relaxed text-bg/80">{settings.city}</p>
+    <footer className="bg-green-deep text-white/80" data-section="footer">
+      <div className="container-x pt-16 pb-28 lg:pb-12">
+        <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr]">
+          <div className="max-w-sm">
+            <Logo logo={null} light />
+            {site.tagline && <p className="mt-5 text-[15px] leading-relaxed">{site.tagline}</p>}
+            {site.service_area && (
+              <p className="mt-4 flex items-center gap-2 text-[14px] text-white/60"><Icon name="pin" size={16} />{site.service_area}</p>
+            )}
           </div>
 
           <div>
-            <h2 className="text-[13px] font-bold uppercase tracking-[0.18em] text-bg/70">Rokate</h2>
-            <ul className="mt-4 space-y-2.5 text-[15px]">
-              <li>
-                <Link href={`${href(locale)}#directions`} className="hover:text-gold">
-                  {s.nav.directions}
-                </Link>
-              </li>
-              <li>
-                <Link href={href(locale, "/menu")} className="hover:text-gold">
-                  {s.nav.packages}
-                </Link>
-              </li>
-              <li>
-                <Link href={href(locale, "/yacht-catering")} className="hover:text-gold">
-                  Yacht Catering
-                </Link>
-              </li>
-              <li>
-                <Link href={href(locale, "/corporate-catering")} className="hover:text-gold">
-                  Corporate Catering
-                </Link>
-              </li>
+            <h3 className="font-sans text-[12px] font-semibold uppercase tracking-[0.2em] text-gold-soft">{d.footer.explore}</h3>
+            <ul className="mt-5 space-y-3 text-[15px]">
+              <li><a className="link-underline" href={`${home}#directions`}>{d.nav.services}</a></li>
+              <li><a className="link-underline" href={`${home}#packages`}>{d.nav.packages}</a></li>
+              <li><a className="link-underline" href={`${home}#portfolio`}>{d.nav.portfolio}</a></li>
+              <li><Link className="link-underline" href={href(locale, "/menu")}>{d.nav.menu}</Link></li>
+              {site.nav_services.map((s) => (
+                <li key={s.slug}><Link className="link-underline" href={href(locale, `/catering/${s.slug}`)}>{s.title}</Link></li>
+              ))}
             </ul>
           </div>
 
           <div>
-            <h2 className="text-[13px] font-bold uppercase tracking-[0.18em] text-bg/70">{s.nav.contact}</h2>
-            <ul className="mt-4 space-y-2.5 text-[15px]">
-              <Contact settings={settings} dark />
+            <h3 className="font-sans text-[12px] font-semibold uppercase tracking-[0.2em] text-gold-soft">{d.footer.contacts}</h3>
+            <ul className="mt-5 space-y-3 text-[15px]">
+              {wa && <li><a className="inline-flex items-center gap-2 link-underline" href={wa} target="_blank" rel="noopener" data-location="footer"><WhatsAppIcon size={16} />WhatsApp</a></li>}
+              {site.phone && <li><a className="inline-flex items-center gap-2 link-underline" href={telLink(site.phone)} data-location="footer"><Icon name="phone" size={16} />{site.phone}</a></li>}
+              {site.email && <li><a className="inline-flex items-center gap-2 link-underline" href={`mailto:${site.email}`} data-location="footer"><Icon name="mail" size={16} />{site.email}</a></li>}
+              {site.instagram_url && <li><a className="inline-flex items-center gap-2 link-underline" href={site.instagram_url} target="_blank" rel="noopener" data-location="footer"><Icon name="instagram" size={16} />{d.footer.follow}</a></li>}
+              {site.working_hours && <li className="text-white/60 text-[14px]">{site.working_hours}</li>}
             </ul>
-            <p className="mt-4 text-[14px] text-bg/75">{settings.hours}</p>
           </div>
         </div>
 
-        <div className="mt-12 h-px bg-line-dark" />
-
-        <div className="mt-5 flex flex-col gap-3 text-[13px] text-bg/75 sm:flex-row sm:items-center sm:justify-between">
-          <p>
-            © {year} Rokate Catering. {s.allRights}
-          </p>
-          <div className="flex items-center gap-5">
-            <Link href={href(locale, "/partners")} className="hover:text-gold">
-              {s.partners}
-            </Link>
-            <Link href={href(locale, "/privacy")} className="hover:text-gold">
-              {s.privacy}
-            </Link>
+        <div className="mt-14 flex flex-col gap-4 border-t border-white/15 pt-6 text-[13px] text-white/55 sm:flex-row sm:items-center sm:justify-between">
+          <p>© {new Date().getFullYear()} {site.company_name}. {d.footer.rights}</p>
+          <div className="flex gap-6">
+            <Link className="link-underline" href={href(locale, "/partners")}>{d.nav.partners}</Link>
+            <Link className="link-underline" href={href(locale, "/privacy")}>{d.footer.privacy}</Link>
           </div>
         </div>
       </div>
-      <div className="h-[72px] md:hidden" aria-hidden="true" />
     </footer>
   );
 }

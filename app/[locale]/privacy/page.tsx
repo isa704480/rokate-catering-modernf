@@ -1,36 +1,53 @@
 import type { Metadata } from "next";
-import { Paragraphs } from "@/components/Sections";
-import { doc, localeFrom, LOCALES } from "@/lib/content";
-import { pageMeta } from "@/lib/seo";
-import type { PageDoc } from "@/lib/types";
+import { notFound } from "next/navigation";
+import { PageHero } from "@/components/PageHero";
+import { api } from "@/lib/api";
+import { isLocale, t } from "@/lib/i18n";
+import { buildMeta } from "@/lib/seo";
+import { href } from "@/lib/site";
+import type { LegalData, Locale, SiteData } from "@/lib/types";
 
-export function generateStaticParams() {
-  return LOCALES.map((locale) => ({ locale }));
+type Props = { params: Promise<{ locale: string }> };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  if (!isLocale(locale)) return {};
+  const [p, site] = await Promise.all([api<LegalData>("legal/privacy", locale), api<SiteData>("site", locale)]);
+  return buildMeta(locale, "/privacy", p?.seo ?? null, site, p?.title);
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
-  const locale = localeFrom(await params);
-  return { ...pageMeta("privacy", locale, "/privacy"), robots: { index: false, follow: true } };
-}
-
-export default async function PrivacyPage({ params }: { params: Promise<{ locale: string }> }) {
-  const locale = localeFrom(await params);
-  const page = doc<PageDoc>("pages/privacy", locale);
-
+/** Oddiy matn: bo'sh qator — yangi paragraf, "## " — sarlavha, *matn* — kursiv. */
+function Body({ text }: { text: string }) {
   return (
-    <section className="container-x py-12 md:py-20">
-      <h1 className="h2 max-w-3xl">{page.title}</h1>
-      <p className="lede mt-4">{page.lede}</p>
-      <div className="mt-10 max-w-3xl">
-        {page.blocks.map((b) => (
-          <section key={b.title} className="border-t border-line py-6 last:border-b">
-            <h2 className="text-[18px] font-bold">{b.title}</h2>
-            <div className="mt-2">
-              <Paragraphs text={b.text} className="body text-[15px]" />
-            </div>
-          </section>
-        ))}
-      </div>
-    </section>
+    <>
+      {text.split(/\n\s*\n/).map((block, i) => {
+        const lines = block.trim().split("\n");
+        const head = lines[0].startsWith("## ") ? lines.shift()!.slice(3) : null;
+        const rest = lines.join(" ").trim();
+        const italic = /^\*(.+)\*$/.exec(rest);
+        return (
+          <div key={i}>
+            {head && <h2>{head}</h2>}
+            {rest && (italic ? <p><em>{italic[1]}</em></p> : <p>{rest}</p>)}
+          </div>
+        );
+      })}
+    </>
+  );
+}
+
+export default async function Privacy({ params }: Props) {
+  const { locale: l } = await params;
+  const locale = l as Locale;
+  const p = await api<LegalData>("legal/privacy", locale);
+  if (!p) notFound();
+  const d = t(locale);
+  return (
+    <>
+      <PageHero title={p.title} crumbs={[{ href: href(locale, "/"), label: d.nav.home }, { href: href(locale, "/privacy"), label: p.title }]} />
+      <section className="container-x pb-24">
+        <div className="prose-rk max-w-2xl text-[16px]"><Body text={p.body} /></div>
+      </section>
+    </>
   );
 }

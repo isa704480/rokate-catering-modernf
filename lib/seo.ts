@@ -1,37 +1,30 @@
 import type { Metadata } from "next";
-import { doc, LOCALES, type Locale } from "./content";
-import type { Settings, Seo } from "./types";
+import { absolute, href, SITE_URL } from "./site";
+import type { Locale, Seo, SiteData } from "./types";
 
-/**
- * Har bir sahifa uchun Title, Description, canonical, hreflang va Open Graph.
- * Matnlar content/seo.json da — Roman ularni CMS orqali o'zgartira oladi.
- */
-export function pageMeta(key: keyof Seo | string, locale: Locale, path = "/"): Metadata {
-  const settings = doc<Settings>("settings", locale);
-  const seo = doc<Seo>("seo", locale);
-  const entry = seo[key] ?? seo.home;
-  const base = settings.siteUrl.replace(/\/$/, "");
-  const url = `${base}/${locale}${path === "/" ? "" : path}`;
-
-  const languages: Record<string, string> = {};
-  for (const l of LOCALES) languages[l] = `${base}/${l}${path === "/" ? "" : path}`;
-  languages["x-default"] = languages.en;
-
+/** Har bir sahifa uchun metadata: title, description, canonical, hreflang, Open Graph. */
+export function buildMeta(locale: Locale, path: string, seo: Partial<Seo> | null, site: SiteData | null, fallbackTitle = ""): Metadata {
+  const title = seo?.title || fallbackTitle || site?.seo.title || "Rokate Catering";
+  const description = seo?.description || site?.seo.description || "";
+  const image = seo?.image?.src || site?.seo.image?.src;
+  const url = `${SITE_URL}${href(locale, path)}`;
   return {
-    metadataBase: new URL(base),
-    title: entry.title,
-    description: entry.description,
-    alternates: { canonical: url, languages },
-    openGraph: {
-      type: "website",
-      siteName: "Rokate Catering",
-      title: entry.title,
-      description: entry.description,
-      url,
-      locale: locale === "ru" ? "ru_RU" : "en_US",
-      images: [{ url: `${base}/media/yacht-deck-table__w1500.webp`, width: 1500, height: 2000, alt: "Rokate Catering" }],
+    title,
+    description,
+    alternates: {
+      canonical: url,
+      languages: { en: `${SITE_URL}${href("en", path)}`, ru: `${SITE_URL}${href("ru", path)}`, "x-default": `${SITE_URL}${href("en", path)}` },
     },
-    twitter: { card: "summary_large_image", title: entry.title, description: entry.description },
-    robots: { index: true, follow: true },
+    openGraph: {
+      title,
+      description,
+      url,
+      siteName: site?.company_name || "Rokate Catering",
+      locale: locale === "ru" ? "ru_RU" : "en_US",
+      type: "website",
+      ...(image ? { images: [{ url: absolute(image)! }] } : {}),
+    },
+    twitter: { card: "summary_large_image", title, description },
+    robots: seo?.noindex ? { index: false, follow: true } : undefined,
   };
 }

@@ -1,36 +1,46 @@
-/** GA4 hodisalari. Yo'riqnomaning 8-bo'limidagi ro'yxat. */
-export type Ev =
-  | "whatsapp_click"
-  | "telegram_click"
-  | "phone_click"
-  | "email_click"
-  | "form_submit"
-  | "partner_form_submit";
+"use client";
 
-export function track(event: Ev, params: Record<string, string | number | undefined> = {}) {
-  if (typeof window === "undefined") return;
-  const w = window as unknown as { dataLayer?: unknown[]; gtag?: (...a: unknown[]) => void };
-  if (typeof w.gtag === "function") w.gtag("event", event, params);
-  else (w.dataLayer ||= []).push({ event, ...params });
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+    dataLayer?: unknown[];
+  }
 }
 
-/** Reklama va Instagram bio uchun UTM belgilarini saqlab, formaga qo'shamiz. */
-export function attribution() {
-  if (typeof window === "undefined") return {};
-  const q = new URLSearchParams(window.location.search);
-  const keys = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"] as const;
-  const out: Record<string, string> = {};
-  for (const k of keys) {
-    const v = q.get(k) || sessionStorage.getItem(k);
-    if (v) {
-      out[k] = v;
-      try {
-        sessionStorage.setItem(k, v);
-      } catch {
-        /* private rejimda yozib bo'lmasligi mumkin */
-      }
-    }
+/** GA4 eventi (GA ulanmagan bo'lsa jim o'tadi). */
+export function track(event: string, params: Record<string, unknown> = {}) {
+  try {
+    window.gtag?.("event", event, params);
+  } catch {
+    /* ignore */
   }
-  if (document.referrer && !document.referrer.includes(window.location.host)) out.referrer = document.referrer;
-  return out;
+}
+
+const KEY = "rk_attr";
+
+export type Attribution = { utm_source?: string; utm_medium?: string; utm_campaign?: string; referrer?: string };
+
+/** Birinchi tashrifdagi UTM va referrer'ni eslab qoladi (sessiya davomida). */
+export function captureAttribution() {
+  try {
+    if (sessionStorage.getItem(KEY)) return;
+    const q = new URLSearchParams(window.location.search);
+    const data: Attribution = {
+      utm_source: q.get("utm_source") || undefined,
+      utm_medium: q.get("utm_medium") || undefined,
+      utm_campaign: q.get("utm_campaign") || undefined,
+      referrer: document.referrer && !document.referrer.startsWith(window.location.origin) ? document.referrer : undefined,
+    };
+    sessionStorage.setItem(KEY, JSON.stringify(data));
+  } catch {
+    /* storage yopiq bo'lishi mumkin */
+  }
+}
+
+export function getAttribution(): Attribution {
+  try {
+    return JSON.parse(sessionStorage.getItem(KEY) || "{}");
+  } catch {
+    return {};
+  }
 }
