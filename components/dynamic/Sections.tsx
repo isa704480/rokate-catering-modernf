@@ -38,7 +38,7 @@ export function DynHero({ hero, chips, wa, waLabel, cta }: {
         <div className="absolute inset-0 bg-gradient-to-t from-[#0b1120]/95 via-[#0b1120]/35 to-[#0b1120]/10" />
 
         {/* yuqori o'ngda "suzuvchi" teglar */}
-        <div className="absolute right-4 top-4 hidden flex-wrap justify-end gap-2 sm:flex lg:right-8 lg:top-8">
+        <div className="absolute right-4 top-4 flex flex-wrap justify-end gap-2 lg:right-8 lg:top-8">
           {chips.map((c) => (
             <span key={c} className="glass rounded-full px-4 py-2 text-[13px] font-semibold text-white">{c}</span>
           ))}
@@ -76,7 +76,7 @@ export function DynMarquee({ items }: { items: string[] }) {
   const row = [...items, ...items];
   return (
     <div className="overflow-hidden py-6 lg:py-8" aria-hidden="true">
-      <div className="-rotate-1 bg-lime py-4">
+      <div className="-rotate-1 bg-sand py-4">
         <div className="marquee">
           {[0, 1].map((k) => (
             <div key={k} className="flex shrink-0 items-center">
@@ -115,7 +115,7 @@ export function DynAbout({ about, facts }: { about: HomeData["about"]; facts: st
           <div className="overflow-hidden rounded-[28px]">
             <Img img={about.image} sizes="(min-width:1024px) 40vw, 100vw" className="aspect-[4/5] w-full object-cover" />
           </div>
-          <div className="absolute -bottom-5 -left-3 rotate-[-4deg] rounded-2xl bg-lime px-5 py-4 font-display text-[15px] uppercase leading-tight shadow-lg sm:-left-6">
+          <div className="absolute -bottom-5 -left-3 rotate-[-4deg] rounded-2xl bg-gold px-5 py-4 font-display text-[15px] uppercase leading-tight shadow-lg sm:-left-6">
             Dubai<br />catering
           </div>
         </div>
@@ -149,7 +149,7 @@ export function DynDirections({ data, locale, more, kicker }: {
                     <h3 className={`dyn-title ${big ? "text-[clamp(1.8rem,3vw,2.8rem)]" : "text-[1.35rem]"}`}>{s.title}</h3>
                     {s.card_text && <p className={`mt-2 text-[14px] leading-relaxed text-white/75 ${big ? "max-w-md" : "line-clamp-2"}`}>{s.card_text}</p>}
                   </div>
-                  <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-lime text-ink transition-transform duration-500 group-hover:rotate-[-45deg]" aria-label={more}>
+                  <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-green text-white transition-transform duration-500 group-hover:rotate-[-45deg]" aria-label={more}>
                     <Icon name="arrow" size={20} />
                   </span>
                 </div>
@@ -186,14 +186,14 @@ export function DynRelax({ data, cta }: { data: HomeData["relax"]; cta: string }
           </div>
           <ol className="space-y-4">
             {data.steps.map((s, i) => (
-              <li key={s.title} className="reveal rounded-[24px] border border-white/10 bg-white/[.04] p-7 transition-colors hover:border-lime/60 hover:bg-white/[.07] lg:p-9">
+              <li key={s.title} className="reveal rounded-[24px] border border-white/10 bg-white/[.04] p-7 transition-colors hover:border-gold/60 hover:bg-white/[.07] lg:p-9">
                 <div className="flex items-start justify-between gap-6">
                   <h3 className="dyn-title min-w-0 flex-1 text-[clamp(1.25rem,2.4vw,2rem)] text-white">{s.title}</h3>
-                  <span className="font-display text-[2.4rem] leading-none text-lime sm:text-[3.4rem]">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="font-display text-[2.4rem] leading-none text-gold sm:text-[3.4rem]">{String(i + 1).padStart(2, "0")}</span>
                 </div>
                 {s.text && <p className="mt-4 max-w-md text-[16px] leading-relaxed text-white/65">{s.text}</p>}
                 <div className="mt-6 h-1 overflow-hidden rounded-full bg-white/10">
-                  <div className="h-full rounded-full bg-lime" style={{ width: `${((i + 1) / data.steps.length) * 100}%` }} />
+                  <div className="h-full rounded-full bg-gold" style={{ width: `${((i + 1) / data.steps.length) * 100}%` }} />
                 </div>
               </li>
             ))}
@@ -215,7 +215,7 @@ export function DynServices({ data, kicker }: { data: HomeData["services"]; kick
           {data.items.map((s) => (
             <li key={s.title}
                 className="group flex items-center gap-3 rounded-full border border-line bg-white py-2.5 pl-2.5 pr-6 text-[15px] font-semibold transition-all duration-300 hover:-translate-y-0.5 hover:border-ink hover:bg-ink hover:text-white">
-              <span className="grid h-10 w-10 place-items-center rounded-full bg-lime text-ink"><Icon name={s.icon} size={20} /></span>
+              <span className="grid h-10 w-10 place-items-center rounded-full bg-green text-white"><Icon name={s.icon} size={20} /></span>
               {s.title}
             </li>
           ))}
@@ -236,14 +236,14 @@ export function DynWhy({ data }: { data: HomeData["why"] }) {
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {data.items.map((w, i) => (
             <div key={w.title}
-                 className={`reveal flex min-h-[260px] flex-col justify-between rounded-[28px] p-7 ${i === 0 ? "bg-lime text-ink" : i === 3 ? "bg-ink text-white" : "border border-line bg-white"}`}
+                 className={`reveal flex min-h-[260px] flex-col justify-between rounded-[28px] p-7 ${i === 0 ? "bg-green text-white" : i === 3 ? "bg-ink text-white" : "border border-line bg-white"}`}
                  style={{ transitionDelay: `${i * 80}ms` }}>
-              <span className={`grid h-14 w-14 place-items-center rounded-full ${i === 0 ? "bg-ink text-lime" : i === 3 ? "bg-lime text-ink" : "bg-sand text-ink"}`}>
+              <span className={`grid h-14 w-14 place-items-center rounded-full ${i === 0 ? "bg-white/20 text-white" : i === 3 ? "bg-green text-white" : "bg-sand text-ink"}`}>
                 <Icon name={w.icon} size={26} />
               </span>
               <div>
                 <h3 className={`dyn-title text-[1.3rem] ${i === 3 ? "text-white" : ""}`}>{w.title}</h3>
-                {w.text && <p className={`mt-3 text-[15px] leading-relaxed ${i === 3 ? "text-white/70" : i === 0 ? "text-ink/75" : "text-ink-muted"}`}>{w.text}</p>}
+                {w.text && <p className={`mt-3 text-[15px] leading-relaxed ${i === 3 ? "text-white/70" : i === 0 ? "text-white/75" : "text-ink-muted"}`}>{w.text}</p>}
               </div>
             </div>
           ))}

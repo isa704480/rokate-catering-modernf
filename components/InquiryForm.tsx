@@ -43,6 +43,8 @@ export function InquiryForm({ locale, labels, eventTypes, locations, packages, d
     if (!v("name")) errs.name = labels.required;
     if (!v("phone")) errs.phone = labels.required;
     else if (v("phone").replace(/\D/g, "").length < 7) errs.phone = labels.phoneInvalid;
+    if (!v("event_date")) errs.event_date = labels.required;
+    if (!v("guests")) errs.guests = labels.required;
     setErrors(errs);
     if (Object.keys(errs).length) return;
 
@@ -87,12 +89,14 @@ export function InquiryForm({ locale, labels, eventTypes, locations, packages, d
         {fieldErr("phone")}
       </div>
       <div>
-        <label className="label" htmlFor="f-date">{labels.date}</label>
-        <input id="f-date" name="event_date" type="date" className="field" />
+        <label className="label" htmlFor="f-date">{labels.date} *</label>
+        <input id="f-date" name="event_date" type="date" className="field" aria-invalid={!!errors.event_date} />
+        {fieldErr("event_date")}
       </div>
       <div>
-        <label className="label" htmlFor="f-guests">{labels.guests}</label>
-        <input id="f-guests" name="guests" type="number" min={1} max={5000} inputMode="numeric" className="field" placeholder="20" />
+        <label className="label" htmlFor="f-guests">{labels.guests} *</label>
+        <input id="f-guests" name="guests" type="number" min={1} max={5000} inputMode="numeric" className="field" placeholder="20" aria-invalid={!!errors.guests} />
+        {fieldErr("guests")}
       </div>
       <div>
         <label className="label" htmlFor="f-type">{labels.type}</label>

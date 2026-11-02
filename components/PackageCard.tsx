@@ -12,7 +12,7 @@ export function PackageCard({ p, locale, requestHref }: { p: Package; locale: Lo
       <div className="img-zoom relative aspect-[4/3] overflow-hidden">
         <Img img={p.image} sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw" className="h-full w-full object-cover" />
         {p.badge && (
-          <span className="absolute left-4 top-4 rounded-full bg-lime px-3 py-1 text-[11px] font-bold uppercase tracking-[0.12em] text-ink">
+          <span className="absolute left-4 top-4 rounded-full bg-green text-white px-3 py-1 text-[11px] font-bold uppercase tracking-[0.12em]">
             {d.badge[p.badge] || p.badge}
           </span>
         )}

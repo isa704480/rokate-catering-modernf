@@ -11,7 +11,7 @@ export function Relax({ data, cta, ctaHref }: { data: HomeData["relax"]; cta: st
         </div>
         <div className="container-x !max-w-none flex flex-col justify-center py-16 lg:px-20 lg:py-24">
           <div className="reveal max-w-xl">
-            {data.eyebrow && <p className="eyebrow !text-lime">{data.eyebrow}</p>}
+            {data.eyebrow && <p className="eyebrow !text-gold-soft">{data.eyebrow}</p>}
             <h2 className="mt-5 text-[clamp(2.6rem,5vw,4.4rem)] italic text-white">{data.title}</h2>
             {data.text && <p className="mt-6 text-[17px] leading-relaxed text-white/75">{data.text}</p>}
           </div>

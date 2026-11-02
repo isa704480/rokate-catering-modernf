@@ -48,7 +48,7 @@ export function Shell({ children }: { children: React.ReactNode }) {
               <Link key={it.key} href={`/admin/r/${it.key}`} className={linkCls(isActive(it.key))}>
                 <AIcon name={it.icon} size={18} />
                 <span className="flex-1">{it.title}</span>
-                {!!it.badge && <span className="rounded-full bg-lime px-2 py-0.5 text-[11px] font-bold text-ink">{it.badge}</span>}
+                {!!it.badge && <span className="rounded-full bg-green text-white px-2 py-0.5 text-[11px] font-bold">{it.badge}</span>}
               </Link>
             ))}
           </div>

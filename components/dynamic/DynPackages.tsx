@@ -31,7 +31,7 @@ export function DynPackages({ data, offers, locale, kicker }: {
         </div>
 
         {offers.map((o) => (
-          <div key={o.id} className="reveal mt-10 flex flex-col gap-6 overflow-hidden rounded-[28px] bg-lime p-6 sm:flex-row sm:items-center sm:p-8">
+          <div key={o.id} className="reveal mt-10 flex flex-col gap-6 overflow-hidden rounded-[28px] bg-sand p-6 sm:flex-row sm:items-center sm:p-8 border border-gold/30">
             {o.image && <Img img={o.image} sizes="200px" className="aspect-square w-full rounded-[20px] object-cover sm:w-44" />}
             <div className="flex-1">
               <p className="text-[12px] font-bold uppercase tracking-[0.14em]">{d.badge.seasonal}{o.ends_at ? ` · ${d.offerUntil} ${new Date(o.ends_at).toLocaleDateString(locale === "ru" ? "ru-RU" : "en-GB", { day: "numeric", month: "long" })}` : ""}</p>
@@ -55,7 +55,7 @@ export function DynPackages({ data, offers, locale, kicker }: {
                 <span className="absolute left-3 top-3 rounded-full bg-white/90 px-3 py-1.5 text-[12px] font-bold backdrop-blur">
                   {p.price_from != null ? `${d.price.from} ${formatPrice(locale, p.price_from)} ${d.price.currency}` : d.price.onRequest}
                 </span>
-                {p.badge && <span className="absolute right-3 top-3 rounded-full bg-lime px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider">{d.badge[p.badge] || p.badge}</span>}
+                {p.badge && <span className="absolute right-3 top-3 rounded-full bg-green text-white px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider">{d.badge[p.badge] || p.badge}</span>}
               </div>
               <div className="flex flex-1 flex-col p-6 pt-4">
                 {guests && <p className="flex items-center gap-2 text-[13px] font-semibold text-ink-muted"><Icon name="users" size={16} />{guests}</p>}

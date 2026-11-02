@@ -4,6 +4,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Icon, WhatsAppIcon } from "./Icon";
 import { Logo } from "./Logo";
+import { href as buildHref } from "@/lib/site";
 
 type Props = {
   locale: "en" | "ru";
@@ -15,7 +16,7 @@ type Props = {
 
 function switchLocale(pathname: string, to: "en" | "ru") {
   const clean = pathname.replace(/^\/(ru|en)(?=\/|$)/, "") || "/";
-  return to === "en" ? clean : clean === "/" ? "/ru" : `/ru${clean}`;
+  return to === "en" ? buildHref("en", clean) : buildHref("ru", clean);
 }
 
 export function Header({ locale, logo, wa, labels, homeHref }: Props) {
@@ -75,7 +76,7 @@ export function Header({ locale, logo, wa, labels, homeHref }: Props) {
     { href: `${homeHref}#directions`, label: labels.services },
     { href: `${homeHref}#packages`, label: labels.packages },
     { href: `${homeHref}#portfolio`, label: labels.portfolio },
-    { href: `${homeHref === "/" ? "" : homeHref}/menu`, label: labels.menu },
+    { href: buildHref(locale, "/menu"), label: labels.menu },
     { href: `${homeHref}#request`, label: labels.contact },
   ];
 

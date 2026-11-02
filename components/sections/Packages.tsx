@@ -17,7 +17,7 @@ export function Packages({ data, offers, locale, eyebrow }: { data: HomeData["pa
           <div key={o.id} className="reveal mt-12 grid overflow-hidden rounded-[var(--radius-card)] bg-green-deep text-white md:grid-cols-2">
             {o.image && <Img img={o.image} sizes="(min-width:768px) 50vw, 100vw" className="h-64 w-full object-cover md:h-full" />}
             <div className="flex flex-col justify-center p-8 lg:p-12">
-              <p className="eyebrow !text-lime">
+              <p className="eyebrow !text-gold-soft">
                 {d.badge.seasonal}{o.ends_at ? ` · ${d.offerUntil} ${new Date(o.ends_at).toLocaleDateString(locale === "ru" ? "ru-RU" : "en-GB", { day: "numeric", month: "long" })}` : ""}
               </p>
               <h3 className="mt-4 text-[2.2rem] text-white">{o.title}</h3>

@@ -1,11 +1,11 @@
-export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3002").replace(/\/$/, "");
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://rokate-catering-modernf.vercel.app").replace(/\/$/, "");
 export const LOCALES = ["en", "ru"] as const;
 
-/** Til uchun yo'l: EN — prefikssiz, RU — /ru */
+/** Til uchun to'liq yo'l: /en/... yoki /ru/... */
 export function href(locale: string, path = "/") {
   const p = path.startsWith("/") ? path : `/${path}`;
-  if (locale === "en") return p;
-  return p === "/" ? "/ru" : `/ru${p}`;
+  const prefix = locale === "ru" ? "/ru" : "/en";
+  return p === "/" ? prefix : `${prefix}${p}`;
 }
 
 export function absolute(url: string | null | undefined) {
