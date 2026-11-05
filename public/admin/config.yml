@@ -233,21 +233,40 @@ collections:
   # ----------------------------------------------------------------- Отзывы
   - name: reviews
     label: "Отзывы · Reviews"
-    label_singular: "Отзыв · Review"
-    folder: content/reviews
-    extension: json
-    format: json
-    create: true
-    summary: "{{author}}"
-    description: Пока пусто. Добавляйте только настоящие отзывы клиентов — блок появится на сайте сам.
-    fields:
-      - { name: order, label: Порядок, widget: number, value_type: int, default: 9 }
-      - { name: author, label: Кто оставил, widget: string }
-      - { name: kind_ru, label: Мероприятие (RU), widget: string, required: false }
-      - { name: kind_en, label: Мероприятие (EN), widget: string, required: false }
-      - { name: text_ru, label: Текст отзыва (RU), widget: text }
-      - { name: text_en, label: Текст отзыва (EN), widget: text }
-      - { name: hidden, label: Скрыть на сайте, widget: boolean, required: false, default: false }
+    files:
+      - name: reviews
+        label: Отзывы и кнопка Google
+        file: content/reviews.json
+        description: >-
+          Отзывы взяты из профиля Google. Добавляйте только настоящие отзывы —
+          скопируйте текст из Google и переведите на второй язык.
+        fields:
+          - { name: kicker_ru, label: Надпись над заголовком (RU), widget: string }
+          - { name: kicker_en, label: Надпись над заголовком (EN), widget: string }
+          - { name: title_ru, label: Заголовок (RU), widget: string }
+          - { name: title_en, label: Заголовок (EN), widget: string }
+          - { name: text_ru, label: Подпись (RU), widget: text, required: false }
+          - { name: text_en, label: Подпись (EN), widget: text, required: false }
+          - name: googleUrl
+            label: Ссылка «Оставить отзыв»
+            widget: string
+            required: false
+            hint: "Ссылка на отзыв в Google. Пусто — кнопка не показывается."
+          - { name: ctaLabel_ru, label: Надпись на кнопке (RU), widget: string, required: false }
+          - { name: ctaLabel_en, label: Надпись на кнопке (EN), widget: string, required: false }
+          - name: items
+            label: Отзывы
+            label_singular: Отзыв
+            widget: list
+            summary: "{{fields.author}}"
+            fields:
+              - { name: author, label: Кто оставил, widget: string }
+              - { name: rating, label: Оценка, widget: number, value_type: int, default: 5, min: 1, max: 5 }
+              - { name: kind_ru, label: Мероприятие (RU), widget: string, required: false }
+              - { name: kind_en, label: Мероприятие (EN), widget: string, required: false }
+              - { name: text_ru, label: Текст отзыва (RU), widget: text }
+              - { name: text_en, label: Текст отзыва (EN), widget: text }
+              - { name: hidden, label: Скрыть на сайте, widget: boolean, required: false, default: false }
 
   # ----------------------------------------------------------------- Страницы
   - name: pages

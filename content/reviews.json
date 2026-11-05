@@ -1,0 +1,49 @@
+{
+  "title_ru": "Отзывы",
+  "title_en": "Reviews",
+  "kicker_ru": "Google",
+  "kicker_en": "Google",
+  "text_ru": "Отзывы клиентов из нашего профиля в Google.",
+  "text_en": "Client reviews from our Google profile.",
+  "googleUrl": "https://g.page/r/CeApRrflqD6eEBM/review",
+  "ctaLabel_ru": "Оставить отзыв в Google",
+  "ctaLabel_en": "Leave a review on Google",
+  "items": [
+    {
+      "author": "Эльма Панова",
+      "rating": 5,
+      "kind_ru": "",
+      "kind_en": "",
+      "text_ru": "Один из лучших кейтерингов в Дубае. Всё всегда очень красиво, вкусно. Ребята очень пунктуальные, приятные.",
+      "text_en": "One of the best catering services in Dubai. Everything is always beautiful and delicious. The team is punctual and a pleasure to work with.",
+      "hidden": false
+    },
+    {
+      "author": "Vera",
+      "rating": 5,
+      "kind_ru": "",
+      "kind_en": "",
+      "text_ru": "Один из лучших кейтерингов в Дубае и, без преувеличения, самый вкусный из всех, что мы пробовали.",
+      "text_en": "One of the best catering services in Dubai and, without exaggeration, the most delicious we have tried.",
+      "hidden": false
+    },
+    {
+      "author": "Alexandra Sh",
+      "rating": 5,
+      "kind_ru": "День рождения",
+      "kind_en": "Birthday",
+      "text_ru": "Хочу выразить огромную благодарность компании Rokate Catering за то, что они сделали празднование дня рождения по-настоящему незабываемым!",
+      "text_en": "I want to say a huge thank you to Rokate Catering for making our birthday celebration truly unforgettable!",
+      "hidden": false
+    },
+    {
+      "author": "Anastasiia Khmelova",
+      "rating": 5,
+      "kind_ru": "Прогулка на яхте",
+      "kind_en": "Yacht trip",
+      "text_ru": "Большой выбор, вкусная еда и превосходное обслуживание! Обязательно закажем ещё раз для наших прогулок на яхте! Большое спасибо!",
+      "text_en": "Great choice, delicious food and excellent service! We will definitely order again for our yacht trips. Thank you very much!",
+      "hidden": false
+    }
+  ]
+}

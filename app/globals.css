@@ -199,3 +199,45 @@
 }
 @keyframes rk-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .marquee { animation: none; } }
+
+/* ------------------------------------------------------------------
+   Sharhlar karuseli (Swiper) — o'q tugmalari va nuqtalar.
+   Bu uslublar ataylab @layer dan tashqarida: Swiper o'z CSS'ini qatlamsiz
+   yuklaydi, qatlamsiz uslublar esa qatlamli uslublardan ustun turadi.
+   ------------------------------------------------------------------ */
+.rev-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    border: 1px solid var(--color-line);
+    color: var(--color-ink);
+    background: var(--color-surface);
+    transition: border-color .2s var(--ease-soft), background-color .2s var(--ease-soft), color .2s var(--ease-soft);
+  }
+  .rev-arrow:hover {
+    border-color: var(--color-green);
+    background: var(--color-green);
+    color: #fff;
+  }
+  .rev-arrow:active { transform: translateY(1px); }
+
+  /* Slayd kartochkalari bir xil balandlikda turishi uchun */
+  #reviews .swiper-slide { height: auto; }
+
+  .rev-dots .swiper-pagination-bullet {
+    width: 22px;
+    height: 4px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    background: var(--color-line);
+    opacity: 1;
+    cursor: pointer;
+    transition: background-color .25s var(--ease-soft), width .25s var(--ease-soft);
+  }
+  .rev-dots .swiper-pagination-bullet:hover { background: var(--color-gold-soft); }
+  .rev-dots .swiper-pagination-bullet-active { width: 36px; background: var(--color-gold); }

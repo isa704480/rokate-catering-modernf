@@ -8,7 +8,8 @@ export function PageHero({ eyebrow, title, intro, image, crumbs }: {
   return (
     <section className="relative" data-section="page_hero">
       <div className="container-x grid gap-10 pt-8 pb-16 lg:grid-cols-12 lg:items-center lg:pt-14 lg:pb-24">
-        <div className={image ? "lg:col-span-6" : "lg:col-span-9"}>
+        {/* min-w-0: grid elementi uzun so'z kengligiga cho'zilib ketmasligi uchun */}
+        <div className={`min-w-0 ${image ? "lg:col-span-6" : "lg:col-span-9"}`}>
           <nav aria-label="Breadcrumb" className="text-[13px] text-ink-muted">
             {crumbs.map((c, i) => (
               <span key={c.href}>
@@ -18,7 +19,9 @@ export function PageHero({ eyebrow, title, intro, image, crumbs }: {
             ))}
           </nav>
           {eyebrow && <p className="eyebrow mt-8">{eyebrow}</p>}
-          <h1 className="mt-4 text-[clamp(2.7rem,5.5vw,4.8rem)]">{title}</h1>
+          {/* Minimal o'lcham kichikroq va hyphens — "конфиденциальности" kabi uzun
+              so'zlar telefonda sahifani kengaytirib yubormasligi uchun */}
+          <h1 className="mt-4 hyphens-auto break-words text-[clamp(1.9rem,5.5vw,4.8rem)]">{title}</h1>
           {intro && <p className="lead mt-6 max-w-xl !text-[18px]">{intro}</p>}
         </div>
         {image && (

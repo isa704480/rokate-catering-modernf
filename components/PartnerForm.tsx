@@ -20,16 +20,10 @@ export function PartnerForm({ locale, labels, thankYouHref }: { locale: string; 
     if (!v("name")) { setState("error"); setMsg(`${labels.name}: ${labels.required}`); return; }
     if (!v("phone") && !v("email")) { setState("error"); setMsg(labels.contactRequired); return; }
     setState("sending");
-    if (process.env.NEXT_PUBLIC_DEMO_MODE === "1") {
-      // DEMO: backend ulanmagan — ariza saqlanmaydi, faqat "rahmat" sahifasi
-      track("partner_lead", { page: "/partners" });
-      router.push(thankYouHref);
-      return;
-    }
     try {
-      const res = await fetch("/api/v1/partner-requests", {
+      const res = await fetch("/api/lead", {
         method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: v("name"), company: v("company"), field: v("field"), phone: v("phone"), email: v("email"),
+        body: JSON.stringify({ kind: "partner", name: v("name"), company: v("company"), field: v("field"), phone: v("phone"), email: v("email"),
                                message: v("message"), website: v("website"), language: locale, turnstile_token: turnstileToken(form) }),
       });
       if (res.status === 429) throw new Error(labels.rate);

@@ -5,6 +5,7 @@ import { DynAbout, DynDirections, DynHead, DynHero, DynMarquee, DynRelax, DynSer
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { JsonLd } from "@/components/JsonLd";
 import { RequestSection } from "@/components/sections/RequestSection";
+import { Reviews } from "@/components/Reviews";
 import { api } from "@/lib/api";
 import { isLocale, t } from "@/lib/i18n";
 import { buildMeta } from "@/lib/seo";
@@ -69,6 +70,7 @@ export default async function HomePage({ params }: Props) {
           </div>
         </section>
       )}
+      <Reviews locale={locale} />
       <DynWhy data={home.why} />
       {home.faq.items.length > 0 && (
         <section className="section pt-0 lg:pt-0" data-section="faq">

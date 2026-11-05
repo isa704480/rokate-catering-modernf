@@ -56,14 +56,9 @@ export function InquiryForm({ locale, labels, eventTypes, locations, packages, d
       comment: v("comment"), website: v("website"), language: locale, source_page: source,
       turnstile_token: turnstileToken(form), ...getAttribution(),
     };
-    if (process.env.NEXT_PUBLIC_DEMO_MODE === "1") {
-      // DEMO: backend ulanmagan — ariza saqlanmaydi, faqat "rahmat" sahifasi
-      track("generate_lead", { form: "inquiry", page: source });
-      router.push(thankYouHref);
-      return;
-    }
     try {
-      const res = await fetch("/api/v1/inquiries", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
+      // Ariza Telegram botga va email'ga yuboriladi (app/api/lead/route.ts)
+      const res = await fetch("/api/lead", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ kind: "inquiry", ...payload }) });
       if (res.status === 429) throw new Error(labels.rate);
       if (!res.ok) throw new Error(labels.error);
       track("generate_lead", { form: "inquiry", page: source, package: payload.package || undefined });
