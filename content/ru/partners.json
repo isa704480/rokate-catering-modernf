@@ -1,0 +1,30 @@
+{
+  "title": "Партнёрам Rokate",
+  "intro": "Мы открыты к сотрудничеству с компаниями и специалистами, которым нужен надёжный кейтеринговый партнёр для своих клиентов или собственных мероприятий.",
+  "audience_title": "С кем мы работаем",
+  "audience": [
+    "Яхтенные компании и брокеры",
+    "Event-агентства",
+    "Concierge-компании",
+    "Специалисты по недвижимости",
+    "Компании из luxury/service сегмента"
+  ],
+  "offer_title": "Что мы предлагаем",
+  "offer_text": "Индивидуальные B2B-условия и разные форматы сотрудничества. Оставьте заявку — детали обсудим лично.",
+  "image": {
+    "src": "/demo-media/partners/yacht-salon-buffet_2qaWNSj__w960.webp",
+    "srcset": "/demo-media/partners/yacht-salon-buffet_2qaWNSj__w480.webp 480w, /demo-media/partners/yacht-salon-buffet_2qaWNSj__w960.webp 960w, /demo-media/partners/yacht-salon-buffet_2qaWNSj__w1500.webp 1500w",
+    "width": 1500,
+    "height": 2000,
+    "alt": "Партнёрам Rokate",
+    "blur": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAADQAQCdASoMABAAA4BaJQBdgB6RvtBqyAD+8aY+zRav0ts6k2Vb/CwIai/GnZK2LzOGW1qhg5WHzgs6GTSTbRklFKYdx3AB1o9W2MXORyfyfaYjx4Ct6KBJUAA="
+  },
+  "form_title": "Стать партнёром",
+  "faq": [],
+  "seo": {
+    "title": "Партнёрам Rokate",
+    "description": "Мы открыты к сотрудничеству с компаниями и специалистами, которым нужен надёжный кейтеринговый партнёр для своих клиентов или собственных мероприятий.",
+    "image": null,
+    "noindex": false
+  }
+}

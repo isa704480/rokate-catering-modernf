@@ -1,0 +1,71 @@
+{
+  "intro": "A selection from our menu. Not sure what to choose? Start with a ready-made package or ask us on WhatsApp.",
+  "pdf": null,
+  "categories": [
+    {
+      "name": "Canapés & finger food",
+      "items": [
+        {
+          "name": "Salmon canapés",
+          "description": "",
+          "price": null
+        },
+        {
+          "name": "Caviar tartlets",
+          "description": "",
+          "price": null
+        },
+        {
+          "name": "Mini croissants",
+          "description": "",
+          "price": null
+        }
+      ]
+    },
+    {
+      "name": "Platters",
+      "items": [
+        {
+          "name": "Fruit platter",
+          "description": "",
+          "price": null
+        },
+        {
+          "name": "Cheese board",
+          "description": "",
+          "price": null
+        },
+        {
+          "name": "Seafood platter",
+          "description": "",
+          "price": null
+        }
+      ]
+    },
+    {
+      "name": "BBQ",
+      "items": [
+        {
+          "name": "Chicken skewers",
+          "description": "",
+          "price": null
+        },
+        {
+          "name": "Grilled vegetables",
+          "description": "",
+          "price": null
+        }
+      ]
+    },
+    {
+      "name": "Desserts",
+      "items": [
+        {
+          "name": "Mini desserts",
+          "description": "",
+          "price": null
+        }
+      ]
+    }
+  ]
+}

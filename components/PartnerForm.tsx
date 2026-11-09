@@ -28,6 +28,18 @@ export function PartnerForm({ locale, labels, thankYouHref }: { locale: string; 
       });
       if (res.status === 429) throw new Error(labels.rate);
       if (!res.ok) throw new Error(labels.error);
+
+      /* Admin paneldagi "Заявки" ro'yxati uchun nusxa. */
+      try {
+        const { saveLeadToFirestore } = await import("@/lib/leads");
+        await saveLeadToFirestore({
+          kind: "partner", name: v("name"), phone: v("phone"),
+          company: v("company") || undefined, field: v("field") || undefined,
+          email: v("email") || undefined, comment: v("message") || undefined,
+          language: locale, page: "/partners",
+        });
+      } catch { /* ro'yxatga yozilmadi — ariza baribir yuborilgan */ }
+
       track("partner_lead", { page: "/partners" });
       router.push(thankYouHref);
     } catch (err) {

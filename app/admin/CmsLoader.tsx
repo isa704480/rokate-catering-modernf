@@ -50,273 +50,39 @@ type Lang = keyof typeof UI;
 /* ------------------------------------------------- Decap UI premium styles & fixes */
 
 const ADMIN_CSS = `
-  /* Ekran va sahifa chetlaridagi ortiqcha scrolllarni tozalash */
+  /* Decap CMS ustiga qo'yiladigan eng kam uslublar.
+     MUHIM: Decap ichki elementlarining joylashuvi (position, display, padding)
+     o'zgartirilmaydi — bir marta urinib ko'rilgan edi, natijada obyekt
+     maydonlari va butun tahrirlagich ko'rinmay qolgan. Faqat bizning
+     yuqori panelimiz uchun joy ochamiz va rang beramiz. */
+
+  :root { --rk-head: 54px; }
+
   html, body {
     margin: 0 !important;
     padding: 0 !important;
-    height: 100% !important;
-    width: 100% !important;
     overflow-x: hidden !important;
     background-color: #f7f4ee !important;
   }
 
   #nc-root {
-    min-height: 100vh !important;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
-    font-size: 15px !important;
-    color: #1c2340 !important;
+    min-height: calc(100vh - var(--rk-head)) !important;
     background-color: #f7f4ee !important;
   }
 
-  /* Shriftlar, input va selektorlar dizayni */
-  #nc-root input, #nc-root textarea, #nc-root select {
-    font-size: 15px !important;
-    font-family: inherit !important;
-    border-radius: 8px !important;
-    border: 1px solid #dcd5c7 !important;
-    background: #ffffff !important;
-    transition: all 0.2s ease !important;
-  }
-
-  #nc-root input:focus, #nc-root textarea:focus, #nc-root select:focus {
-    border-color: #2f5e46 !important;
-    box-shadow: 0 0 0 3px rgba(47, 94, 70, 0.15) !important;
-    outline: none !important;
-  }
-
-  /* Tugmalar uslubi */
-  #nc-root button {
-    font-size: 14px !important;
-    font-weight: 600 !important;
-    border-radius: 8px !important;
-    transition: all 0.2s ease !important;
-  }
-
-  /* Decap CMS ichki konteyneri, editor va toolbar stillari */
-  #nc-root header {
-    background: #ffffff !important;
-    border-bottom: 1px solid #e5ded0 !important;
-    box-shadow: 0 2px 12px rgba(28, 35, 64, 0.04) !important;
-    min-height: 60px !important;
-    padding: 0 16px !important;
-    position: relative !important;
-    z-index: 10 !important;
-  }
-
-  /* Tahrirlash sahifasida (Editor) tepasi qisilib/bosilib qolmasligi uchun */
-  #nc-root [class*="EditorContainer"],
-  #nc-root [class*="EditorToolbar"],
-  #nc-root [class*="AppMainContainer"] {
-    position: relative !important;
-    top: 0 !important;
-  }
-
+  /* Tahrirlash oynasi sahifa boshiga yopishtirilgan (absolute, top: 0).
+     Bizning qora panel 54px joy olgani uchun uni shuncha pastga suramiz.
+     z-index: Decap'ning "Записи / Медиафайлы" paneli 300 da turadi,
+     tahrirlagich uni to'liq yopishi kerak. */
   #nc-root [class*="EditorContainer"] {
-    padding-top: 16px !important;
+    top: var(--rk-head) !important;
+    height: calc(100vh - var(--rk-head)) !important;
+    z-index: 400 !important;
   }
 
-  #nc-root [class*="EditorToolbar"] {
-    position: sticky !important;
-    top: 52px !important; /* Global qora header (52px) tagidan joylashadi */
-    z-index: 50 !important;
-    background: #ffffff !important;
-    border-bottom: 1px solid #e5ded0 !important;
-    box-shadow: 0 4px 12px rgba(28, 35, 64, 0.04) !important;
-  }
-
-  #nc-root [class*="EditorContent"] {
-    padding-top: 24px !important;
-  }
-
-  /* Yon panel (Sidebar / Kolleksiyalar) */
-  #nc-root [class*="SidebarContainer"] {
-    background: #ffffff !important;
-    border-right: 1px solid #e5ded0 !important;
-    box-shadow: 2px 0 16px rgba(28, 35, 64, 0.03) !important;
-    border-radius: 0 16px 16px 0 !important;
-  }
-
-  #nc-root [class*="SidebarContent"] {
-    padding: 16px 12px !important;
-  }
-
-  #nc-root [class*="Sidebar"] h1, 
-  #nc-root [class*="SidebarContainer"] h1 {
-    font-size: 18px !important;
-    font-weight: 700 !important;
-    color: #1c2340 !important;
-    padding-left: 8px !important;
-    margin-bottom: 16px !important;
-  }
-
-  /* Tanlangan va hover qilingan kolleksiya tugmalari */
-  #nc-root [class*="Sidebar"] a,
-  #nc-root [class*="SidebarLink"],
-  #nc-root [class*="ListItemLink"] {
-    border-radius: 10px !important;
-    padding: 10px 14px !important;
-    margin-bottom: 4px !important;
-    color: #434960 !important;
-    font-weight: 500 !important;
-    transition: all 0.15s ease !important;
-  }
-
-  #nc-root [class*="Sidebar"] a:hover,
-  #nc-root [class*="SidebarLink"]:hover,
-  #nc-root [class*="ListItemLink"]:hover {
-    background: #f1ede3 !important;
-    color: #1c2340 !important;
-  }
-
-  /* Faol link (yashil aksent) */
-  #nc-root [class*="Sidebar"] a[class*="active"],
-  #nc-root [class*="SidebarLink"][class*="active"],
-  #nc-root [class*="ListItemLink"][class*="active"],
-  #nc-root [aria-current="page"] {
-    background: #2f5e46 !important;
-    color: #ffffff !important;
-    font-weight: 600 !important;
-  }
-
-  #nc-root [class*="Sidebar"] a[class*="active"] svg,
-  #nc-root [class*="SidebarLink"][class*="active"] svg,
-  #nc-root [class*="ListItemLink"][class*="active"] svg {
-    fill: #ffffff !important;
-  }
-
-  /* Asosiy kontent kartalari va sarlavhalar */
-  #nc-root [class*="Card"],
-  #nc-root [class*="CollectionTop"],
-  #nc-root [class*="ListCard"] {
-    border-radius: 16px !important;
-    border: 1px solid #e7e0d3 !important;
-    box-shadow: 0 4px 20px rgba(28, 35, 64, 0.04) !important;
-    background: #ffffff !important;
-    padding: 20px 24px !important;
-    overflow: visible !important;
-    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
-  }
-
-  /* Decap CMS sarlavha va tugma qatorini to'g'rilash (bir-biriga kirib ketmasligi uchun) */
-  #nc-root [class*="CollectionTop"] {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    gap: 16px !important;
-    min-height: 80px !important;
-  }
-
-  #nc-root [class*="CollectionTop"] h1,
-  #nc-root [class*="CollectionTopHeading"] {
-    font-size: 22px !important;
-    font-weight: 800 !important;
-    color: #1c2340 !important;
-    margin: 0 !important;
-    line-height: 1.3 !important;
-    flex: 1 1 auto !important;
-    min-width: 200px !important;
-  }
-
-  #nc-root [class*="CollectionTopDescription"] {
-    width: 100% !important;
-    font-size: 14px !important;
-    color: #60667e !important;
-    margin-top: 6px !important;
-    line-height: 1.5 !important;
-  }
-
-  /* Yangi yaratish tugmasi ("Создать...") */
-  #nc-root [class*="CollectionTop"] a,
-  #nc-root [class*="CollectionTop"] button,
-  #nc-root a[class*="NewButton"] {
-    background: #2f5e46 !important;
-    color: #ffffff !important;
-    font-weight: 700 !important;
-    font-size: 14px !important;
-    border-radius: 999px !important;
-    padding: 10px 24px !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    white-space: nowrap !important;
-    box-shadow: 0 4px 14px rgba(47, 94, 70, 0.25) !important;
-    text-decoration: none !important;
-    margin: 0 !important;
-  }
-
-  #nc-root [class*="CollectionTop"] a:hover,
-  #nc-root a[class*="NewButton"]:hover {
-    background: #20412f !important;
-    transform: translateY(-1px) !important;
-  }
-
-  #nc-root [class*="Card"]:hover {
-    box-shadow: 0 8px 26px rgba(28, 35, 64, 0.08) !important;
-  }
-
-  /* Asosiy tugmalar (Saqlash, Chop etish, Yaratish) */
-  #nc-root button[class*="PublishButton"],
-  #nc-root button[class*="SaveButton"],
-  #nc-root a[class*="NewButton"],
-  #nc-root [class*="AppHeaderActions"] button:not([class*="cancel"]) {
-    background: #2f5e46 !important;
-    color: #ffffff !important;
-    border: none !important;
-    border-radius: 999px !important;
-    padding: 10px 22px !important;
-    box-shadow: 0 4px 14px rgba(47, 94, 70, 0.25) !important;
-  }
-
-  #nc-root button[class*="PublishButton"]:hover,
-  #nc-root a[class*="NewButton"]:hover {
-    background: #20412f !important;
-    transform: translateY(-1px) !important;
-  }
-
-  /* Mobil va ixcham ekranlar uchun moslashuv */
-  @media (max-width: 899px) {
-    #nc-root [class*="AppHeaderContent"] {
-      flex-wrap: wrap !important;
-      min-width: 0 !important;
-      width: 100% !important;
-      gap: 8px !important;
-      padding: 10px 0 !important;
-    }
-
-    #nc-root [class*="AppHeaderContent"] nav {
-      flex-wrap: wrap !important;
-      min-width: 0 !important;
-      gap: 6px 12px !important;
-    }
-
-    #nc-root [class*="AppHeaderActions"] {
-      width: 100% !important;
-      min-width: 0 !important;
-      display: flex !important;
-      justify-content: flex-end !important;
-      gap: 8px !important;
-      margin-top: 4px !important;
-    }
-
-    #nc-root [class*="SidebarContainer"] {
-      position: static !important;
-      width: 100% !important;
-      max-width: 100% !important;
-      height: auto !important;
-      max-height: 48vh !important;
-      border-radius: 0 0 16px 16px !important;
-      border-right: none !important;
-      border-bottom: 1px solid #e2dbcd !important;
-      overflow-y: auto !important;
-    }
-
-    #nc-root [class*="AppMainContainer"], #nc-root main {
-      margin-left: 0 !important;
-      padding: 14px !important;
-      width: 100% !important;
-      box-sizing: border-box !important;
-    }
+  /* Decap'ning o'z paneli bizniki tagida tursin */
+  #nc-root [class*="AppHeader"] {
+    top: var(--rk-head) !important;
   }
 `;
 

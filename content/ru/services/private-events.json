@@ -1,0 +1,122 @@
+{
+  "slug": "private-events",
+  "title": "Виллы и частные праздники",
+  "headline": "Кейтеринг для частных мероприятий в Дубае",
+  "intro": "Дни рождения, юбилеи и ужины с друзьями — мы берём на себя стол, сервис и оформление.",
+  "body": "",
+  "image": {
+    "src": "/demo-media/services/villa-dinner-night_EJiUihG__w960.webp",
+    "srcset": "/demo-media/services/villa-dinner-night_EJiUihG__w480.webp 480w, /demo-media/services/villa-dinner-night_EJiUihG__w960.webp 960w, /demo-media/services/villa-dinner-night_EJiUihG__w1500.webp 1500w",
+    "width": 1500,
+    "height": 2000,
+    "alt": "Виллы и частные праздники",
+    "blur": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAADQAQCdASoMABAAA4BaJQBOgBuJWcU8sAD+8zUog2v9Ma13oeuu+LnPRKcOB/U9PVt4H85bAMC1EORsapRiGz0x5VQH1f2n3DOfg53rjIDybcIAAAA="
+  },
+  "location_type": "villa",
+  "options": [],
+  "packages": [
+    {
+      "id": 7,
+      "slug": "canape-reception",
+      "name": "Фуршет с канапе",
+      "image": {
+        "src": "/demo-media/packages/canape-marble-table_H5RvwR6__w960.webp",
+        "srcset": "/demo-media/packages/canape-marble-table_H5RvwR6__w480.webp 480w, /demo-media/packages/canape-marble-table_H5RvwR6__w960.webp 960w, /demo-media/packages/canape-marble-table_H5RvwR6__w1500.webp 1500w",
+        "width": 1500,
+        "height": 2000,
+        "alt": "Фуршет с канапе",
+        "blur": "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAABQAgCdASoMABAAA4BaJYwCdAERB42Ycp6h2AAA/vUyFFTn2+9RSbwh0ML4G4ow+f/UQ3wcRzvOaenbd6gIGs4SZxbHLblstuiSHDYWomBnitXGWhqKHJMDu5bzta6AAAA="
+      },
+      "images": [],
+      "guests_min": 20,
+      "guests_max": 60,
+      "short_text": "Канапе и finger food для приёмов, открытий и корпоративных мероприятий.",
+      "contents": [
+        "Ассорти канапе",
+        "Тарталетки",
+        "Мини-десерты",
+        "Фрукты",
+        "Официанты по запросу"
+      ],
+      "price_from": null,
+      "price_note": "",
+      "badge": ""
+    },
+    {
+      "id": 8,
+      "slug": "bbq-on-board",
+      "name": "BBQ на борту",
+      "image": {
+        "src": "/demo-media/packages/chef-grill-skewers_a2J2Izk__w960.webp",
+        "srcset": "/demo-media/packages/chef-grill-skewers_a2J2Izk__w480.webp 480w, /demo-media/packages/chef-grill-skewers_a2J2Izk__w960.webp 960w, /demo-media/packages/chef-grill-skewers_a2J2Izk__w1500.webp 1500w",
+        "width": 1500,
+        "height": 2000,
+        "alt": "BBQ на борту",
+        "blur": "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAAAwAgCdASoMABAAA4BaJQBOgMW5tdupcFRYsAD33vKrb2g249UXDW2YkDlJGM2RwL7eAkShLJldbBXUS0G7b2q60oYbZyFc9ubGSSjThKtKWwF8eVypGdyhr3Ij13Wrk+weQAAA"
+      },
+      "images": [],
+      "guests_min": 10,
+      "guests_max": 30,
+      "short_text": "Живой гриль с нашим шефом — на яхте, на вилле или на природе.",
+      "contents": [
+        "Шашлычки из курицы и говядины",
+        "Овощи гриль",
+        "Морепродукты",
+        "Салаты и соусы",
+        "Шеф на площадке"
+      ],
+      "price_from": null,
+      "price_note": "",
+      "badge": ""
+    }
+  ],
+  "gallery": [
+    {
+      "src": "/demo-media/portfolio/yacht-birthday-balloons_6cd7rWS__w960.webp",
+      "srcset": "/demo-media/portfolio/yacht-birthday-balloons_6cd7rWS__w480.webp 480w, /demo-media/portfolio/yacht-birthday-balloons_6cd7rWS__w960.webp 960w, /demo-media/portfolio/yacht-birthday-balloons_6cd7rWS__w1500.webp 1500w",
+      "width": 1500,
+      "height": 2000,
+      "alt": "День рождения на яхте",
+      "blur": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAAAQAgCdASoMABAAA4BaJYgCdADdZgAS6YyIAPIyKkwmlKUryfJ6P7tBDJhHLZP8IrefIVK2MqjMDo5MfhPxLtYOGfIU0cjHZNmpQ1AiTznbIMpO0BHjIUKAxDUAAA=="
+    },
+    {
+      "src": "/demo-media/portfolio/yacht-birthday-table_04VfkeA__w960.webp",
+      "srcset": "/demo-media/portfolio/yacht-birthday-table_04VfkeA__w480.webp 480w, /demo-media/portfolio/yacht-birthday-table_04VfkeA__w960.webp 960w, /demo-media/portfolio/yacht-birthday-table_04VfkeA__w1500.webp 1500w",
+      "width": 1500,
+      "height": 2000,
+      "alt": "День рождения на яхте",
+      "blur": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAABQAgCdASoMABAAA4BaJZQCdAERB6xLxOGn1AAA34tJiKAY8Gts/ccw+inIdkUPvtYzIeCWDF34oXE6+tMAyJYcqi5BF+luYdGscMzqyG8TtwfJVAA="
+    },
+    {
+      "src": "/demo-media/portfolio/yacht-lounge-snacks_ZHua8f2__w960.webp",
+      "srcset": "/demo-media/portfolio/yacht-lounge-snacks_ZHua8f2__w480.webp 480w, /demo-media/portfolio/yacht-lounge-snacks_ZHua8f2__w960.webp 960w, /demo-media/portfolio/yacht-lounge-snacks_ZHua8f2__w1500.webp 1500w",
+      "width": 1500,
+      "height": 2000,
+      "alt": "День рождения на яхте",
+      "blur": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAACQAQCdASoMABAAA4BaJQBWABubTwAA/dX9b7Q9La6Qln4gdByKwrbrjEg32hZq30Pa/3a6i1MHJC4DCq2ZcWmCYLUrwc8u7xtQGZI+ArvgqM4AAAA="
+    },
+    {
+      "src": "/demo-media/portfolio/villa-dinner-night_g1w7JeH__w960.webp",
+      "srcset": "/demo-media/portfolio/villa-dinner-night_g1w7JeH__w480.webp 480w, /demo-media/portfolio/villa-dinner-night_g1w7JeH__w960.webp 960w, /demo-media/portfolio/villa-dinner-night_g1w7JeH__w1500.webp 1500w",
+      "width": 1500,
+      "height": 2000,
+      "alt": "Вечерний ужин на вилле",
+      "blur": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAADQAQCdASoMABAAA4BaJQBOgBuJWcU8sAD+8zUog2v9Ma13oeuu+LnPRKcOB/U9PVt4H85bAMC1EORsapRiGz0x5VQH1f2n3DOfg53rjIDybcIAAAA="
+    },
+    {
+      "src": "/demo-media/portfolio/white-table-setting_JejXMCT__w960.webp",
+      "srcset": "/demo-media/portfolio/white-table-setting_JejXMCT__w480.webp 480w, /demo-media/portfolio/white-table-setting_JejXMCT__w960.webp 960w, /demo-media/portfolio/white-table-setting_JejXMCT__w1500.webp 1500w",
+      "width": 1500,
+      "height": 2000,
+      "alt": "Вечерний ужин на вилле",
+      "blur": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAAAwAgCdASoMABAAA4BaJYwCdAD/DzamU67AgAD5d4X3S+GUL/y6SXNX8fHVm4Pf76BbqdoLm58FXgn6A7UKgnQIB5X2zV1QsrJImCBP0Pp1+S+jVygAAA=="
+    }
+  ],
+  "faq": [],
+  "seo": {
+    "title": "Кейтеринг для частных мероприятий в Дубае",
+    "description": "Дни рождения, юбилеи и ужины с друзьями — мы берём на себя стол, сервис и оформление.",
+    "image": null,
+    "noindex": false
+  }
+}

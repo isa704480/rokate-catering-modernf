@@ -1,0 +1,71 @@
+{
+  "intro": "Позиции из нашего меню. Сложно выбрать? Начните с готового пакета или спросите нас в WhatsApp.",
+  "pdf": null,
+  "categories": [
+    {
+      "name": "Канапе и finger food",
+      "items": [
+        {
+          "name": "Канапе с лососем",
+          "description": "",
+          "price": null
+        },
+        {
+          "name": "Тарталетки с икрой",
+          "description": "",
+          "price": null
+        },
+        {
+          "name": "Мини-круассаны",
+          "description": "",
+          "price": null
+        }
+      ]
+    },
+    {
+      "name": "Ассорти",
+      "items": [
+        {
+          "name": "Фруктовое ассорти",
+          "description": "",
+          "price": null
+        },
+        {
+          "name": "Сырная доска",
+          "description": "",
+          "price": null
+        },
+        {
+          "name": "Ассорти из морепродуктов",
+          "description": "",
+          "price": null
+        }
+      ]
+    },
+    {
+      "name": "BBQ",
+      "items": [
+        {
+          "name": "Шашлычки из курицы",
+          "description": "",
+          "price": null
+        },
+        {
+          "name": "Овощи гриль",
+          "description": "",
+          "price": null
+        }
+      ]
+    },
+    {
+      "name": "Десерты",
+      "items": [
+        {
+          "name": "Мини-десерты",
+          "description": "",
+          "price": null
+        }
+      ]
+    }
+  ]
+}

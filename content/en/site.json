@@ -1,0 +1,90 @@
+{
+  "company_name": "Rokate Catering",
+  "tagline": "Premium catering for yachts, villas and events in Dubai.",
+  "phone": "+971 56 892 6321",
+  "whatsapp_number": "971568926321",
+  "whatsapp_text": "Hello Rokate! I'd like to plan catering for my event.",
+  "email": "rokate.catering@gmail.com",
+  "instagram_url": "https://instagram.com/rokate_catering",
+  "service_area": "Dubai, UAE",
+  "working_hours": "24/7",
+  "address": "",
+  "logo": null,
+  "seo": {
+    "title": "Rokate Catering — Premium Event Catering in Dubai",
+    "description": "Catering for yachts, villas, offices and private events in Dubai. Food, service, setup and everything around it — you just enjoy the day.",
+    "image": null
+  },
+  "event_types": [
+    {
+      "id": 18,
+      "slug": "yacht-catering",
+      "name": "Yacht catering"
+    },
+    {
+      "id": 14,
+      "slug": "grand-opening",
+      "name": "Grand opening"
+    },
+    {
+      "id": 13,
+      "slug": "corporate",
+      "name": "Corporate catering"
+    },
+    {
+      "id": 12,
+      "slug": "private-dinner",
+      "name": "Private dinner"
+    },
+    {
+      "id": 21,
+      "slug": "wedding",
+      "name": "Wedding catering"
+    },
+    {
+      "id": 20,
+      "slug": "other",
+      "name": "Other"
+    }
+  ],
+  "locations": [
+    {
+      "value": "yacht",
+      "label": "Yacht"
+    },
+    {
+      "value": "villa",
+      "label": "Villa"
+    },
+    {
+      "value": "office",
+      "label": "Office"
+    },
+    {
+      "value": "home",
+      "label": "Home"
+    },
+    {
+      "value": "beach",
+      "label": "Beach / outdoor"
+    },
+    {
+      "value": "other",
+      "label": "Other"
+    }
+  ],
+  "nav_services": [
+    {
+      "slug": "yacht-catering",
+      "title": "Yacht Catering"
+    },
+    {
+      "slug": "private-events",
+      "title": "Villa & Private Events"
+    },
+    {
+      "slug": "corporate-catering",
+      "title": "Corporate Catering"
+    }
+  ]
+}

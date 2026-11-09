@@ -1,6 +1,15 @@
 "use client";
 import { createContext, useCallback, useContext, useState } from "react";
-import { AIcon } from "./AIcon";
+
+/** Toast ichidagi kichik belgi: muvaffaqiyat uchun belgi, xato uchun undov. */
+function ToastMark({ ok }: { ok: boolean }) {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+         strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      {ok ? <path d="M5 13l4 4L19 7" /> : <><circle cx="12" cy="12" r="9" /><path d="M12 8v5M12 16.5v.01" /></>}
+    </svg>
+  );
+}
 
 /* ---------- Toast ---------- */
 type Toast = { id: number; text: string; kind: "ok" | "error" };
@@ -21,7 +30,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
           <div key={t.id} role="status"
                className={`pointer-events-auto flex items-center gap-2 rounded-xl px-4 py-3 text-[14px] font-medium shadow-lg ${
                  t.kind === "ok" ? "bg-green-deep text-white" : "bg-rose-600 text-white"}`}>
-            <AIcon name={t.kind === "ok" ? "check" : "help"} size={18} />{t.text}
+            <ToastMark ok={t.kind === "ok"} />{t.text}
           </div>
         ))}
       </div>

@@ -61,6 +61,23 @@ export function InquiryForm({ locale, labels, eventTypes, locations, packages, d
       const res = await fetch("/api/lead", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ kind: "inquiry", ...payload }) });
       if (res.status === 429) throw new Error(labels.rate);
       if (!res.ok) throw new Error(labels.error);
+
+      /* Admin paneldagi "Заявки" ro'yxati uchun nusxa. Xatolik bo'lsa ham
+         ariza allaqachon Telegram'ga ketgan — mijozga xato ko'rsatilmaydi. */
+      try {
+        const { saveLeadToFirestore } = await import("@/lib/leads");
+        await saveLeadToFirestore({
+          kind: "inquiry", name: payload.name, phone: payload.phone,
+          date: payload.event_date || undefined,
+          guests: payload.guests != null ? String(payload.guests) : undefined,
+          eventType: payload.event_type || undefined,
+          place: payload.location_type || undefined,
+          comment: payload.comment || undefined,
+          package: payload.package || undefined,
+          language: locale, page: source,
+        });
+      } catch { /* ro'yxatga yozilmadi — ariza baribir yuborilgan */ }
+
       track("generate_lead", { form: "inquiry", page: source, package: payload.package || undefined });
       router.push(thankYouHref);
     } catch (err) {

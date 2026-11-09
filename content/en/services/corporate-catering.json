@@ -1,0 +1,227 @@
+{
+  "slug": "corporate-catering",
+  "title": "Corporate Catering",
+  "headline": "Corporate Catering & Business Events in Dubai",
+  "intro": "From coffee breaks and conferences to gala dinners and team buffets.",
+  "body": "A yacht is a special venue: limited space, no kitchen on board in many cases and guests who expect everything to look perfect. We plan the menu and logistics around the boat, bring everything ready to serve and take care of the setup and cleaning.\n\nChoose a ready-made package or tell us about your event — we will prepare a proposal for your number of guests and format.",
+  "image": {
+    "src": "/demo-media/services/yacht-deck-table_EXgaE0R__w960.webp",
+    "srcset": "/demo-media/services/yacht-deck-table_EXgaE0R__w480.webp 480w, /demo-media/services/yacht-deck-table_EXgaE0R__w960.webp 960w, /demo-media/services/yacht-deck-table_EXgaE0R__w1500.webp 1500w",
+    "width": 1500,
+    "height": 2000,
+    "alt": "Yacht Catering",
+    "blur": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAADwAQCdASoMABAAA4BaJYwCdAELTpoVowAA4ZpudaXkcjj+HYF0I0/gPUKXYsk9ltkAaD9p0G+npmjvQoNSK2VZ7JVTAt5OqShkjQ/ldX0kAAAA"
+  },
+  "location_type": "yacht",
+  "options": [
+    {
+      "title": "Brunch & breakfast",
+      "text": "Light and fresh: pastries, canapés, fruit."
+    },
+    {
+      "title": "Buffet & canapés",
+      "text": "Finger food for parties on board."
+    },
+    {
+      "title": "BBQ on board",
+      "text": "Our chef grills right on the yacht."
+    },
+    {
+      "title": "Full service",
+      "text": "Staff, tableware, decor and cleaning."
+    }
+  ],
+  "packages": [
+    {
+      "id": 6,
+      "slug": "yacht-brunch",
+      "name": "Yacht Brunch",
+      "image": {
+        "src": "/demo-media/packages/platters-closeup_WBllDdF__w960.webp",
+        "srcset": "/demo-media/packages/platters-closeup_WBllDdF__w480.webp 480w, /demo-media/packages/platters-closeup_WBllDdF__w960.webp 960w, /demo-media/packages/platters-closeup_WBllDdF__w1500.webp 1500w",
+        "width": 1500,
+        "height": 2000,
+        "alt": "Yacht Brunch",
+        "blur": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAAAQAgCdASoMABAAA4BaJaACdAYvrk0T3R1AAPyO6IJWAHKfy39+Ozz2fg6JmVFJegnshVpIWngDM/WKbvN4Me3Otetd5DpkVIOvHYv//p4yEZtwTkTt1C+AAAA="
+      },
+      "images": [],
+      "guests_min": 10,
+      "guests_max": 20,
+      "short_text": "A balanced brunch set for a day on the water: light, fresh and beautifully served.",
+      "contents": [
+        "Croissants and mini sandwiches",
+        "Canapés with salmon",
+        "Fruit platter",
+        "Cheese board",
+        "Desserts"
+      ],
+      "price_from": null,
+      "price_note": "",
+      "badge": "bestseller"
+    },
+    {
+      "id": 7,
+      "slug": "canape-reception",
+      "name": "Canapé Reception",
+      "image": {
+        "src": "/demo-media/packages/canape-marble-table_H5RvwR6__w960.webp",
+        "srcset": "/demo-media/packages/canape-marble-table_H5RvwR6__w480.webp 480w, /demo-media/packages/canape-marble-table_H5RvwR6__w960.webp 960w, /demo-media/packages/canape-marble-table_H5RvwR6__w1500.webp 1500w",
+        "width": 1500,
+        "height": 2000,
+        "alt": "Canapé Reception",
+        "blur": "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAABQAgCdASoMABAAA4BaJYwCdAERB42Ycp6h2AAA/vUyFFTn2+9RSbwh0ML4G4ow+f/UQ3wcRzvOaenbd6gIGs4SZxbHLblstuiSHDYWomBnitXGWhqKHJMDu5bzta6AAAA="
+      },
+      "images": [],
+      "guests_min": 20,
+      "guests_max": 60,
+      "short_text": "Finger food and canapés for receptions, openings and corporate events.",
+      "contents": [
+        "Assorted canapés",
+        "Tartlets",
+        "Mini desserts",
+        "Fruit",
+        "Service staff on request"
+      ],
+      "price_from": null,
+      "price_note": "",
+      "badge": ""
+    },
+    {
+      "id": 8,
+      "slug": "bbq-on-board",
+      "name": "BBQ Experience",
+      "image": {
+        "src": "/demo-media/packages/chef-grill-skewers_a2J2Izk__w960.webp",
+        "srcset": "/demo-media/packages/chef-grill-skewers_a2J2Izk__w480.webp 480w, /demo-media/packages/chef-grill-skewers_a2J2Izk__w960.webp 960w, /demo-media/packages/chef-grill-skewers_a2J2Izk__w1500.webp 1500w",
+        "width": 1500,
+        "height": 2000,
+        "alt": "BBQ Experience",
+        "blur": "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAAAwAgCdASoMABAAA4BaJQBOgMW5tdupcFRYsAD33vKrb2g249UXDW2YkDlJGM2RwL7eAkShLJldbBXUS0G7b2q60oYbZyFc9ubGSSjThKtKWwF8eVypGdyhr3Ij13Wrk+weQAAA"
+      },
+      "images": [],
+      "guests_min": 10,
+      "guests_max": 30,
+      "short_text": "Live grill with our chef — on a yacht, at a villa or outdoors.",
+      "contents": [
+        "Chicken and beef skewers",
+        "Grilled vegetables",
+        "Seafood",
+        "Salads and sauces",
+        "Chef on site"
+      ],
+      "price_from": null,
+      "price_note": "",
+      "badge": ""
+    }
+  ],
+  "gallery": [
+    {
+      "src": "/demo-media/portfolio/yacht-deck-table_KC1ggbl__w960.webp",
+      "srcset": "/demo-media/portfolio/yacht-deck-table_KC1ggbl__w480.webp 480w, /demo-media/portfolio/yacht-deck-table_KC1ggbl__w960.webp 960w, /demo-media/portfolio/yacht-deck-table_KC1ggbl__w1500.webp 1500w",
+      "width": 1500,
+      "height": 2000,
+      "alt": "Brunch on a yacht in Dubai Marina",
+      "blur": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAADwAQCdASoMABAAA4BaJYwCdAELTpoVowAA4ZpudaXkcjj+HYF0I0/gPUKXYsk9ltkAaD9p0G+npmjvQoNSK2VZ7JVTAt5OqShkjQ/ldX0kAAAA"
+    },
+    {
+      "src": "/demo-media/portfolio/yacht-oysters-fruit_zeFHRTA__w960.webp",
+      "srcset": "/demo-media/portfolio/yacht-oysters-fruit_zeFHRTA__w480.webp 480w, /demo-media/portfolio/yacht-oysters-fruit_zeFHRTA__w960.webp 960w, /demo-media/portfolio/yacht-oysters-fruit_zeFHRTA__w1500.webp 1500w",
+      "width": 1500,
+      "height": 2000,
+      "alt": "Brunch on a yacht in Dubai Marina",
+      "blur": "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAAAwAgCdASoMABAAA4BaJagCdAD8JwNsQ44qwAD+6fvm8Iy7JEr0/xrohbXF7jb+rT0X4KkkMhzCV3uVZMPXItKBsrDkIckFRE+F9Fn1ut6dPFZvlKglBsc68tZiEjCcJOkVQAAA"
+    },
+    {
+      "src": "/demo-media/portfolio/platters-closeup_DRu2erP__w960.webp",
+      "srcset": "/demo-media/portfolio/platters-closeup_DRu2erP__w480.webp 480w, /demo-media/portfolio/platters-closeup_DRu2erP__w960.webp 960w, /demo-media/portfolio/platters-closeup_DRu2erP__w1500.webp 1500w",
+      "width": 1500,
+      "height": 2000,
+      "alt": "Brunch on a yacht in Dubai Marina",
+      "blur": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAAAQAgCdASoMABAAA4BaJaACdAYvrk0T3R1AAPyO6IJWAHKfy39+Ozz2fg6JmVFJegnshVpIWngDM/WKbvN4Me3Otetd5DpkVIOvHYv//p4yEZtwTkTt1C+AAAA="
+    },
+    {
+      "src": "/demo-media/portfolio/waitress-fruit-platter_GYXBbe2__w960.webp",
+      "srcset": "/demo-media/portfolio/waitress-fruit-platter_GYXBbe2__w480.webp 480w, /demo-media/portfolio/waitress-fruit-platter_GYXBbe2__w960.webp 960w, /demo-media/portfolio/waitress-fruit-platter_GYXBbe2__w1500.webp 1500w",
+      "width": 1500,
+      "height": 2000,
+      "alt": "Brunch on a yacht in Dubai Marina",
+      "blur": "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAAAQAgCdASoMABAAA4BaJQBOgMYstZ9NqXkYAP7IcYEDXYq9nyQvS4Bo+QfmhD4v0EINtj/FGzZnLpp/3jOzM1i0erb10IzJe+j0fs8AmS4ZXQr1VghADezr5I391cNAAAA="
+    },
+    {
+      "src": "/demo-media/portfolio/yacht-birthday-balloons_6cd7rWS__w960.webp",
+      "srcset": "/demo-media/portfolio/yacht-birthday-balloons_6cd7rWS__w480.webp 480w, /demo-media/portfolio/yacht-birthday-balloons_6cd7rWS__w960.webp 960w, /demo-media/portfolio/yacht-birthday-balloons_6cd7rWS__w1500.webp 1500w",
+      "width": 1500,
+      "height": 2000,
+      "alt": "Birthday party on a yacht",
+      "blur": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAAAQAgCdASoMABAAA4BaJYgCdADdZgAS6YyIAPIyKkwmlKUryfJ6P7tBDJhHLZP8IrefIVK2MqjMDo5MfhPxLtYOGfIU0cjHZNmpQ1AiTznbIMpO0BHjIUKAxDUAAA=="
+    },
+    {
+      "src": "/demo-media/portfolio/yacht-birthday-table_04VfkeA__w960.webp",
+      "srcset": "/demo-media/portfolio/yacht-birthday-table_04VfkeA__w480.webp 480w, /demo-media/portfolio/yacht-birthday-table_04VfkeA__w960.webp 960w, /demo-media/portfolio/yacht-birthday-table_04VfkeA__w1500.webp 1500w",
+      "width": 1500,
+      "height": 2000,
+      "alt": "Birthday party on a yacht",
+      "blur": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAABQAgCdASoMABAAA4BaJZQCdAERB6xLxOGn1AAA34tJiKAY8Gts/ccw+inIdkUPvtYzIeCWDF34oXE6+tMAyJYcqi5BF+luYdGscMzqyG8TtwfJVAA="
+    },
+    {
+      "src": "/demo-media/portfolio/yacht-lounge-snacks_ZHua8f2__w960.webp",
+      "srcset": "/demo-media/portfolio/yacht-lounge-snacks_ZHua8f2__w480.webp 480w, /demo-media/portfolio/yacht-lounge-snacks_ZHua8f2__w960.webp 960w, /demo-media/portfolio/yacht-lounge-snacks_ZHua8f2__w1500.webp 1500w",
+      "width": 1500,
+      "height": 2000,
+      "alt": "Birthday party on a yacht",
+      "blur": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAACQAQCdASoMABAAA4BaJQBWABubTwAA/dX9b7Q9La6Qln4gdByKwrbrjEg32hZq30Pa/3a6i1MHJC4DCq2ZcWmCYLUrwc8u7xtQGZI+ArvgqM4AAAA="
+    },
+    {
+      "src": "/demo-media/portfolio/yacht-canape-buffet_F3ehij9__w960.webp",
+      "srcset": "/demo-media/portfolio/yacht-canape-buffet_F3ehij9__w480.webp 480w, /demo-media/portfolio/yacht-canape-buffet_F3ehij9__w960.webp 960w, /demo-media/portfolio/yacht-canape-buffet_F3ehij9__w1500.webp 1500w",
+      "width": 1500,
+      "height": 2000,
+      "alt": "Buffet in the yacht salon",
+      "blur": "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAAAQAgCdASoMABAAA4BaJQBdgMX6tj4pdJ3AAPz+CbbLr9/VJrHFeOhPUw+oW6df9iikBpQNjqo7Z46Z3bOJPJKRJ5ws1M23dQZssDGR+h4Jwb3m8o3At++ShnrqEYg9UAA="
+    },
+    {
+      "src": "/demo-media/portfolio/yacht-salon-buffet_q71MeOK__w960.webp",
+      "srcset": "/demo-media/portfolio/yacht-salon-buffet_q71MeOK__w480.webp 480w, /demo-media/portfolio/yacht-salon-buffet_q71MeOK__w960.webp 960w, /demo-media/portfolio/yacht-salon-buffet_q71MeOK__w1500.webp 1500w",
+      "width": 1500,
+      "height": 2000,
+      "alt": "Buffet in the yacht salon",
+      "blur": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAADQAQCdASoMABAAA4BaJQBdgB6RvtBqyAD+8aY+zRav0ts6k2Vb/CwIai/GnZK2LzOGW1qhg5WHzgs6GTSTbRklFKYdx3AB1o9W2MXORyfyfaYjx4Ct6KBJUAA="
+    },
+    {
+      "src": "/demo-media/portfolio/seafood-fruit-table_ij4bxd6__w960.webp",
+      "srcset": "/demo-media/portfolio/seafood-fruit-table_ij4bxd6__w480.webp 480w, /demo-media/portfolio/seafood-fruit-table_ij4bxd6__w960.webp 960w, /demo-media/portfolio/seafood-fruit-table_ij4bxd6__w1500.webp 1500w",
+      "width": 1500,
+      "height": 2000,
+      "alt": "Buffet in the yacht salon",
+      "blur": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAADQAQCdASoMABAAA4BaJYgC7ADg/wGcCAD+6vHGC2FAnE74Bgs0nfptbfF/ktwgF76ETxmTiR/zLg1UZVB2j9kGzQi5sCd5kCrFAuUx3RWLxYfVH2VGJ7E8AAA="
+    },
+    {
+      "src": "/demo-media/portfolio/chef-bbq-yacht_CIyyrrN__w960.webp",
+      "srcset": "/demo-media/portfolio/chef-bbq-yacht_CIyyrrN__w480.webp 480w, /demo-media/portfolio/chef-bbq-yacht_CIyyrrN__w960.webp 960w, /demo-media/portfolio/chef-bbq-yacht_CIyyrrN__w1500.webp 1500w",
+      "width": 1500,
+      "height": 2000,
+      "alt": "BBQ on board",
+      "blur": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAAAwAgCdASoMABAAA4BaJaACdAdwB6Eqi18LgAD+VfYAZ+qJrp/LdVoLDTmMqiVUbxbi2G0IuXUDt9pTc2rV67xOL9Hf2f3/sEQ+7aGuOZzOc6qnndbYyXkRfNq2Jc/6gIAAAA=="
+    },
+    {
+      "src": "/demo-media/portfolio/chef-grill-skewers_IlTlnoY__w960.webp",
+      "srcset": "/demo-media/portfolio/chef-grill-skewers_IlTlnoY__w480.webp 480w, /demo-media/portfolio/chef-grill-skewers_IlTlnoY__w960.webp 960w, /demo-media/portfolio/chef-grill-skewers_IlTlnoY__w1500.webp 1500w",
+      "width": 1500,
+      "height": 2000,
+      "alt": "BBQ on board",
+      "blur": "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAAAwAgCdASoMABAAA4BaJQBOgMW5tdupcFRYsAD33vKrb2g249UXDW2YkDlJGM2RwL7eAkShLJldbBXUS0G7b2q60oYbZyFc9ubGSSjThKtKWwF8eVypGdyhr3Ij13Wrk+weQAAA"
+    }
+  ],
+  "faq": [
+    {
+      "q": "Can you cater on any yacht?",
+      "a": "Yes — tell us the yacht, marina and number of guests, and we will plan the menu and setup for it."
+    }
+  ],
+  "seo": {
+    "title": "Yacht Catering in Dubai",
+    "description": "We bring everything on board: food, tableware, decor and staff. You and your guests enjoy the sea.",
+    "image": null,
+    "noindex": false
+  }
+}

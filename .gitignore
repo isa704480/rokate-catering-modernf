@@ -8,8 +8,7 @@ next-env.d.ts
 .DS_Store
 .vercel
 
+# Test skrinshotlari va mijoz materiallari — GitHub'ga hech qachon ketmasin
 admin*.png
-materials/
-
-admin*.png
+*_shot.png
 materials/

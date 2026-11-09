@@ -1,0 +1,90 @@
+{
+  "company_name": "Rokate Catering",
+  "tagline": "Премиальный кейтеринг для яхт, вилл и мероприятий в Дубае.",
+  "phone": "+971 56 892 6321",
+  "whatsapp_number": "971568926321",
+  "whatsapp_text": "Здравствуйте, Rokate! Хочу заказать кейтеринг для мероприятия.",
+  "email": "rokate.catering@gmail.com",
+  "instagram_url": "https://instagram.com/rokate_catering",
+  "service_area": "Дубай, ОАЭ",
+  "working_hours": "24/7",
+  "address": "",
+  "logo": null,
+  "seo": {
+    "title": "Rokate Catering — премиальный кейтеринг в Дубае",
+    "description": "Кейтеринг на яхтах, виллах, в офисах и на частных мероприятиях в Дубае. Еда, сервис, оформление — а вы просто наслаждаетесь праздником.",
+    "image": null
+  },
+  "event_types": [
+    {
+      "id": 18,
+      "slug": "yacht-catering",
+      "name": "Кейтеринг на яхте"
+    },
+    {
+      "id": 14,
+      "slug": "grand-opening",
+      "name": "Торжественное открытие"
+    },
+    {
+      "id": 13,
+      "slug": "corporate",
+      "name": "Корпоративный кейтеринг"
+    },
+    {
+      "id": 12,
+      "slug": "private-dinner",
+      "name": "Приватный ужин"
+    },
+    {
+      "id": 21,
+      "slug": "wedding",
+      "name": "Свадебный кейтеринг"
+    },
+    {
+      "id": 20,
+      "slug": "other",
+      "name": "Другое"
+    }
+  ],
+  "locations": [
+    {
+      "value": "yacht",
+      "label": "Яхта"
+    },
+    {
+      "value": "villa",
+      "label": "Вилла"
+    },
+    {
+      "value": "office",
+      "label": "Офис"
+    },
+    {
+      "value": "home",
+      "label": "Дом"
+    },
+    {
+      "value": "beach",
+      "label": "Пляж / на улице"
+    },
+    {
+      "value": "other",
+      "label": "Другое"
+    }
+  ],
+  "nav_services": [
+    {
+      "slug": "yacht-catering",
+      "title": "Кейтеринг на яхте"
+    },
+    {
+      "slug": "private-events",
+      "title": "Виллы и частные праздники"
+    },
+    {
+      "slug": "corporate-catering",
+      "title": "Корпоративный кейтеринг"
+    }
+  ]
+}

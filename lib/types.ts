@@ -1,12 +1,14 @@
 export type Locale = "en" | "ru";
 
+/* Rasm. Admin paneldan yangi rasm yuklanganda faqat `src` va `alt` bo'ladi —
+   qolgan maydonlar (srcset, o'lcham, blur) eski rasmlarga tegishli. */
 export type Img = {
   src: string;
-  srcset: string;
-  width: number | null;
-  height: number | null;
-  alt: string;
-  blur: string;
+  srcset?: string;
+  width?: number | null;
+  height?: number | null;
+  alt?: string;
+  blur?: string;
 } | null;
 
 export type Seo = { title: string; description: string; image: Img; noindex: boolean };

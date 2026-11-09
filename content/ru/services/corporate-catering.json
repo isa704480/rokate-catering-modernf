@@ -1,0 +1,227 @@
+{
+  "slug": "corporate-catering",
+  "title": "Корпоративный кейтеринг",
+  "headline": "Корпоративный кейтеринг и деловые события в Дубае",
+  "intro": "Кофе-брейки, бизнес-ланчи, конференции, фуршеты и гала-ужины для вашей компании.",
+  "body": "Яхта — особая площадка: мало места, часто нет кухни на борту, а гости ждут, что всё будет выглядеть идеально. Мы планируем меню и логистику под конкретную яхту, привозим всё готовым к подаче, берём на себя сервировку и уборку.\n\nВыберите готовый пакет или расскажите о мероприятии — мы подготовим предложение под ваше количество гостей и формат.",
+  "image": {
+    "src": "/demo-media/services/yacht-deck-table_EXgaE0R__w960.webp",
+    "srcset": "/demo-media/services/yacht-deck-table_EXgaE0R__w480.webp 480w, /demo-media/services/yacht-deck-table_EXgaE0R__w960.webp 960w, /demo-media/services/yacht-deck-table_EXgaE0R__w1500.webp 1500w",
+    "width": 1500,
+    "height": 2000,
+    "alt": "Кейтеринг на яхте",
+    "blur": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAADwAQCdASoMABAAA4BaJYwCdAELTpoVowAA4ZpudaXkcjj+HYF0I0/gPUKXYsk9ltkAaD9p0G+npmjvQoNSK2VZ7JVTAt5OqShkjQ/ldX0kAAAA"
+  },
+  "location_type": "yacht",
+  "options": [
+    {
+      "title": "Бранч и завтрак",
+      "text": "Легко и свежо: выпечка, канапе, фрукты."
+    },
+    {
+      "title": "Фуршет и канапе",
+      "text": "Finger food для вечеринок на борту."
+    },
+    {
+      "title": "BBQ на борту",
+      "text": "Шеф готовит гриль прямо на яхте."
+    },
+    {
+      "title": "Полный сервис",
+      "text": "Персонал, посуда, декор и уборка."
+    }
+  ],
+  "packages": [
+    {
+      "id": 6,
+      "slug": "yacht-brunch",
+      "name": "Бранч на яхте",
+      "image": {
+        "src": "/demo-media/packages/platters-closeup_WBllDdF__w960.webp",
+        "srcset": "/demo-media/packages/platters-closeup_WBllDdF__w480.webp 480w, /demo-media/packages/platters-closeup_WBllDdF__w960.webp 960w, /demo-media/packages/platters-closeup_WBllDdF__w1500.webp 1500w",
+        "width": 1500,
+        "height": 2000,
+        "alt": "Бранч на яхте",
+        "blur": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAAAQAgCdASoMABAAA4BaJaACdAYvrk0T3R1AAPyO6IJWAHKfy39+Ozz2fg6JmVFJegnshVpIWngDM/WKbvN4Me3Otetd5DpkVIOvHYv//p4yEZtwTkTt1C+AAAA="
+      },
+      "images": [],
+      "guests_min": 10,
+      "guests_max": 20,
+      "short_text": "Сбалансированный бранч для дня на воде: легко, свежо и красиво.",
+      "contents": [
+        "Круассаны и мини-сэндвичи",
+        "Канапе с лососем",
+        "Фруктовое ассорти",
+        "Сырная доска",
+        "Десерты"
+      ],
+      "price_from": null,
+      "price_note": "",
+      "badge": "bestseller"
+    },
+    {
+      "id": 7,
+      "slug": "canape-reception",
+      "name": "Фуршет с канапе",
+      "image": {
+        "src": "/demo-media/packages/canape-marble-table_H5RvwR6__w960.webp",
+        "srcset": "/demo-media/packages/canape-marble-table_H5RvwR6__w480.webp 480w, /demo-media/packages/canape-marble-table_H5RvwR6__w960.webp 960w, /demo-media/packages/canape-marble-table_H5RvwR6__w1500.webp 1500w",
+        "width": 1500,
+        "height": 2000,
+        "alt": "Фуршет с канапе",
+        "blur": "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAABQAgCdASoMABAAA4BaJYwCdAERB42Ycp6h2AAA/vUyFFTn2+9RSbwh0ML4G4ow+f/UQ3wcRzvOaenbd6gIGs4SZxbHLblstuiSHDYWomBnitXGWhqKHJMDu5bzta6AAAA="
+      },
+      "images": [],
+      "guests_min": 20,
+      "guests_max": 60,
+      "short_text": "Канапе и finger food для приёмов, открытий и корпоративных мероприятий.",
+      "contents": [
+        "Ассорти канапе",
+        "Тарталетки",
+        "Мини-десерты",
+        "Фрукты",
+        "Официанты по запросу"
+      ],
+      "price_from": null,
+      "price_note": "",
+      "badge": ""
+    },
+    {
+      "id": 8,
+      "slug": "bbq-on-board",
+      "name": "BBQ на борту",
+      "image": {
+        "src": "/demo-media/packages/chef-grill-skewers_a2J2Izk__w960.webp",
+        "srcset": "/demo-media/packages/chef-grill-skewers_a2J2Izk__w480.webp 480w, /demo-media/packages/chef-grill-skewers_a2J2Izk__w960.webp 960w, /demo-media/packages/chef-grill-skewers_a2J2Izk__w1500.webp 1500w",
+        "width": 1500,
+        "height": 2000,
+        "alt": "BBQ на борту",
+        "blur": "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAAAwAgCdASoMABAAA4BaJQBOgMW5tdupcFRYsAD33vKrb2g249UXDW2YkDlJGM2RwL7eAkShLJldbBXUS0G7b2q60oYbZyFc9ubGSSjThKtKWwF8eVypGdyhr3Ij13Wrk+weQAAA"
+      },
+      "images": [],
+      "guests_min": 10,
+      "guests_max": 30,
+      "short_text": "Живой гриль с нашим шефом — на яхте, на вилле или на природе.",
+      "contents": [
+        "Шашлычки из курицы и говядины",
+        "Овощи гриль",
+        "Морепродукты",
+        "Салаты и соусы",
+        "Шеф на площадке"
+      ],
+      "price_from": null,
+      "price_note": "",
+      "badge": ""
+    }
+  ],
+  "gallery": [
+    {
+      "src": "/demo-media/portfolio/yacht-deck-table_KC1ggbl__w960.webp",
+      "srcset": "/demo-media/portfolio/yacht-deck-table_KC1ggbl__w480.webp 480w, /demo-media/portfolio/yacht-deck-table_KC1ggbl__w960.webp 960w, /demo-media/portfolio/yacht-deck-table_KC1ggbl__w1500.webp 1500w",
+      "width": 1500,
+      "height": 2000,
+      "alt": "Бранч на яхте в Dubai Marina",
+      "blur": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAADwAQCdASoMABAAA4BaJYwCdAELTpoVowAA4ZpudaXkcjj+HYF0I0/gPUKXYsk9ltkAaD9p0G+npmjvQoNSK2VZ7JVTAt5OqShkjQ/ldX0kAAAA"
+    },
+    {
+      "src": "/demo-media/portfolio/yacht-oysters-fruit_zeFHRTA__w960.webp",
+      "srcset": "/demo-media/portfolio/yacht-oysters-fruit_zeFHRTA__w480.webp 480w, /demo-media/portfolio/yacht-oysters-fruit_zeFHRTA__w960.webp 960w, /demo-media/portfolio/yacht-oysters-fruit_zeFHRTA__w1500.webp 1500w",
+      "width": 1500,
+      "height": 2000,
+      "alt": "Бранч на яхте в Dubai Marina",
+      "blur": "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAAAwAgCdASoMABAAA4BaJagCdAD8JwNsQ44qwAD+6fvm8Iy7JEr0/xrohbXF7jb+rT0X4KkkMhzCV3uVZMPXItKBsrDkIckFRE+F9Fn1ut6dPFZvlKglBsc68tZiEjCcJOkVQAAA"
+    },
+    {
+      "src": "/demo-media/portfolio/platters-closeup_DRu2erP__w960.webp",
+      "srcset": "/demo-media/portfolio/platters-closeup_DRu2erP__w480.webp 480w, /demo-media/portfolio/platters-closeup_DRu2erP__w960.webp 960w, /demo-media/portfolio/platters-closeup_DRu2erP__w1500.webp 1500w",
+      "width": 1500,
+      "height": 2000,
+      "alt": "Бранч на яхте в Dubai Marina",
+      "blur": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAAAQAgCdASoMABAAA4BaJaACdAYvrk0T3R1AAPyO6IJWAHKfy39+Ozz2fg6JmVFJegnshVpIWngDM/WKbvN4Me3Otetd5DpkVIOvHYv//p4yEZtwTkTt1C+AAAA="
+    },
+    {
+      "src": "/demo-media/portfolio/waitress-fruit-platter_GYXBbe2__w960.webp",
+      "srcset": "/demo-media/portfolio/waitress-fruit-platter_GYXBbe2__w480.webp 480w, /demo-media/portfolio/waitress-fruit-platter_GYXBbe2__w960.webp 960w, /demo-media/portfolio/waitress-fruit-platter_GYXBbe2__w1500.webp 1500w",
+      "width": 1500,
+      "height": 2000,
+      "alt": "Бранч на яхте в Dubai Marina",
+      "blur": "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAAAQAgCdASoMABAAA4BaJQBOgMYstZ9NqXkYAP7IcYEDXYq9nyQvS4Bo+QfmhD4v0EINtj/FGzZnLpp/3jOzM1i0erb10IzJe+j0fs8AmS4ZXQr1VghADezr5I391cNAAAA="
+    },
+    {
+      "src": "/demo-media/portfolio/yacht-birthday-balloons_6cd7rWS__w960.webp",
+      "srcset": "/demo-media/portfolio/yacht-birthday-balloons_6cd7rWS__w480.webp 480w, /demo-media/portfolio/yacht-birthday-balloons_6cd7rWS__w960.webp 960w, /demo-media/portfolio/yacht-birthday-balloons_6cd7rWS__w1500.webp 1500w",
+      "width": 1500,
+      "height": 2000,
+      "alt": "День рождения на яхте",
+      "blur": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAAAQAgCdASoMABAAA4BaJYgCdADdZgAS6YyIAPIyKkwmlKUryfJ6P7tBDJhHLZP8IrefIVK2MqjMDo5MfhPxLtYOGfIU0cjHZNmpQ1AiTznbIMpO0BHjIUKAxDUAAA=="
+    },
+    {
+      "src": "/demo-media/portfolio/yacht-birthday-table_04VfkeA__w960.webp",
+      "srcset": "/demo-media/portfolio/yacht-birthday-table_04VfkeA__w480.webp 480w, /demo-media/portfolio/yacht-birthday-table_04VfkeA__w960.webp 960w, /demo-media/portfolio/yacht-birthday-table_04VfkeA__w1500.webp 1500w",
+      "width": 1500,
+      "height": 2000,
+      "alt": "День рождения на яхте",
+      "blur": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAABQAgCdASoMABAAA4BaJZQCdAERB6xLxOGn1AAA34tJiKAY8Gts/ccw+inIdkUPvtYzIeCWDF34oXE6+tMAyJYcqi5BF+luYdGscMzqyG8TtwfJVAA="
+    },
+    {
+      "src": "/demo-media/portfolio/yacht-lounge-snacks_ZHua8f2__w960.webp",
+      "srcset": "/demo-media/portfolio/yacht-lounge-snacks_ZHua8f2__w480.webp 480w, /demo-media/portfolio/yacht-lounge-snacks_ZHua8f2__w960.webp 960w, /demo-media/portfolio/yacht-lounge-snacks_ZHua8f2__w1500.webp 1500w",
+      "width": 1500,
+      "height": 2000,
+      "alt": "День рождения на яхте",
+      "blur": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAACQAQCdASoMABAAA4BaJQBWABubTwAA/dX9b7Q9La6Qln4gdByKwrbrjEg32hZq30Pa/3a6i1MHJC4DCq2ZcWmCYLUrwc8u7xtQGZI+ArvgqM4AAAA="
+    },
+    {
+      "src": "/demo-media/portfolio/yacht-canape-buffet_F3ehij9__w960.webp",
+      "srcset": "/demo-media/portfolio/yacht-canape-buffet_F3ehij9__w480.webp 480w, /demo-media/portfolio/yacht-canape-buffet_F3ehij9__w960.webp 960w, /demo-media/portfolio/yacht-canape-buffet_F3ehij9__w1500.webp 1500w",
+      "width": 1500,
+      "height": 2000,
+      "alt": "Фуршет в салоне яхты",
+      "blur": "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAAAQAgCdASoMABAAA4BaJQBdgMX6tj4pdJ3AAPz+CbbLr9/VJrHFeOhPUw+oW6df9iikBpQNjqo7Z46Z3bOJPJKRJ5ws1M23dQZssDGR+h4Jwb3m8o3At++ShnrqEYg9UAA="
+    },
+    {
+      "src": "/demo-media/portfolio/yacht-salon-buffet_q71MeOK__w960.webp",
+      "srcset": "/demo-media/portfolio/yacht-salon-buffet_q71MeOK__w480.webp 480w, /demo-media/portfolio/yacht-salon-buffet_q71MeOK__w960.webp 960w, /demo-media/portfolio/yacht-salon-buffet_q71MeOK__w1500.webp 1500w",
+      "width": 1500,
+      "height": 2000,
+      "alt": "Фуршет в салоне яхты",
+      "blur": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAADQAQCdASoMABAAA4BaJQBdgB6RvtBqyAD+8aY+zRav0ts6k2Vb/CwIai/GnZK2LzOGW1qhg5WHzgs6GTSTbRklFKYdx3AB1o9W2MXORyfyfaYjx4Ct6KBJUAA="
+    },
+    {
+      "src": "/demo-media/portfolio/seafood-fruit-table_ij4bxd6__w960.webp",
+      "srcset": "/demo-media/portfolio/seafood-fruit-table_ij4bxd6__w480.webp 480w, /demo-media/portfolio/seafood-fruit-table_ij4bxd6__w960.webp 960w, /demo-media/portfolio/seafood-fruit-table_ij4bxd6__w1500.webp 1500w",
+      "width": 1500,
+      "height": 2000,
+      "alt": "Фуршет в салоне яхты",
+      "blur": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAADQAQCdASoMABAAA4BaJYgC7ADg/wGcCAD+6vHGC2FAnE74Bgs0nfptbfF/ktwgF76ETxmTiR/zLg1UZVB2j9kGzQi5sCd5kCrFAuUx3RWLxYfVH2VGJ7E8AAA="
+    },
+    {
+      "src": "/demo-media/portfolio/chef-bbq-yacht_CIyyrrN__w960.webp",
+      "srcset": "/demo-media/portfolio/chef-bbq-yacht_CIyyrrN__w480.webp 480w, /demo-media/portfolio/chef-bbq-yacht_CIyyrrN__w960.webp 960w, /demo-media/portfolio/chef-bbq-yacht_CIyyrrN__w1500.webp 1500w",
+      "width": 1500,
+      "height": 2000,
+      "alt": "BBQ на борту",
+      "blur": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAAAwAgCdASoMABAAA4BaJaACdAdwB6Eqi18LgAD+VfYAZ+qJrp/LdVoLDTmMqiVUbxbi2G0IuXUDt9pTc2rV67xOL9Hf2f3/sEQ+7aGuOZzOc6qnndbYyXkRfNq2Jc/6gIAAAA=="
+    },
+    {
+      "src": "/demo-media/portfolio/chef-grill-skewers_IlTlnoY__w960.webp",
+      "srcset": "/demo-media/portfolio/chef-grill-skewers_IlTlnoY__w480.webp 480w, /demo-media/portfolio/chef-grill-skewers_IlTlnoY__w960.webp 960w, /demo-media/portfolio/chef-grill-skewers_IlTlnoY__w1500.webp 1500w",
+      "width": 1500,
+      "height": 2000,
+      "alt": "BBQ на борту",
+      "blur": "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAAAwAgCdASoMABAAA4BaJQBOgMW5tdupcFRYsAD33vKrb2g249UXDW2YkDlJGM2RwL7eAkShLJldbBXUS0G7b2q60oYbZyFc9ubGSSjThKtKWwF8eVypGdyhr3Ij13Wrk+weQAAA"
+    }
+  ],
+  "faq": [
+    {
+      "q": "Вы работаете на любой яхте?",
+      "a": "Да — сообщите яхту, марину и количество гостей, и мы спланируем меню и сервировку под неё."
+    }
+  ],
+  "seo": {
+    "title": "Кейтеринг на яхте в Дубае",
+    "description": "Мы привозим на борт всё необходимое: еду, посуду, декор и персонал. Вы с гостями наслаждаетесь морем.",
+    "image": null,
+    "noindex": false
+  }
+}

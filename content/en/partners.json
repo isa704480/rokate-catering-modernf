@@ -1,0 +1,30 @@
+{
+  "title": "Partner with Rokate",
+  "intro": "We are open to long-term cooperation with companies and specialists who need a reliable catering partner for their clients or their own events.",
+  "audience_title": "Who we work with",
+  "audience": [
+    "Yacht companies & brokers",
+    "Event agencies",
+    "Concierge services",
+    "Real estate professionals",
+    "Luxury & service companies"
+  ],
+  "offer_title": "What we offer",
+  "offer_text": "Individual B2B terms and different cooperation formats. Leave a request — we will discuss the details personally.",
+  "image": {
+    "src": "/demo-media/partners/yacht-salon-buffet_2qaWNSj__w960.webp",
+    "srcset": "/demo-media/partners/yacht-salon-buffet_2qaWNSj__w480.webp 480w, /demo-media/partners/yacht-salon-buffet_2qaWNSj__w960.webp 960w, /demo-media/partners/yacht-salon-buffet_2qaWNSj__w1500.webp 1500w",
+    "width": 1500,
+    "height": 2000,
+    "alt": "Partner with Rokate",
+    "blur": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAADQAQCdASoMABAAA4BaJQBdgB6RvtBqyAD+8aY+zRav0ts6k2Vb/CwIai/GnZK2LzOGW1qhg5WHzgs6GTSTbRklFKYdx3AB1o9W2MXORyfyfaYjx4Ct6KBJUAA="
+  },
+  "form_title": "Become a partner",
+  "faq": [],
+  "seo": {
+    "title": "Partner with Rokate",
+    "description": "We are open to long-term cooperation with companies and specialists who need a reliable catering partner for their clients or their own events.",
+    "image": null,
+    "noindex": false
+  }
+}
