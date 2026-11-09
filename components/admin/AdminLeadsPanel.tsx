@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { db } from "@/lib/firebase";
 import {
   collection,
@@ -231,7 +232,7 @@ export default function AdminLeadsPanel({ lang = "ru" }: { lang?: "ru" | "en" })
           padding: "16px 22px",
           background: "#ffffff",
           borderRadius: 18,
-          border: "1px solid #e5ded0",
+          border: "1px solid #e3dccd",
           boxShadow: "0 4px 20px rgba(28,35,64,.04)",
           marginBottom: 20,
         }}
@@ -247,9 +248,9 @@ export default function AdminLeadsPanel({ lang = "ru" }: { lang?: "ru" | "en" })
                 alignItems: "center",
                 gap: 6,
                 padding: "3px 12px",
-                background: "#fef2f2",
-                color: "#dc2626",
-                border: "1px solid #fecaca",
+                background: "#fbf3f3",
+                color: "#8d2b2b",
+                border: "1px solid #e3c3c3",
                 borderRadius: 999,
                 fontSize: 13,
                 fontWeight: 700,
@@ -260,20 +261,20 @@ export default function AdminLeadsPanel({ lang = "ru" }: { lang?: "ru" | "en" })
                   width: 8,
                   height: 8,
                   borderRadius: "50%",
-                  background: "#dc2626",
+                  background: "#8d2b2b",
                   animation: "rk-pulse 1.5s infinite",
                 }}
               />
               {newCount} {t.newBadge}
             </span>
           ) : (
-            <span style={{ fontSize: 13, color: "#6b7280" }}>{t.allReviewed}</span>
+            <span style={{ fontSize: 13, color: "#5b6179" }}>{t.allReviewed}</span>
           )}
         </div>
 
         {/* Filters and Sound button */}
         <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
-          <div style={{ display: "inline-flex", background: "#f5f2ea", padding: 3, borderRadius: 12 }}>
+          <div style={{ display: "inline-flex", background: "#fdfbf7", padding: 3, borderRadius: 12 }}>
             {(
               [
                 { id: "all", label: t.all },
@@ -288,7 +289,7 @@ export default function AdminLeadsPanel({ lang = "ru" }: { lang?: "ru" | "en" })
                 style={{
                   border: 0,
                   background: filter === btn.id ? "#ffffff" : "transparent",
-                  color: filter === btn.id ? "#1c2340" : "#60667e",
+                  color: filter === btn.id ? "#1c2340" : "#5b6179",
                   fontWeight: filter === btn.id ? 700 : 500,
                   fontSize: 13,
                   padding: "6px 14px",
@@ -314,9 +315,9 @@ export default function AdminLeadsPanel({ lang = "ru" }: { lang?: "ru" | "en" })
               display: "inline-flex",
               alignItems: "center",
               gap: 7,
-              border: "1px solid #ded6c8",
+              border: "1px solid #e3dccd",
               background: soundEnabled ? "#f0f7f3" : "#fdfbf7",
-              color: soundEnabled ? "#2f5e46" : "#8a8f9f",
+              color: soundEnabled ? "#2f5e46" : "#5b6179",
               padding: "7px 14px",
               borderRadius: 12,
               fontSize: 13,
@@ -331,7 +332,7 @@ export default function AdminLeadsPanel({ lang = "ru" }: { lang?: "ru" | "en" })
 
       {/* Leads list */}
       {loading ? (
-        <div style={{ textAlign: "center", padding: "60px 0", color: "#6b7280" }}>
+        <div style={{ textAlign: "center", padding: "60px 0", color: "#5b6179" }}>
           {t.loading}
         </div>
       ) : filtered.length === 0 ? (
@@ -341,8 +342,8 @@ export default function AdminLeadsPanel({ lang = "ru" }: { lang?: "ru" | "en" })
             borderRadius: 18,
             padding: "50px 20px",
             textAlign: "center",
-            border: "1px solid #e7dfd1",
-            color: "#6b7280",
+            border: "1px solid #e3dccd",
+            color: "#5b6179",
           }}
         >
           <div style={{ fontSize: 36, marginBottom: 10 }}>📭</div>
@@ -350,19 +351,25 @@ export default function AdminLeadsPanel({ lang = "ru" }: { lang?: "ru" | "en" })
           <p style={{ margin: "6px 0 0", fontSize: 14 }}>{t.emptyDesc}</p>
         </div>
       ) : (
-        <div style={{ display: "grid", gap: 14 }}>
+        <motion.div layout style={{ display: "grid", gap: 14 }}>
+          <AnimatePresence initial={false}>
           {filtered.map((lead) => {
             const isNew = (lead.status || "new") === "new";
             const cleanPhone = (lead.phone || "").replace(/\D/g, "");
             const waUrl = cleanPhone ? `https://wa.me/${cleanPhone}` : null;
 
             return (
-              <div
+              <motion.div
                 key={lead.id}
+                layout
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.97 }}
+                transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
                 style={{
                   background: "#ffffff",
                   borderRadius: 16,
-                  border: isNew ? "1.5px solid #2f5e46" : "1px solid #e7e0d3",
+                  border: isNew ? "1.5px solid #2f5e46" : "1px solid #e3dccd",
                   padding: "18px 22px",
                   boxShadow: isNew
                     ? "0 6px 20px rgba(47, 94, 70, 0.08)"
@@ -390,8 +397,8 @@ export default function AdminLeadsPanel({ lang = "ru" }: { lang?: "ru" | "en" })
                         fontWeight: 700,
                         textTransform: "uppercase",
                         letterSpacing: ".04em",
-                        background: isNew ? "#2f5e46" : "#f1ede3",
-                        color: isNew ? "#ffffff" : "#4b5563",
+                        background: isNew ? "#2f5e46" : "#efe9dc",
+                        color: isNew ? "#ffffff" : "#5b6179",
                       }}
                     >
                       {isNew ? `✨ ${t.newLabel}` : lead.status === "contacted" ? t.contactedLabel : t.completedLabel}
@@ -404,8 +411,8 @@ export default function AdminLeadsPanel({ lang = "ru" }: { lang?: "ru" | "en" })
                           borderRadius: 6,
                           fontSize: 11,
                           fontWeight: 700,
-                          background: "#e0f2fe",
-                          color: "#0369a1",
+                          background: "#e8eefb",
+                          color: "#3568c4",
                         }}
                       >
                         {t.partnerBadge}
@@ -430,48 +437,48 @@ export default function AdminLeadsPanel({ lang = "ru" }: { lang?: "ru" | "en" })
                     display: "grid",
                     gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
                     gap: 10,
-                    background: "#fcfbf8",
+                    background: "#fdfbf7",
                     padding: "12px 16px",
                     borderRadius: 12,
                     fontSize: 14,
                   }}
                 >
                   <div>
-                    <span style={{ color: "#71778e", fontSize: 12, display: "block" }}>{t.phone}:</span>
+                    <span style={{ color: "#5b6179", fontSize: 12, display: "block" }}>{t.phone}:</span>
                     <strong style={{ color: "#1c2340" }}>{lead.phone || "—"}</strong>
                   </div>
 
                   {lead.date && (
                     <div>
-                      <span style={{ color: "#71778e", fontSize: 12, display: "block" }}>{t.eventDate}:</span>
+                      <span style={{ color: "#5b6179", fontSize: 12, display: "block" }}>{t.eventDate}:</span>
                       <strong style={{ color: "#1c2340" }}>{lead.date}</strong>
                     </div>
                   )}
 
                   {lead.guests && (
                     <div>
-                      <span style={{ color: "#71778e", fontSize: 12, display: "block" }}>{t.guestsCount}:</span>
+                      <span style={{ color: "#5b6179", fontSize: 12, display: "block" }}>{t.guestsCount}:</span>
                       <strong style={{ color: "#1c2340" }}>{lead.guests} {t.guestsUnit}</strong>
                     </div>
                   )}
 
                   {lead.eventType && (
                     <div>
-                      <span style={{ color: "#71778e", fontSize: 12, display: "block" }}>{t.eventType}:</span>
+                      <span style={{ color: "#5b6179", fontSize: 12, display: "block" }}>{t.eventType}:</span>
                       <strong style={{ color: "#1c2340" }}>{lead.eventType}</strong>
                     </div>
                   )}
 
                   {lead.place && (
                     <div>
-                      <span style={{ color: "#71778e", fontSize: 12, display: "block" }}>{t.location}:</span>
+                      <span style={{ color: "#5b6179", fontSize: 12, display: "block" }}>{t.location}:</span>
                       <strong style={{ color: "#1c2340" }}>{lead.place}</strong>
                     </div>
                   )}
 
                   {lead.company && (
                     <div>
-                      <span style={{ color: "#71778e", fontSize: 12, display: "block" }}>{t.company}:</span>
+                      <span style={{ color: "#5b6179", fontSize: 12, display: "block" }}>{t.company}:</span>
                       <strong style={{ color: "#1c2340" }}>{lead.company}</strong>
                     </div>
                   )}
@@ -480,11 +487,11 @@ export default function AdminLeadsPanel({ lang = "ru" }: { lang?: "ru" | "en" })
                 {lead.comment && (
                   <div
                     style={{
-                      background: "#f7f5ee",
+                      background: "#fdfbf7",
                       padding: "10px 14px",
                       borderRadius: 10,
                       fontSize: 13.5,
-                      color: "#374151",
+                      color: "#1c2340",
                     }}
                   >
                     <strong>{t.commentLabel}:</strong> {lead.comment}
@@ -500,7 +507,7 @@ export default function AdminLeadsPanel({ lang = "ru" }: { lang?: "ru" | "en" })
                     justifyContent: "space-between",
                     gap: 10,
                     paddingTop: 8,
-                    borderTop: "1px solid #f0e9dc",
+                    borderTop: "1px solid #efe9dc",
                   }}
                 >
                   <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
@@ -533,7 +540,7 @@ export default function AdminLeadsPanel({ lang = "ru" }: { lang?: "ru" | "en" })
                           display: "inline-flex",
                           alignItems: "center",
                           gap: 6,
-                          background: "#f1ede3",
+                          background: "#efe9dc",
                           color: "#1c2340",
                           textDecoration: "none",
                           fontSize: 13,
@@ -570,9 +577,9 @@ export default function AdminLeadsPanel({ lang = "ru" }: { lang?: "ru" | "en" })
                         type="button"
                         onClick={() => updateStatus(lead.id, "new")}
                         style={{
-                          border: "1px solid #cbd5e1",
+                          border: "1px solid #e3dccd",
                           background: "transparent",
-                          color: "#64748b",
+                          color: "#5b6179",
                           padding: "6px 12px",
                           borderRadius: 8,
                           fontSize: 12.5,
@@ -589,7 +596,7 @@ export default function AdminLeadsPanel({ lang = "ru" }: { lang?: "ru" | "en" })
                       style={{
                         border: 0,
                         background: "transparent",
-                        color: "#9ca3af",
+                        color: "#8a90a2",
                         cursor: "pointer",
                         padding: "6px 8px",
                         fontSize: 13,
@@ -600,10 +607,11 @@ export default function AdminLeadsPanel({ lang = "ru" }: { lang?: "ru" | "en" })
                     </button>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+          </AnimatePresence>
+        </motion.div>
       )}
     </div>
   );

@@ -2,6 +2,7 @@
 
 import { useEffect, useState, type FormEvent } from "react";
 import AdminLeadsPanel from "@/components/admin/AdminLeadsPanel";
+import AdminStats from "@/components/admin/AdminStats";
 
 const CMS_SCRIPT = "https://unpkg.com/decap-cms@3.8.3/dist/decap-cms.js";
 
@@ -24,8 +25,9 @@ const UI = {
     loadingTitle: "Загрузка панели управления",
     loadingDesc: "Подключаем редактор Decap CMS…",
     note: "Сохранение контента синхронизируется через GitHub-аккаунт владельца.",
-    tabLeads: "📥 Заявки клиентов (со звуком)",
-    tabCms: "✏️ Контент сайта (CMS)",
+    tabLeads: "Заявки клиентов",
+    tabStats: "Статистика",
+    tabCms: "Контент сайта",
     viewSite: "На сайт ↗",
     logout: "Выйти",
   },
@@ -38,8 +40,9 @@ const UI = {
     loadingTitle: "Loading Control Panel",
     loadingDesc: "Connecting Decap CMS editor…",
     note: "Content changes are synced via the site owner's GitHub account.",
-    tabLeads: "📥 Client Inquiries (with alert)",
-    tabCms: "✏️ Site Content (CMS)",
+    tabLeads: "Client inquiries",
+    tabStats: "Statistics",
+    tabCms: "Site content",
     viewSite: "View site ↗",
     logout: "Log out",
   },
@@ -95,13 +98,17 @@ export default function CmsLoader() {
   const [value, setValue] = useState("");
   const [error, setError] = useState(false);
   const [ready, setReady] = useState(false);
-  const [activeTab, setActiveTab] = useState<"leads" | "cms">("leads");
+  const [activeTab, setActiveTab] = useState<"leads" | "stats" | "cms">("leads");
 
   const s = UI[lang];
 
   useEffect(() => {
-    if (sessionStorage.getItem(SESSION_KEY) === "1") {
-      setAuthed(true);
+    /* localStorage, sessionStorage emas: brauzer yopilsa ham esda qoladi,
+       shunda parol har safar so'ralmaydi. "Выйти" bosilganda o'chiriladi. */
+    try {
+      if (localStorage.getItem(SESSION_KEY) === "1") setAuthed(true);
+    } catch {
+      /* brauzer xotirani bloklagan bo'lsa — parol qaytadan so'raladi */
     }
     setChecked(true);
   }, []);
@@ -136,7 +143,11 @@ export default function CmsLoader() {
     e.preventDefault();
     const correctPassword = process.env.NEXT_PUBLIC_ADMIN_PASSWORD || DEFAULT_PASSWORD;
     if (value === correctPassword) {
-      sessionStorage.setItem(SESSION_KEY, "1");
+      try {
+        localStorage.setItem(SESSION_KEY, "1");
+      } catch {
+        /* xotira ishlamasa ham shu seansda kirgan bo'ladi */
+      }
       setAuthed(true);
       setError(false);
     } else {
@@ -465,41 +476,31 @@ export default function CmsLoader() {
           </div>
 
           <nav style={{ display: "flex", gap: 6 }}>
-            <button
-              type="button"
-              onClick={() => setActiveTab("leads")}
-              style={{
-                border: 0,
-                background: activeTab === "leads" ? "#2f5e46" : "rgba(255,255,255,0.08)",
-                color: "#ffffff",
-                padding: "7px 16px",
-                borderRadius: 999,
-                fontSize: 13.5,
-                fontWeight: 700,
-                cursor: "pointer",
-                transition: "all 0.15s ease",
-              }}
-            >
-              {s.tabLeads}
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setActiveTab("cms")}
-              style={{
-                border: 0,
-                background: activeTab === "cms" ? "#2f5e46" : "rgba(255,255,255,0.08)",
-                color: "#ffffff",
-                padding: "7px 16px",
-                borderRadius: 999,
-                fontSize: 13.5,
-                fontWeight: 700,
-                cursor: "pointer",
-                transition: "all 0.15s ease",
-              }}
-            >
-              {s.tabCms}
-            </button>
+            {([
+              ["leads", s.tabLeads],
+              ["stats", s.tabStats],
+              ["cms", s.tabCms],
+            ] as const).map(([key, label]) => (
+              <button
+                key={key}
+                type="button"
+                onClick={() => setActiveTab(key)}
+                style={{
+                  position: "relative",
+                  border: 0,
+                  background: activeTab === key ? "#2f5e46" : "rgba(255,255,255,0.08)",
+                  color: "#ffffff",
+                  padding: "7px 16px",
+                  borderRadius: 999,
+                  fontSize: 13.5,
+                  fontWeight: 700,
+                  cursor: "pointer",
+                  transition: "background 0.18s ease",
+                }}
+              >
+                {label}
+              </button>
+            ))}
           </nav>
         </div>
 
@@ -544,7 +545,12 @@ export default function CmsLoader() {
           <button
             type="button"
             onClick={() => {
-              sessionStorage.removeItem(SESSION_KEY);
+              try {
+                localStorage.removeItem(SESSION_KEY);
+                sessionStorage.removeItem(SESSION_KEY);
+              } catch {
+                /* e'tiborsiz */
+              }
               setAuthed(false);
             }}
             style={{
@@ -566,6 +572,13 @@ export default function CmsLoader() {
       {activeTab === "leads" && (
         <main style={{ padding: "16px 0 40px" }}>
           <AdminLeadsPanel lang={lang} />
+        </main>
+      )}
+
+      {/* Tab: Statistika */}
+      {activeTab === "stats" && (
+        <main style={{ padding: "20px 24px 48px", maxWidth: 1180, margin: "0 auto" }}>
+          <AdminStats lang={lang} />
         </main>
       )}
 
