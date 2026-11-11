@@ -32,6 +32,110 @@ const clean = (v: unknown, max = 600) =>
 const escapeHtml = (s: string) =>
   s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c] as string);
 
+
+/* ------------------------------------------------------------ kanallar */
+
+type Result = { ok: boolean; error?: string };
+
+/** Telegram'ga yuboradi. Xato bo'lsa Telegram'ning o'z izohini qaytaradi. */
+async function sendTelegram(text: string): Promise<Result> {
+  const botToken = process.env.TELEGRAM_BOT_TOKEN?.trim();
+  const chatId = process.env.TELEGRAM_CHAT_ID?.trim();
+  if (!botToken) return { ok: false, error: "TELEGRAM_BOT_TOKEN не задан" };
+  if (!chatId) return { ok: false, error: "TELEGRAM_CHAT_ID не задан" };
+  try {
+    const res = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ chat_id: chatId, text, disable_web_page_preview: true }),
+      signal: AbortSignal.timeout(8000),
+    });
+    if (res.ok) return { ok: true };
+    const body = (await res.json().catch(() => ({}))) as { description?: string };
+    return { ok: false, error: `Telegram ${res.status}: ${body.description ?? "неизвестная ошибка"}` };
+  } catch (e) {
+    return { ok: false, error: `Telegram недоступен: ${String(e).slice(0, 120)}` };
+  }
+}
+
+/** Email yuboradi (Resend). Xato bo'lsa Resend'ning o'z izohini qaytaradi. */
+async function sendEmail(subject: string, html: string, replyTo?: string): Promise<Result> {
+  const key = process.env.RESEND_API_KEY?.trim();
+  const to = process.env.LEAD_EMAIL_TO?.trim();
+  const from = process.env.LEAD_EMAIL_FROM?.trim();
+  if (!key) return { ok: false, error: "RESEND_API_KEY не задан" };
+  if (!to) return { ok: false, error: "LEAD_EMAIL_TO не задан" };
+  if (!from) return { ok: false, error: "LEAD_EMAIL_FROM не задан" };
+  try {
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        from,
+        to: to.split(",").map((x) => x.trim()).filter(Boolean),
+        subject,
+        html,
+        ...(replyTo ? { reply_to: replyTo } : {}),
+      }),
+      signal: AbortSignal.timeout(8000),
+    });
+    if (res.ok) return { ok: true };
+    const body = (await res.json().catch(() => ({}))) as { message?: string };
+    return { ok: false, error: `Resend ${res.status}: ${body.message ?? "неизвестная ошибка"}` };
+  } catch (e) {
+    return { ok: false, error: `Resend недоступен: ${String(e).slice(0, 120)}` };
+  }
+}
+
+/* ---------------------------------------------------------- diagnostika */
+
+/**
+ * GET /api/lead — sozlamalar tekshiruvi.
+ *
+ *   /api/lead              qaysi o'zgaruvchilar qo'yilganini ko'rsatadi (qiymatsiz)
+ *   /api/lead?test=CHAT_ID  sinov xabarini Telegram va email'ga yuboradi va
+ *                           har bir kanalning aniq xatosini qaytaradi
+ *
+ * Sinov faqat TELEGRAM_CHAT_ID ni bilgan odamga ishlaydi — begona odam
+ * bu manzil orqali guruhga xabar yubora olmaydi.
+ */
+export async function GET(request: Request) {
+  const env = (k: string) => Boolean(process.env[k]?.trim());
+  const configured = {
+    TELEGRAM_BOT_TOKEN: env("TELEGRAM_BOT_TOKEN"),
+    TELEGRAM_CHAT_ID: env("TELEGRAM_CHAT_ID"),
+    RESEND_API_KEY: env("RESEND_API_KEY"),
+    LEAD_EMAIL_TO: env("LEAD_EMAIL_TO"),
+    LEAD_EMAIL_FROM: env("LEAD_EMAIL_FROM"),
+    TURNSTILE_SECRET: env("TURNSTILE_SECRET"),
+    NEXT_PUBLIC_TURNSTILE_SITE_KEY: env("NEXT_PUBLIC_TURNSTILE_SITE_KEY"),
+  };
+
+  const key = new URL(request.url).searchParams.get("test");
+  const chatId = process.env.TELEGRAM_CHAT_ID?.trim();
+  const headers = { "cache-control": "no-store" };
+
+  if (!key) {
+    return NextResponse.json(
+      { configured, hint: "Добавьте ?test=<TELEGRAM_CHAT_ID>, чтобы отправить пробное сообщение" },
+      { headers }
+    );
+  }
+  if (!chatId || key !== chatId) {
+    return NextResponse.json({ configured, error: "Неверный ключ проверки" }, { status: 403, headers });
+  }
+
+  const stamp = new Date().toISOString().replace("T", " ").slice(0, 19);
+  const [telegram, email] = await Promise.all([
+    sendTelegram(`Проверка сайта Rokate Catering\nЕсли вы видите это сообщение — Telegram настроен.\n${stamp} UTC`),
+    sendEmail(
+      "Проверка сайта Rokate Catering",
+      `<p>Если вы видите это письмо — e-mail настроен.</p><p>${stamp} UTC</p>`
+    ),
+  ]);
+  return NextResponse.json({ configured, telegram, email }, { headers });
+}
+
 export async function POST(request: Request) {
   let data: Lead;
   try {
@@ -41,7 +145,7 @@ export async function POST(request: Request) {
   }
 
   // Spam qopqoni — odam bu maydonni ko'rmaydi, bot to'ldiradi
-  if (clean(data.website)) return NextResponse.json({ ok: true });
+  if (clean(data.rk_hp)) return NextResponse.json({ ok: true });
 
   const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "";
 
@@ -100,56 +204,24 @@ export async function POST(request: Request) {
   const text = `${title}\n\n${all.map(([k, v]) => `${k}: ${v}`).join("\n")}`;
   const waLink = phone ? `https://wa.me/${phone.replace(/\D/g, "")}` : "";
 
-  const sent: string[] = [];
+  const subject = `${title}: ${name}`;
+  const html = `<h2>${title}</h2><table cellpadding="6">${all
+    .map(([k, v]) => `<tr><td><b>${k}</b></td><td>${escapeHtml(v)}</td></tr>`)
+    .join("")}</table>${waLink ? `<p><a href="${waLink}">WhatsApp</a></p>` : ""}`;
 
-  // Telegram
-  const botToken = process.env.TELEGRAM_BOT_TOKEN;
-  const chatId = process.env.TELEGRAM_CHAT_ID;
-  if (botToken && chatId) {
-    try {
-      const res = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          chat_id: chatId,
-          text: waLink ? `${text}\n\n${waLink}` : text,
-          disable_web_page_preview: true,
-        }),
-      });
-      if (res.ok) sent.push("telegram");
-    } catch {
-      /* quyida tekshiriladi */
-    }
-  }
+  const [telegram, mail] = await Promise.all([
+    sendTelegram(waLink ? `${text}\n\n${waLink}` : text),
+    sendEmail(subject, html, email || undefined),
+  ]);
 
-  // Email
-  const resendKey = process.env.RESEND_API_KEY;
-  const to = process.env.LEAD_EMAIL_TO;
-  const from = process.env.LEAD_EMAIL_FROM;
-  if (resendKey && to && from) {
-    try {
-      const html = `<h2>${title}</h2><table cellpadding="6">${all
-        .map(([k, v]) => `<tr><td><b>${k}</b></td><td>${escapeHtml(v)}</td></tr>`)
-        .join("")}</table>${waLink ? `<p><a href="${waLink}">WhatsApp</a></p>` : ""}`;
-      const res = await fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: { Authorization: `Bearer ${resendKey}`, "Content-Type": "application/json" },
-        body: JSON.stringify({
-          from,
-          to: [to],
-          subject: `${title}: ${name}`,
-          html,
-          ...(email ? { reply_to: email } : {}),
-        }),
-      });
-      if (res.ok) sent.push("email");
-    } catch {
-      /* quyida tekshiriladi */
-    }
-  }
+  /* Har bir muvaffaqiyatsiz kanal Vercel loglariga aniq sababi bilan yoziladi.
+     Bitta kanal ishlasa mijozga xato ko'rsatilmaydi, lekin sabab yo'qolmaydi. */
+  if (!telegram.ok) console.error("[lead] Telegram:", telegram.error);
+  if (!mail.ok) console.error("[lead] Email:", mail.error);
+
+  const sent = [telegram.ok && "telegram", mail.ok && "email"].filter(Boolean) as string[];
 
   if (!sent.length) {
-    console.error("Ariza yetkazilmadi", { telegram: !!botToken, email: !!resendKey });
     return NextResponse.json({ error: "not_delivered" }, { status: 503 });
   }
 

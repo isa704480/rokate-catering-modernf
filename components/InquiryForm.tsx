@@ -53,7 +53,7 @@ export function InquiryForm({ locale, labels, eventTypes, locations, packages, d
     const payload = {
       name: v("name"), phone: v("phone"), event_date: v("event_date") || null, event_type: v("event_type") || null,
       guests: v("guests") ? Number(v("guests")) : null, location_type: v("location_type"), package: v("package") || null,
-      comment: v("comment"), website: v("website"), language: locale, source_page: source,
+      comment: v("comment"), rk_hp: v("rk_hp"), language: locale, source_page: source,
       turnstile_token: turnstileToken(form), ...getAttribution(),
     };
     try {
@@ -139,7 +139,7 @@ export function InquiryForm({ locale, labels, eventTypes, locations, packages, d
       </div>
       {/* honeypot: odamlar ko'rmaydi, botlar to'ldiradi */}
       <div className="hidden" aria-hidden="true">
-        <input name="website" tabIndex={-1} autoComplete="off" />
+        <input name="rk_hp" tabIndex={-1} autoComplete="off" aria-hidden="true" />
       </div>
       <div className="sm:col-span-2"><Turnstile /></div>
       <div className="sm:col-span-2 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">

@@ -2,6 +2,7 @@ import { DynHead } from "./dynamic/Sections";
 import ReviewsSlider, { type SliderReview } from "./ReviewsSlider";
 import reviewsData from "@/content/reviews.json";
 import type { Locale } from "@/lib/types";
+import { liveFile } from "@/lib/api";
 
 /**
  * Sharhlar bloki.
@@ -44,8 +45,9 @@ function pick(item: Record<string, unknown>, base: string, locale: Locale): stri
   return String((value || fallback) ?? "");
 }
 
-export function Reviews({ locale }: { locale: Locale }) {
-  const data = reviewsData as unknown as Record<string, unknown> & { items: Item[] };
+export async function Reviews({ locale }: { locale: Locale }) {
+  /* Jonli: admin panelda saqlangan sharh qayta yig'ishni kutmasdan chiqadi */
+  const data = (await liveFile("content/reviews.json", reviewsData)) as unknown as Record<string, unknown> & { items: Item[] };
   const visible = (data.items ?? []).filter((r) => !r.hidden && (r.text_ru || r.text_en));
   if (!visible.length) return null;
 

@@ -24,7 +24,7 @@ export function PartnerForm({ locale, labels, thankYouHref }: { locale: string; 
       const res = await fetch("/api/lead", {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ kind: "partner", name: v("name"), company: v("company"), field: v("field"), phone: v("phone"), email: v("email"),
-                               message: v("message"), website: v("website"), language: locale, turnstile_token: turnstileToken(form) }),
+                               message: v("message"), rk_hp: v("rk_hp"), language: locale, turnstile_token: turnstileToken(form) }),
       });
       if (res.status === 429) throw new Error(labels.rate);
       if (!res.ok) throw new Error(labels.error);
@@ -56,7 +56,7 @@ export function PartnerForm({ locale, labels, thankYouHref }: { locale: string; 
       <div><label className="label" htmlFor="p-phone">{labels.phone}</label><input id="p-phone" name="phone" type="tel" className="field" placeholder={labels.phonePh} autoComplete="tel" /></div>
       <div><label className="label" htmlFor="p-email">{labels.email}</label><input id="p-email" name="email" type="email" className="field" autoComplete="email" /></div>
       <div className="sm:col-span-2"><label className="label" htmlFor="p-msg">{labels.message}</label><textarea id="p-msg" name="message" rows={4} className="field resize-y" /></div>
-      <div className="hidden" aria-hidden="true"><input name="website" tabIndex={-1} autoComplete="off" /></div>
+      <div className="hidden" aria-hidden="true"><input name="rk_hp" tabIndex={-1} autoComplete="off" aria-hidden="true" /></div>
       <div className="sm:col-span-2"><Turnstile /></div>
       <div className="sm:col-span-2">
         <button type="submit" className="btn btn-primary w-full sm:w-auto" disabled={state === "sending"}>
