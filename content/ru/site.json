@@ -1,20 +1,10 @@
 {
-  "company_name": "Rokate Catering",
-  "tagline": "Премиальный кейтеринг для яхт, вилл и мероприятий в Дубае.",
-  "phone": "+971 56 892 6321",
-  "whatsapp_number": "971568926321",
-  "whatsapp_text": "Здравствуйте, Rokate! Хочу заказать кейтеринг для мероприятия.",
-  "email": "rokate.catering@gmail.com",
-  "instagram_url": "https://instagram.com/rokate_catering",
-  "service_area": "Дубай, ОАЭ",
   "working_hours": "24/7",
-  "address": "",
+  "instagram_url": "https://instagram.com/rokate_catering",
   "logo": null,
-  "seo": {
-    "title": "Rokate Catering — премиальный кейтеринг в Дубае",
-    "description": "Кейтеринг на яхтах, виллах, в офисах и на частных мероприятиях в Дубае. Еда, сервис, оформление — а вы просто наслаждаетесь праздником.",
-    "image": null
-  },
+  "company_name": "Rokate Cateringggg",
+  "phone": "+971 56 892 6321",
+  "tagline": "Премиальный кейтеринг для яхт, вилл и мероприятий в Дубае.",
   "event_types": [
     {
       "id": 18,
@@ -47,6 +37,30 @@
       "name": "Другое"
     }
   ],
+  "address": "",
+  "whatsapp_number": "971568926321",
+  "service_area": "Дубай, ОАЭ",
+  "whatsapp_text": "Здравствуйте, Rokate! Хочу заказать кейтеринг для мероприятия.",
+  "nav_services": [
+    {
+      "slug": "yacht-catering",
+      "title": "Кейтеринг на яхте"
+    },
+    {
+      "slug": "private-events",
+      "title": "Виллы и частные праздники"
+    },
+    {
+      "slug": "corporate-catering",
+      "title": "Корпоративный кейтеринг"
+    }
+  ],
+  "email": "rokate.catering@gmail.com",
+  "seo": {
+    "title": "Rokate Catering — премиальный кейтеринг в Дубае",
+    "description": "Кейтеринг на яхтах, виллах, в офисах и на частных мероприятиях в Дубае. Еда, сервис, оформление — а вы просто наслаждаетесь праздником.",
+    "image": null
+  },
   "locations": [
     {
       "value": "yacht",
@@ -71,20 +85,6 @@
     {
       "value": "other",
       "label": "Другое"
-    }
-  ],
-  "nav_services": [
-    {
-      "slug": "yacht-catering",
-      "title": "Кейтеринг на яхте"
-    },
-    {
-      "slug": "private-events",
-      "title": "Виллы и частные праздники"
-    },
-    {
-      "slug": "corporate-catering",
-      "title": "Корпоративный кейтеринг"
     }
   ]
 }
